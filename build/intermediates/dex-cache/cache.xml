@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp\commons-net-3.6\commons-net-3.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b71de00508dcb078d2b24b5fa7e538636de9b3da">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp\app\build\intermediates\pre-dexed\debug\commons-net-3.6_8875913005600101c61405a0efec8c4ed1caf230.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp\commons-net-3.6\commons-net-examples-3.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d66546454f7fcec996296bbe8d709851fddf0c81">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp\app\build\intermediates\pre-dexed\debug\commons-net-examples-3.6_53cea63546ed77e663d0f28dfdabef2d35164d15.jar" />
+    </item>
+
+</items>

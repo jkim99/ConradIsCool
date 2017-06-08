@@ -63,12 +63,15 @@ public class ScheduleCheck {
 		String time = t.toString();
 		return time.substring(0, time.length() - 3);
 	}
+	public int getDay(int off) {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, off);
+		String date = new SimpleDateFormat("MM dd").format(c.getTime());
+		int[] y = {Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5))};
+		return cal.getDay(y[1], y[0]);
+	}
 	public int getDay() {
-		String date = new SimpleDateFormat("dd-MM-yyyy").format(new java.util.Date());
-		//Log.i("debugging", date);
-        String[] x = date.substring(0, 6).split("-");
-        int[] y = {Integer.valueOf(x[0]), Integer.valueOf(x[1])};
-        return cal.getDay(y[0], y[1]);
+		return getDay(0);
 	}
 	public int getPeriod(int minutes) {
 		if(minutes >= 464 && minutes < 524)
@@ -87,31 +90,25 @@ public class ScheduleCheck {
 	public String getRoom(int dayAfter, int periodAfter){
 		String time = getTheTime();
 		//Log.i("debugging", time);
-		int day = getDay() - 1 + dayAfter;
+		int day = getDay(dayAfter);
 		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3));
 		//Log.i("debugging", minutes + "");
 		try {
 			if(day < 0) {
-				if(day == -1)
-					return "No School";
-				else if(day == -2)
-					return "Half day";
-				else if(day == -3)
-					return "Snow Day";
-				else if(day == -10)
-					return "Error";
+				return exceptions(day);
 			}
 			else {
-				return getSchedule(getDay() + dayAfter, getPeriod(minutes) + periodAfter);
+				return getSchedule(day - 1, getPeriod(minutes) + periodAfter);
 			}
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
 			return "No Class!";
 		}
-		return "null";
 	}
 	public String getSchedule(int day, int p) {
-		char c = schedule[day][p];
+		if(day < 0)
+			return exceptions(day);
+		char c = schedule[day - 1][p];
 		try {
 			return classes[(int) c - 65];
 		}
@@ -125,5 +122,16 @@ public class ScheduleCheck {
 		int[] y = {Integer.valueOf(x[0]), Integer.valueOf(x[1])};
 		cal.addSnowDay(y[0], y[1]);
 	}
-
+	public String exceptions(int day) {
+		if(day == -1)
+			return "No School";
+		else if(day == -2)
+			return "Half day";
+		else if(day == -3)
+			return "Snow Day";
+		else if(day == -10)
+			return "Error";
+		else
+			return "null";
+	}
 }

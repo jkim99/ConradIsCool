@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -19,9 +20,12 @@ public class MainActivity extends AppCompatActivity {
 	private ScheduleCheck sc;
 	private File f;
 	private int timesSwiped;
+	private DateFormat df;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		timesSwiped = 0;
+		df = new SimpleDateFormat("MMM dd");
 		//getGrades();
 		f = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
 		if(!f.exists())
@@ -129,11 +133,14 @@ public class MainActivity extends AppCompatActivity {
 			public void onSwipeLeft() {timesSwiped--; mainView(null);}
 			public void onSwipeRight() {timesSwiped++; mainView(null);}
 		};
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, timesSwiped);
 		TextView date = (TextView)findViewById(R.id.date);
-		String monthDay = (new SimpleDateFormat("MMM dd").format(new java.util.Date()));
-		date.setText(monthDay.substring(0, monthDay.length() - 2) + (Integer.valueOf(monthDay.substring(monthDay.length() - 2)) + timesSwiped));
+		String monthDay = df.format(cal.getTime());
+		date.setText(monthDay);
 		TextView dayRotation = (TextView)findViewById(R.id.day);
-		dayRotation.setText("Day: " + sc.getDay());
+		int d = sc.getDay(timesSwiped);
+		dayRotation.setText(d > 0 ? "Day: " + d : sc.exceptions(d));
 		Button currentClass = (Button)findViewById(R.id.currentClass);
 		currentClass.setText("Current Class: " + sc.getRoom(timesSwiped, 0));
 		currentClass.setOnTouchListener(on);
@@ -154,20 +161,23 @@ public class MainActivity extends AppCompatActivity {
 			public void onSwipeRight() {timesSwiped++; dayView(null);}
 		};
 		TextView date = (TextView)findViewById(R.id.date);
-		String monthDay = (new SimpleDateFormat("MMM dd").format(new java.util.Date()));
-		date.setText(monthDay.substring(0, monthDay.length() - 2) + (Integer.valueOf(monthDay.substring(monthDay.length() - 2)) + timesSwiped));
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, timesSwiped);
+		String monthDay = df.format(cal.getTime());
+		date.setText(monthDay);
 		TextView dayRotation = (TextView)findViewById(R.id.day);
-		dayRotation.setText("Day: " + (sc.getDay() + timesSwiped));
+		int d = sc.getDay(timesSwiped);
+		dayRotation.setText(d > 0 ? "Day: " + d : sc.exceptions(d));
 		Button p1 = (Button)findViewById(R.id.p1);
 		Button p2 = (Button)findViewById(R.id.p2);
 		Button p3 = (Button)findViewById(R.id.p3);
 		Button p4 = (Button)findViewById(R.id.p4);
 		Button p5 = (Button)findViewById(R.id.p5);
-		p1.setText(sc.getSchedule(sc.getDay() + timesSwiped, 0));
-		p2.setText(sc.getSchedule(sc.getDay() + timesSwiped, 1));
-		p3.setText(sc.getSchedule(sc.getDay() + timesSwiped, 2));
-		p4.setText(sc.getSchedule(sc.getDay() + timesSwiped, 3));
-		p5.setText(sc.getSchedule(sc.getDay() + timesSwiped, 4));
+		p1.setText(sc.getSchedule(sc.getDay(timesSwiped), 0));
+		p2.setText(sc.getSchedule(sc.getDay(timesSwiped), 1));
+		p3.setText(sc.getSchedule(sc.getDay(timesSwiped), 2));
+		p4.setText(sc.getSchedule(sc.getDay(timesSwiped), 3));
+		p5.setText(sc.getSchedule(sc.getDay(timesSwiped), 4));
 		p1.setOnTouchListener(on);
 		p2.setOnTouchListener(on);
 		p3.setOnTouchListener(on);
