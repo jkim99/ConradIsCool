@@ -8,11 +8,11 @@ import java.util.*;
 public class ScheduleCheck {
 	private String[] classes;
 	private char[][] schedule;
-    private Calendar cal;
+    private SchoolCalendar cal;
     private Context context;
 	public ScheduleCheck(Context con, ArrayList<String> c) {
         context = con;
-		cal = new Calendar(con);
+		cal = new SchoolCalendar(con);
         schedule = new char[8][5];
 		schedule[0][0] = 'A';
 		schedule[0][1] = 'C';
