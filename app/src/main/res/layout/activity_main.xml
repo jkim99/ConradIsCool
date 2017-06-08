@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
@@ -72,6 +73,76 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintLeft_toRightOf="@+id/toggle"
 		app:layout_constraintRight_toRightOf="parent"/>
+=======
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jonat.scheduleapp.MainActivity">
+
+    <!--<ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="354dp"
+        android:layout_height="213dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="getAnnouncements"
+        android:src="@drawable/file"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="7dp" />-->
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="252dp"
+        android:layout_height="53dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="238dp"
+        android:text="Display the Day"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:background="#468499"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="132dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="252dp"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:background="#08a4d9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        android:layout_marginLeft="297dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        tools:layout_editor_absoluteX="252dp"/>
+    <TextView
+        android:id="@+id/currentClass"
+        android:layout_width="409dp"
+        android:layout_height="150dp"
+        android:text="Display Current Class"
+        android:background="#4ca620"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.146"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/nextClass"
+        android:layout_width="517dp"
+        android:layout_height="150dp"
+        android:background="#e8b32d"
+        android:text="Display Next Class"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="203dp"/>
+>>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 
 
 </android.support.constraint.ConstraintLayout>

@@ -4,9 +4,13 @@ import android.content.ContextWrapper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+<<<<<<< HEAD
 import android.view.View;
 import android.webkit.*;
 import android.widget.Button;
+=======
+import android.webkit.*;
+>>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 import android.widget.TextView;
 
 import java.io.*;
@@ -18,9 +22,16 @@ public class MainActivity extends AppCompatActivity {
 	private WebView mWebView = null;
 	private ScheduleCheck sc;
 	private File f;
+<<<<<<< HEAD
 	private int timesSwiped;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+=======
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+
+>>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 		super.onCreate(savedInstanceState);
 		//getGrades();
 		f = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
@@ -56,7 +67,22 @@ public class MainActivity extends AppCompatActivity {
 		for(int i = 0; i < temp.length; i += 5)
 			classes.add(temp[i] + "\n" + temp[i + 1] + "\n" + temp[i + 2] + "\n" + temp[i + 3] + "\n");
 		sc = new ScheduleCheck(this, classes);
+<<<<<<< HEAD
 		mainView(null);
+=======
+		String day = "Day: " + sc.getDay();
+		String period = sc.getCurrentClass();
+		Log.i("debugging", period);
+		setContentView(R.layout.activity_main);
+		TextView date = (TextView)findViewById(R.id.date);
+		date.setText(new SimpleDateFormat("MM-dd").format(new java.util.Date()));
+		TextView textView = (TextView)findViewById(R.id.day);
+		textView.setText(day);
+		TextView textView2 = (TextView)findViewById(R.id.currentClass);
+		textView2.setText(period);
+		TextView textView3 = (TextView)findViewById(R.id.nextClass);
+		textView3.setText(sc.getNextClass());
+>>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 	}
 
 	public void getSchedule() {
@@ -93,7 +119,10 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 	/*public void getGrades() {
 		mWebView = new WebView(this);
 		mWebView.getSettings().setJavaScriptEnabled(true);
@@ -123,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 	}*/
+<<<<<<< HEAD
 	public void mainView(View view) {
 		setContentView(R.layout.activity_main);
 		OnSwipeTouchListener on = new OnSwipeTouchListener(this) {
@@ -181,4 +211,6 @@ public class MainActivity extends AppCompatActivity {
 		settings.setText("Settings");
 
 	}
+=======
+>>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 }
