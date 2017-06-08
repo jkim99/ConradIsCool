@@ -55,6 +55,12 @@ public class Calendar {
 			Log.i("debugging", "Creating file...");
 			updateCalendar();
 		}
+		try {
+			Scanner scan = new Scanner(f);
+			while(scan.hasNextLine())
+				Log.i("debugging", scan.nextLine());
+		}
+		catch(IOException ioe) {}
 	}
 	public void updateCalendar() {
 		try {
@@ -137,6 +143,7 @@ public class Calendar {
 					sun += 7;
 			}
 			pw.close();
+
 		}
 		catch(IOException ioe) {
 			Log.i("debugging", ioe.toString());

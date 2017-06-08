@@ -18,11 +18,9 @@ public class MainActivity extends AppCompatActivity {
 	private WebView mWebView = null;
 	private ScheduleCheck sc;
 	private File f;
-	private String page;
-
+	private int timesSwiped;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		//getGrades();
 		f = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
@@ -58,21 +56,7 @@ public class MainActivity extends AppCompatActivity {
 		for(int i = 0; i < temp.length; i += 5)
 			classes.add(temp[i] + "\n" + temp[i + 1] + "\n" + temp[i + 2] + "\n" + temp[i + 3] + "\n");
 		sc = new ScheduleCheck(this, classes);
-		setContentView(R.layout.activity_main);
-		TextView date = (TextView)findViewById(R.id.date);
-		date.setText(new SimpleDateFormat("MMM dd").format(new java.util.Date()));
-		TextView dayRotation = (TextView)findViewById(R.id.day);
-		dayRotation.setText("Day: " + sc.getDay());
-		Button currentClass = (Button)findViewById(R.id.currentClass);
-		currentClass.setText("Current Class: " + sc.getRoom(0, 0));
-		Button nextClass = (Button)findViewById(R.id.nextClass);
-		nextClass.setText("Next Class: " + sc.getRoom(0, 1));
-		Button search = (Button)findViewById(R.id.search);
-		search.setText("Search");
-		Button toggle = (Button)findViewById(R.id.toggle);
-		toggle.setText("Toggle");
-		Button settings = (Button)findViewById(R.id.settings);
-		settings.setText("Settings");
+		mainView(null);
 	}
 
 	public void getSchedule() {
@@ -141,14 +125,21 @@ public class MainActivity extends AppCompatActivity {
 	}*/
 	public void mainView(View view) {
 		setContentView(R.layout.activity_main);
+		OnSwipeTouchListener on = new OnSwipeTouchListener(this) {
+			public void onSwipeLeft() {timesSwiped--; mainView(null);}
+			public void onSwipeRight() {timesSwiped++; mainView(null);}
+		};
 		TextView date = (TextView)findViewById(R.id.date);
-		date.setText(new SimpleDateFormat("MMM dd").format(new java.util.Date()));
+		String monthDay = (new SimpleDateFormat("MMM dd").format(new java.util.Date()));
+		date.setText(monthDay.substring(0, monthDay.length() - 2) + (Integer.valueOf(monthDay.substring(monthDay.length() - 2)) + timesSwiped));
 		TextView dayRotation = (TextView)findViewById(R.id.day);
 		dayRotation.setText("Day: " + sc.getDay());
 		Button currentClass = (Button)findViewById(R.id.currentClass);
-		currentClass.setText("Current Class: " + sc.getRoom(0, 0));
+		currentClass.setText("Current Class: " + sc.getRoom(timesSwiped, 0));
+		currentClass.setOnTouchListener(on);
 		Button nextClass = (Button)findViewById(R.id.nextClass);
-		nextClass.setText("Next Class: " + sc.getRoom(0, 1));
+		nextClass.setText("Next Class: " + sc.getRoom(timesSwiped, 1));
+		nextClass.setOnTouchListener(on);
 		Button search = (Button)findViewById(R.id.search);
 		search.setText("Search");
 		Button toggle = (Button)findViewById(R.id.toggle);
@@ -158,31 +149,36 @@ public class MainActivity extends AppCompatActivity {
 	}
 	public void dayView(View view) {
 		setContentView(R.layout.day_view);
+		OnSwipeTouchListener on = new OnSwipeTouchListener(this) {
+			public void onSwipeLeft() {timesSwiped--; dayView(null);}
+			public void onSwipeRight() {timesSwiped++; dayView(null);}
+		};
 		TextView date = (TextView)findViewById(R.id.date);
-		date.setText(new SimpleDateFormat("MMM dd").format(new java.util.Date()));
+		String monthDay = (new SimpleDateFormat("MMM dd").format(new java.util.Date()));
+		date.setText(monthDay.substring(0, monthDay.length() - 2) + (Integer.valueOf(monthDay.substring(monthDay.length() - 2)) + timesSwiped));
 		TextView dayRotation = (TextView)findViewById(R.id.day);
-		dayRotation.setText("Day: " + sc.getDay());
-
+		dayRotation.setText("Day: " + (sc.getDay() + timesSwiped));
 		Button p1 = (Button)findViewById(R.id.p1);
 		Button p2 = (Button)findViewById(R.id.p2);
 		Button p3 = (Button)findViewById(R.id.p3);
 		Button p4 = (Button)findViewById(R.id.p4);
 		Button p5 = (Button)findViewById(R.id.p5);
-		p1.setText(sc.getSchedule(sc.getDay(), 0));
-		p2.setText(sc.getSchedule(sc.getDay(), 1));
-		p3.setText(sc.getSchedule(sc.getDay(), 2));
-		p4.setText(sc.getSchedule(sc.getDay(), 3));
-		p5.setText(sc.getSchedule(sc.getDay(), 4));
-
+		p1.setText(sc.getSchedule(sc.getDay() + timesSwiped, 0));
+		p2.setText(sc.getSchedule(sc.getDay() + timesSwiped, 1));
+		p3.setText(sc.getSchedule(sc.getDay() + timesSwiped, 2));
+		p4.setText(sc.getSchedule(sc.getDay() + timesSwiped, 3));
+		p5.setText(sc.getSchedule(sc.getDay() + timesSwiped, 4));
+		p1.setOnTouchListener(on);
+		p2.setOnTouchListener(on);
+		p3.setOnTouchListener(on);
+		p4.setOnTouchListener(on);
+		p5.setOnTouchListener(on);
 		Button search = (Button)findViewById(R.id.search);
 		search.setText("Search");
 		Button toggle = (Button)findViewById(R.id.toggle);
 		toggle.setText("Toggle");
 		Button settings = (Button)findViewById(R.id.settings);
 		settings.setText("Settings");
-
-	}
-	public void search(View view) {
 
 	}
 }

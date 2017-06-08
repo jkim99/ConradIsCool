@@ -70,7 +70,21 @@ public class ScheduleCheck {
         int[] y = {Integer.valueOf(x[0]), Integer.valueOf(x[1])};
         return cal.getDay(y[0], y[1]);
 	}
-	public String getRoom(int dayAfter, int period){
+	public int getPeriod(int minutes) {
+		if(minutes >= 464 && minutes < 524)
+			return 0;
+		else if(minutes >= 524 && minutes < 603)
+			return 1;
+		else if(minutes >= 603 && minutes < 667)
+			return 2;
+		else if(minutes >= 667 && minutes < 781)
+			return 3;
+		else if(minutes >= 781 && minutes < 845)
+			return 4;
+		else
+			return -10;
+	}
+	public String getRoom(int dayAfter, int periodAfter){
 		String time = getTheTime();
 		//Log.i("debugging", time);
 		int day = getDay() - 1 + dayAfter;
@@ -88,18 +102,7 @@ public class ScheduleCheck {
 					return "Error";
 			}
 			else {
-				if(minutes >= 464 && minutes < 524)
-					return getSchedule(day, period);
-				else if(minutes >= 524 && minutes < 603)
-					return getSchedule(day, period + 1);
-				else if(minutes >= 603 && minutes < 667)
-					return getSchedule(day, period + 2);
-				else if(minutes >= 667 && minutes < 781)
-					return getSchedule(day, period + 3);
-				else if(minutes >= 781 && minutes < 845)
-					return getSchedule(day, period + 4);
-				else
-					return "None";
+				return getSchedule(getDay() + dayAfter, getPeriod(minutes) + periodAfter);
 			}
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
