@@ -50,15 +50,15 @@ public class Calendar {
 		}
 	}
 	public void createCalendar() {
-		f = new File((new ContextWrapper(con)).getFilesDir() + "calendar.txt");
-		if(!f.exists() && f.isDirectory()) {
+		f = new File((new ContextWrapper(con)).getFilesDir() + "/calendar.txt");
+		if(!f.exists()) {
 			Log.i("debugging", "Creating file...");
 			updateCalendar();
 		}
 	}
 	public void updateCalendar() {
 		try {
-			f = new File((new ContextWrapper(con)).getFilesDir() + "calendar.txt");
+			f = new File((new ContextWrapper(con)).getFilesDir() + "/calendar.txt");
 			Log.i("debugging", "Updating file...");
 			PrintWriter pw = new PrintWriter(f);
 			int x = -3;

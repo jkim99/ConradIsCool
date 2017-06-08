@@ -4,7 +4,9 @@ import android.content.ContextWrapper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.*;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.*;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 	private WebView mWebView = null;
 	private ScheduleCheck sc;
 	private File f;
+	private String page;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +58,21 @@ public class MainActivity extends AppCompatActivity {
 		for(int i = 0; i < temp.length; i += 5)
 			classes.add(temp[i] + "\n" + temp[i + 1] + "\n" + temp[i + 2] + "\n" + temp[i + 3] + "\n");
 		sc = new ScheduleCheck(this, classes);
-		String day = "Day: " + sc.getDay();
-		String period = sc.getRoom(0, 0);
-		Log.i("debugging", period);
 		setContentView(R.layout.activity_main);
-		//TextView date = (TextView)findViewById(R.id.date);
-		//date.setText(new SimpleDateFormat("MM-dd").format(new java.util.Date()));
+		TextView date = (TextView)findViewById(R.id.date);
+		date.setText(new SimpleDateFormat("MMM dd").format(new java.util.Date()));
 		TextView dayRotation = (TextView)findViewById(R.id.day);
-		dayRotation.setText(day);
-		TextView currentClass = (TextView)findViewById(R.id.currentClass);
-		currentClass.setText(period);
-		TextView nextClass = (TextView)findViewById(R.id.nextClass);
-		nextClass.setText(sc.getRoom(0, 1));
+		dayRotation.setText("Day: " + sc.getDay());
+		Button currentClass = (Button)findViewById(R.id.currentClass);
+		currentClass.setText("Current Class: " + sc.getRoom(0, 0));
+		Button nextClass = (Button)findViewById(R.id.nextClass);
+		nextClass.setText("Next Class: " + sc.getRoom(0, 1));
+		Button search = (Button)findViewById(R.id.search);
+		search.setText("Search");
+		Button toggle = (Button)findViewById(R.id.toggle);
+		toggle.setText("Toggle");
+		Button settings = (Button)findViewById(R.id.settings);
+		settings.setText("Settings");
 	}
 
 	public void getSchedule() {
@@ -133,4 +139,50 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 	}*/
+	public void mainView(View view) {
+		setContentView(R.layout.activity_main);
+		TextView date = (TextView)findViewById(R.id.date);
+		date.setText(new SimpleDateFormat("MMM dd").format(new java.util.Date()));
+		TextView dayRotation = (TextView)findViewById(R.id.day);
+		dayRotation.setText("Day: " + sc.getDay());
+		Button currentClass = (Button)findViewById(R.id.currentClass);
+		currentClass.setText("Current Class: " + sc.getRoom(0, 0));
+		Button nextClass = (Button)findViewById(R.id.nextClass);
+		nextClass.setText("Next Class: " + sc.getRoom(0, 1));
+		Button search = (Button)findViewById(R.id.search);
+		search.setText("Search");
+		Button toggle = (Button)findViewById(R.id.toggle);
+		toggle.setText("Toggle");
+		Button settings = (Button)findViewById(R.id.settings);
+		settings.setText("Settings");
+	}
+	public void dayView(View view) {
+		setContentView(R.layout.day_view);
+		TextView date = (TextView)findViewById(R.id.date);
+		date.setText(new SimpleDateFormat("MMM dd").format(new java.util.Date()));
+		TextView dayRotation = (TextView)findViewById(R.id.day);
+		dayRotation.setText("Day: " + sc.getDay());
+
+		Button p1 = (Button)findViewById(R.id.p1);
+		Button p2 = (Button)findViewById(R.id.p2);
+		Button p3 = (Button)findViewById(R.id.p3);
+		Button p4 = (Button)findViewById(R.id.p4);
+		Button p5 = (Button)findViewById(R.id.p5);
+		p1.setText(sc.getSchedule(sc.getDay(), 0));
+		p2.setText(sc.getSchedule(sc.getDay(), 1));
+		p3.setText(sc.getSchedule(sc.getDay(), 2));
+		p4.setText(sc.getSchedule(sc.getDay(), 3));
+		p5.setText(sc.getSchedule(sc.getDay(), 4));
+
+		Button search = (Button)findViewById(R.id.search);
+		search.setText("Search");
+		Button toggle = (Button)findViewById(R.id.toggle);
+		toggle.setText("Toggle");
+		Button settings = (Button)findViewById(R.id.settings);
+		settings.setText("Settings");
+
+	}
+	public void search(View view) {
+
+	}
 }

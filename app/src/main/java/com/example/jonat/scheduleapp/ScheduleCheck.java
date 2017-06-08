@@ -65,6 +65,7 @@ public class ScheduleCheck {
 	}
 	public int getDay() {
 		String date = new SimpleDateFormat("dd-MM-yyyy").format(new java.util.Date());
+		//Log.i("debugging", date);
         String[] x = date.substring(0, 6).split("-");
         int[] y = {Integer.valueOf(x[0]), Integer.valueOf(x[1])};
         return cal.getDay(y[0], y[1]);
@@ -88,17 +89,17 @@ public class ScheduleCheck {
 			}
 			else {
 				if(minutes >= 464 && minutes < 524)
-					return getSchedule(schedule[day][period]);
+					return getSchedule(day, period);
 				else if(minutes >= 524 && minutes < 603)
-					return getSchedule(schedule[day][1 + period]);
+					return getSchedule(day, period + 1);
 				else if(minutes >= 603 && minutes < 667)
-					return getSchedule(schedule[day][2 + period]);
+					return getSchedule(day, period + 2);
 				else if(minutes >= 667 && minutes < 781)
-					return getSchedule(schedule[day][3 + period]);
+					return getSchedule(day, period + 3);
 				else if(minutes >= 781 && minutes < 845)
-					return getSchedule(schedule[day][4 + period]);
+					return getSchedule(day, period + 4);
 				else
-					return "Hopefully you're not in school";
+					return "None";
 			}
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
@@ -106,7 +107,8 @@ public class ScheduleCheck {
 		}
 		return "null";
 	}
-	public String getSchedule(char c) {
+	public String getSchedule(int day, int p) {
+		char c = schedule[day][p];
 		try {
 			return classes[(int) c - 65];
 		}
