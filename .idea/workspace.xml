@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="801872a9-874e-41be-97cf-c7183b0bcc53" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/MainActivity.java" />
     </list>
     <ignored path="Schedule App.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,8 +58,8 @@
       <file leaf-file-name="ScheduleCheck.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/ScheduleCheck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1848">
-              <caret line="84" column="23" selection-start-line="84" selection-start-column="23" selection-end-line="84" selection-end-column="23" />
+            <state relative-caret-position="2618">
+              <caret line="119" column="18" selection-start-line="119" selection-start-column="18" selection-end-line="119" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,8 +70,8 @@
       <file leaf-file-name="Calendar.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/Calendar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+            <state relative-caret-position="630">
+              <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -79,14 +80,13 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2178">
-              <caret line="134" column="57" selection-start-line="134" selection-start-column="57" selection-end-line="134" selection-end-column="57" />
+            <state relative-caret-position="3410">
+              <caret line="155" column="44" selection-start-line="155" selection-start-column="44" selection-end-line="155" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1379#1387#0" expanded="true" />
-                <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-                <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-                <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+                <element signature="e#2919#2920#0" expanded="true" />
+                <element signature="e#2942#2943#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -114,9 +114,11 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1518">
-              <caret line="69" column="35" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="35" />
-              <folding />
+            <state relative-caret-position="1540">
+              <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+              <folding>
+                <marker date="1496950120988" expanded="true" signature="142:5678" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1942,8 +1944,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/day_view.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/ScheduleCheck.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/OnSwipeTouchListener.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/Calendar.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2511,7 +2513,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297619" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31919906" sideWeight="0.4919571" order="12" side_tool="false" content_ui="tabs" />
@@ -2519,7 +2521,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5315712" sideWeight="0.5053619" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.53372437" sideWeight="0.49463806" order="8" side_tool="false" content_ui="tabs" x="-9" y="-9" width="1938" height="1048" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.53372437" sideWeight="0.49463806" order="8" side_tool="false" content_ui="tabs" x="0" y="29" width="1920" height="1001" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.78458846" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="1200" y="38" width="1200" height="1262" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2622,9 +2624,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2661,9 +2662,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2700,9 +2700,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2739,9 +2738,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2778,9 +2776,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2817,9 +2814,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2849,9 +2845,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2881,9 +2876,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2967,9 +2961,11 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1518">
-          <caret line="69" column="35" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="1540">
+          <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+          <folding>
+            <marker date="1496950120988" expanded="true" signature="142:5678" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3000,16 +2996,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/Calendar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+        <state relative-caret-position="630">
+          <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/ScheduleCheck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1848">
-          <caret line="84" column="23" selection-start-line="84" selection-start-column="23" selection-end-line="84" selection-end-column="23" />
+        <state relative-caret-position="2618">
+          <caret line="119" column="18" selection-start-line="119" selection-start-column="18" selection-end-line="119" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -3018,14 +3014,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2178">
-          <caret line="134" column="57" selection-start-line="134" selection-start-column="57" selection-end-line="134" selection-end-column="57" />
+        <state relative-caret-position="3410">
+          <caret line="155" column="44" selection-start-line="155" selection-start-column="44" selection-end-line="155" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1379#1387#0" expanded="true" />
-            <element signature="method#getSchedule#0;class#MainActivity#0" expanded="false" />
-            <marker date="1496945538578" expanded="false" signature="4116:4123" ph=" { " />
-            <marker date="1496945538578" expanded="false" signature="4136:4141" ph=" }" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
