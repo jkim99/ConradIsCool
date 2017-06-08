@@ -7,3 +7,9 @@ This is the android app created for Andover High School in order to assist stude
 APK: https://drive.google.com/file/d/0B25a9GoL5A8hS3pGRXZGSG9tZW8/view?usp=sharing
 
 Please E-mail bugs and suggestions at jkim2018@k12.andoverma.us
+
+
+Progress:
+- Search and Settings are not yet ready
+- IOS support coming soon over the summer
+- App only works with test data due to not having updated class information on Aspen
