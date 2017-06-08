@@ -65,15 +65,11 @@ public class ScheduleCheck {
 	}
 	public int getDay() {
 		String date = new SimpleDateFormat("dd-MM-yyyy").format(new java.util.Date());
-<<<<<<< HEAD
 		//Log.i("debugging", date);
-=======
->>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
         String[] x = date.substring(0, 6).split("-");
         int[] y = {Integer.valueOf(x[0]), Integer.valueOf(x[1])};
         return cal.getDay(y[0], y[1]);
 	}
-<<<<<<< HEAD
 	public int getPeriod(int minutes) {
 		if(minutes >= 464 && minutes < 524)
 			return 0;
@@ -92,18 +88,6 @@ public class ScheduleCheck {
 		String time = getTheTime();
 		//Log.i("debugging", time);
 		int day = getDay() - 1 + dayAfter;
-=======
-	public String getNextClass() {
-		return getRoom(1);
-	}
-	public String getCurrentClass() {
-		return getRoom(0);
-	}
-	public String getRoom(int buff){
-		String time = getTheTime();
-		//Log.i("debugging", time);
-		int day = getDay() - 1;
->>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3));
 		//Log.i("debugging", minutes + "");
 		try {
@@ -118,22 +102,7 @@ public class ScheduleCheck {
 					return "Error";
 			}
 			else {
-<<<<<<< HEAD
 				return getSchedule(getDay() + dayAfter, getPeriod(minutes) + periodAfter);
-=======
-				if(minutes >= 464 && minutes < 524)
-					return getSchedule(schedule[day][buff]);
-				else if(minutes >= 524 && minutes < 603)
-					return getSchedule(schedule[day][1 + buff]);
-				else if(minutes >= 603 && minutes < 667)
-					return getSchedule(schedule[day][2 + buff]);
-				else if(minutes >= 667 && minutes < 781)
-					return getSchedule(schedule[day][3 + buff]);
-				else if(minutes >= 781 && minutes < 845)
-					return getSchedule(schedule[day][4 + buff]);
-				else
-					return "Hopefully you're not in school";
->>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 			}
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
@@ -141,12 +110,8 @@ public class ScheduleCheck {
 		}
 		return "null";
 	}
-<<<<<<< HEAD
 	public String getSchedule(int day, int p) {
 		char c = schedule[day][p];
-=======
-	public String getSchedule(char c) {
->>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 		try {
 			return classes[(int) c - 65];
 		}

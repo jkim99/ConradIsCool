@@ -50,7 +50,6 @@ public class Calendar {
 		}
 	}
 	public void createCalendar() {
-<<<<<<< HEAD
 		f = new File((new ContextWrapper(con)).getFilesDir() + "/calendar.txt");
 		if(!f.exists()) {
 			Log.i("debugging", "Creating file...");
@@ -66,17 +65,6 @@ public class Calendar {
 	public void updateCalendar() {
 		try {
 			f = new File((new ContextWrapper(con)).getFilesDir() + "/calendar.txt");
-=======
-		f = new File((new ContextWrapper(con)).getFilesDir() + "calendar.txt");
-		if(!f.exists() && f.isDirectory()) {
-			Log.i("debugging", "Creating file...");
-			updateCalendar();
-		}
-	}
-	public void updateCalendar() {
-		try {
-			f = new File((new ContextWrapper(con)).getFilesDir() + "calendar.txt");
->>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 			Log.i("debugging", "Updating file...");
 			PrintWriter pw = new PrintWriter(f);
 			int x = -3;
@@ -155,10 +143,7 @@ public class Calendar {
 					sun += 7;
 			}
 			pw.close();
-<<<<<<< HEAD
 
-=======
->>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 		}
 		catch(IOException ioe) {
 			Log.i("debugging", ioe.toString());

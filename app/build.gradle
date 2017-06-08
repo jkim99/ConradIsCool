@@ -24,7 +24,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-<<<<<<< HEAD
     compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp/commons-net-3.6/commons-net-3.6.jar')
     compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp/commons-net-3.6/commons-net-3.6-sources.jar')
     compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp/commons-net-3.6/commons-net-examples-3.6.jar')
@@ -33,13 +32,4 @@ dependencies {
     compile 'org.apache:apache:18'
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
-=======
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-    compile 'org.apache:apache:18'
-    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp/commons-net-3.6/commons-net-3.6.jar')
-    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp/commons-net-3.6/commons-net-3.6-sources.jar')
-    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp/commons-net-3.6/commons-net-examples-3.6.jar')
->>>>>>> 30134e2900a127bff6f37dae529bd1518fd839a8
 }
