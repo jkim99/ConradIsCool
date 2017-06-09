@@ -3,8 +3,14 @@ package com.example.jonat.scheduleapp;
 import android.content.ContextWrapper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.*;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.*;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +19,8 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static android.R.attr.slideEdge;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -99,14 +107,17 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void constantView(View view) {
+		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, timesSwiped);
+		cal.add(Calendar.DATE, timesSwiped + 365);
 		TextView date = (TextView)findViewById(R.id.date);
 		String monthDay = df.format(cal.getTime());
 		date.setText(monthDay);
+		TextView dayweek = (TextView)findViewById(R.id.dayweek);
+		dayweek.setText((new SimpleDateFormat("EEE")).format(cal.getTime()).toUpperCase());
 		TextView dayRotation = (TextView)findViewById(R.id.day);
 		int d = sc.getDay(timesSwiped);
-		dayRotation.setText(d > 0 ? "Day: " + d : sc.exceptions(d));
+		dayRotation.setText(d > 0 ? " Day:  " + d : sc.exceptions(d));
 		Button search = (Button)findViewById(R.id.search);
 		search.setText("Search");
 		Button toggle = (Button)findViewById(R.id.toggle);
@@ -116,9 +127,20 @@ public class MainActivity extends AppCompatActivity {
 	}
 	public void mainView(View view) {
 		setContentView(R.layout.activity_main);
+		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
 		on = new OnSwipeTouchListener(this) {
-			public void onSwipeLeft() {timesSwiped++; mainView(null);}
-			public void onSwipeRight() {timesSwiped--; mainView(null);}
+			public void onSwipeLeft() {
+				timesSwiped++;
+				Transition transition = new Slide(3);
+				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
+				mainView(null);
+			}
+			public void onSwipeRight() {
+				timesSwiped--;
+				Transition transition = new Slide(5);
+				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
+				mainView(null);
+			}
 		};
 		constantView(view);
 		Button currentClass = (Button)findViewById(R.id.currentClass);
@@ -130,9 +152,20 @@ public class MainActivity extends AppCompatActivity {
 	}
 	public void dayView(View view) {
 		setContentView(R.layout.day_view);
+		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
 		on = new OnSwipeTouchListener(this) {
-			public void onSwipeLeft() {timesSwiped++; dayView(null);}
-			public void onSwipeRight() {timesSwiped--; dayView(null);}
+			public void onSwipeLeft() {
+				timesSwiped++;
+				Transition transition = new Slide(3);
+				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
+				dayView(null);
+			}
+			public void onSwipeRight() {
+				timesSwiped--;
+				Transition transition = new Slide(5);
+				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
+				dayView(null);
+			}
 		};
 		constantView(view);
 		Button p1 = (Button)findViewById(R.id.p1);
