@@ -82,6 +82,7 @@
 		android:layout_height="0dp"
 		android:background="#171717"
 		android:textColor="#ffffff"
+		android:onClick="settings"
 		app:layout_constraintTop_toBottomOf="@+id/nextClass"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintLeft_toRightOf="@+id/toggle"

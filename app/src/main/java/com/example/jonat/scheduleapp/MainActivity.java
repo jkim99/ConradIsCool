@@ -4,15 +4,16 @@ import android.content.ContextWrapper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.*;
-import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionManager;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.*;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.*;
@@ -20,13 +21,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static android.R.attr.slideEdge;
 
 public class MainActivity extends AppCompatActivity {
 
 	private WebView mWebView = null;
 	private ScheduleCheck sc;
-	private File f;
+	private File scheudleFile;
+	private File settingsCache;
 	private int timesSwiped;
 	private DateFormat df;
 	private OnSwipeTouchListener on;
@@ -34,9 +35,33 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		timesSwiped = 0;
+
 		df = new SimpleDateFormat("MMM dd");
-		f = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
-		if(!f.exists())
+		scheudleFile = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
+		settingsCache = new File((new ContextWrapper(this)).getFilesDir() + "/settings.txt");
+		if(!settingsCache.exists())
+			try {
+				PrintWriter pw = new PrintWriter(settingsCache);
+				pw.println("default_view:current");
+				pw.println("notifications:on");
+				pw.println("Theme:default");
+				pw.close();
+			}
+			catch(IOException ioe) {}
+		else
+			try {
+				Scanner scan = new Scanner(settingsCache);
+				String line;
+				while(scan.hasNextLine()) {
+					line = scan.nextLine();
+					switch(line.substring(0, line.indexOf(":"))) {
+						case "default_view":
+
+					}
+				}
+			}
+			catch(IOException ioe) {}
+		if(!scheudleFile.exists())
 			getSchedule();
 		else
 			mainUI();
@@ -46,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 		String file = "";
 		Log.i("debugging", "Checking for file...");
 		try {
-			Scanner scan = new Scanner(f);
+			Scanner scan = new Scanner(scheudleFile);
 			String line = scan.nextLine();
 			if(!(line.equals("--Schedule--"))) { //VERIFICATION
 				Log.i("debugging", "File not found or corrupted. Creating new schedule file...");
@@ -68,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 		for(int i = 0; i < temp.length; i += 5)
 			classes.add(temp[i] + "\n" + temp[i + 1] + "\n" + temp[i + 2] + "\n" + temp[i + 3] + "\n");
 		sc = new ScheduleCheck(this, classes);
-		mainView(null);
+		currentClass(null);
 	}
 
 	public void getSchedule() {
@@ -107,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void constantView(View view) {
-		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, timesSwiped + 365);
 		TextView date = (TextView)findViewById(R.id.date);
@@ -125,21 +149,22 @@ public class MainActivity extends AppCompatActivity {
 		Button settings = (Button)findViewById(R.id.settings);
 		settings.setText("Settings");
 	}
-	public void mainView(View view) {
-		setContentView(R.layout.activity_main);
+
+	public void currentClass(View view) {
+		setContentView(R.layout.current_class);
 		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
 		on = new OnSwipeTouchListener(this) {
 			public void onSwipeLeft() {
 				timesSwiped++;
 				Transition transition = new Slide(3);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
-				mainView(null);
+				currentClass(null);
 			}
 			public void onSwipeRight() {
 				timesSwiped--;
 				Transition transition = new Slide(5);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
-				mainView(null);
+				currentClass(null);
 			}
 		};
 		constantView(view);
@@ -150,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
 		nextClass.setText("Next Class: " + sc.getRoom(timesSwiped, 1));
 		nextClass.setOnTouchListener(on);
 	}
+
 	public void dayView(View view) {
 		setContentView(R.layout.day_view);
 		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
@@ -184,5 +210,18 @@ public class MainActivity extends AppCompatActivity {
 		p4.setOnTouchListener(on);
 		p5.setOnTouchListener(on);
 
+	}
+
+	public void settings(View view) {
+		setContentView(R.layout.settings);
+
+		/*ArrayList<String> views = new ArrayList<String>();
+		views.add("Current Class View");
+		views.add("Full Day View");
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, views);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		Spinner items = (Spinner) findViewById(R.id.spinner);
+		items.setAdapter(adapter);
+		String selected = items.getSelectedItem().toString();*/
 	}
 }
