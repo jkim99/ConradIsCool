@@ -64,7 +64,6 @@ public class JavaScriptInterface{
 					x = i;
 			for(int j = x; j < lines.length; j++) {
 				line = lines[j];
-				//Log.i("debugging", line);
 				if(!line.equals("") && !line.contains("<") && !line.contains(">") && line.length() != 1 && !line.contains("setInitial"))
 					str += line + "\n";
 			}

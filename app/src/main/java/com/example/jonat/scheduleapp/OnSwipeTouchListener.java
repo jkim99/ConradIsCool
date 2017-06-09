@@ -36,26 +36,29 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			try {
 				float diffY = e2.getY() - e1.getY();
 				float diffX = e2.getX() - e1.getX();
-				if (Math.abs(diffX) > Math.abs(diffY)) {
-					if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-						if (diffX > 0) {
+				if(Math.abs(diffX) > Math.abs(diffY)) {
+					if(Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+						if(diffX > 0) {
 							onSwipeRight();
-						} else {
+						}
+						else {
 							onSwipeLeft();
 						}
 						result = true;
 					}
 				}
-				else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-					if (diffY > 0) {
+				else if(Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
+					if(diffY > 0) {
 						onSwipeBottom();
-					} else {
+					}
+					else {
 						onSwipeTop();
 					}
 					result = true;
 				}
-			} catch (Exception exception) {
-				exception.printStackTrace();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
 			}
 			return result;
 		}

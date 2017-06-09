@@ -89,10 +89,8 @@ public class ScheduleCheck {
 	}
 	public String getRoom(int dayAfter, int periodAfter){
 		String time = getTheTime();
-		//Log.i("debugging", time);
 		int day = getDay(dayAfter);
 		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3));
-		//Log.i("debugging", minutes + "");
 		try {
 			if(day < 0) {
 				return exceptions(day);

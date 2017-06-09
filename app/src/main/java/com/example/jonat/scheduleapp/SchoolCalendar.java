@@ -11,8 +11,6 @@ public class SchoolCalendar {
 	private Context con;
 	private ArrayList<String> snowDays;
 	private ArrayList<String> daysOff;
-	//private ArrayList<String> manualOverride;
-	//private ArrayList<String> halfdays;
 	public SchoolCalendar(Context con) {
 		this.con = con;
 		snowDays = new ArrayList<String>();
@@ -38,16 +36,6 @@ public class SchoolCalendar {
 		addDayOff(20, 4);
 		addDayOff(38, 5);
 		createCalendar();
-		//Admin a = new Admin(con);
-		//a.login("jon", "kim");
-		try {
-			Scanner scan = new Scanner(f);
-			//while(scan.hasNextLine())
-			//	Log.i("debugging", scan.nextLine());
-		}
-		catch(IOException ioe) {
-			Log.i("debugging", ioe.toString());
-		}
 	}
 	public void createCalendar() {
 		f = new File((new ContextWrapper(con)).getFilesDir() + "/calendar.txt");
@@ -187,14 +175,4 @@ public class SchoolCalendar {
 	public void addDayOff(int d, int m) {
 		daysOff.add(m + "/" + d);
 	}
-	public void addManualOverride(String username, String password) {
-		if(!root) {
-			root = (new Admin(con)).login(username, password);
-		}
-		if(root) {
-
-		}
-		//TODO: add admin privs
-	}
-
 }

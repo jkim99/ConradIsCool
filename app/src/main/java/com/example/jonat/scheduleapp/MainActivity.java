@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
 	private File f;
 	private int timesSwiped;
 	private DateFormat df;
+	private OnSwipeTouchListener on;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		timesSwiped = 0;
 		df = new SimpleDateFormat("MMM dd");
-		//getGrades();
 		f = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
 		if(!f.exists())
 			getSchedule();
@@ -98,41 +98,7 @@ public class MainActivity extends AppCompatActivity {
 		});
 	}
 
-	/*public void getGrades() {
-		mWebView = new WebView(this);
-		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.getSettings().setUserAgentString("Mozilla/5.0 (Windows; U; Windows NT 6.2; en-US; rv:1.9) Gecko/2008062901 IceWeasel/3.0");
-		mWebView.loadUrl("https://ma-andover.myfollett.com/aspen/logon.do");
-		mWebView.addJavascriptInterface(new JavaScriptInterface(this), "HTMLOUT");
-		setContentView(mWebView);
-		mWebView.setWebViewClient(new WebViewClient() {
-
-			@Override
-			public void onPageFinished(WebView view, String url) {
-				super.onPageFinished(view, url);
-				String ht = "javascript:window.HTMLOUT.doThingsHTML('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');";
-				mWebView.loadUrl(ht);
-				if(url.contains("home")) {
-					Log.i("debugging", "Logged in");
-					mWebView.loadUrl("https://ma-andover.myfollett.com/aspen/portalClassList.do");
-					ht = "javascript:window.HTMLOUT.doThingsHTML('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');";
-					mWebView.loadUrl(ht);
-					mWebView.destroy();
-				}
-			}
-
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				return false;
-			}
-		});
-	}*/
-	public void mainView(View view) {
-		setContentView(R.layout.activity_main);
-		OnSwipeTouchListener on = new OnSwipeTouchListener(this) {
-			public void onSwipeLeft() {timesSwiped--; mainView(null);}
-			public void onSwipeRight() {timesSwiped++; mainView(null);}
-		};
+	public void constantView(View view) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, timesSwiped);
 		TextView date = (TextView)findViewById(R.id.date);
@@ -141,12 +107,6 @@ public class MainActivity extends AppCompatActivity {
 		TextView dayRotation = (TextView)findViewById(R.id.day);
 		int d = sc.getDay(timesSwiped);
 		dayRotation.setText(d > 0 ? "Day: " + d : sc.exceptions(d));
-		Button currentClass = (Button)findViewById(R.id.currentClass);
-		currentClass.setText("Current Class: " + sc.getRoom(timesSwiped, 0));
-		currentClass.setOnTouchListener(on);
-		Button nextClass = (Button)findViewById(R.id.nextClass);
-		nextClass.setText("Next Class: " + sc.getRoom(timesSwiped, 1));
-		nextClass.setOnTouchListener(on);
 		Button search = (Button)findViewById(R.id.search);
 		search.setText("Search");
 		Button toggle = (Button)findViewById(R.id.toggle);
@@ -154,20 +114,27 @@ public class MainActivity extends AppCompatActivity {
 		Button settings = (Button)findViewById(R.id.settings);
 		settings.setText("Settings");
 	}
+	public void mainView(View view) {
+		setContentView(R.layout.activity_main);
+		on = new OnSwipeTouchListener(this) {
+			public void onSwipeLeft() {timesSwiped++; mainView(null);}
+			public void onSwipeRight() {timesSwiped--; mainView(null);}
+		};
+		constantView(view);
+		Button currentClass = (Button)findViewById(R.id.currentClass);
+		currentClass.setText("Current Class: " + sc.getRoom(timesSwiped, 0));
+		currentClass.setOnTouchListener(on);
+		Button nextClass = (Button)findViewById(R.id.nextClass);
+		nextClass.setText("Next Class: " + sc.getRoom(timesSwiped, 1));
+		nextClass.setOnTouchListener(on);
+	}
 	public void dayView(View view) {
 		setContentView(R.layout.day_view);
-		OnSwipeTouchListener on = new OnSwipeTouchListener(this) {
-			public void onSwipeLeft() {timesSwiped--; dayView(null);}
-			public void onSwipeRight() {timesSwiped++; dayView(null);}
+		on = new OnSwipeTouchListener(this) {
+			public void onSwipeLeft() {timesSwiped++; dayView(null);}
+			public void onSwipeRight() {timesSwiped--; dayView(null);}
 		};
-		TextView date = (TextView)findViewById(R.id.date);
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, timesSwiped);
-		String monthDay = df.format(cal.getTime());
-		date.setText(monthDay);
-		TextView dayRotation = (TextView)findViewById(R.id.day);
-		int d = sc.getDay(timesSwiped);
-		dayRotation.setText(d > 0 ? "Day: " + d : sc.exceptions(d));
+		constantView(view);
 		Button p1 = (Button)findViewById(R.id.p1);
 		Button p2 = (Button)findViewById(R.id.p2);
 		Button p3 = (Button)findViewById(R.id.p3);
@@ -183,12 +150,6 @@ public class MainActivity extends AppCompatActivity {
 		p3.setOnTouchListener(on);
 		p4.setOnTouchListener(on);
 		p5.setOnTouchListener(on);
-		Button search = (Button)findViewById(R.id.search);
-		search.setText("Search");
-		Button toggle = (Button)findViewById(R.id.toggle);
-		toggle.setText("Toggle");
-		Button settings = (Button)findViewById(R.id.settings);
-		settings.setText("Settings");
 
 	}
 }
