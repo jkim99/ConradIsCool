@@ -31,12 +31,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
-	private View currentClassView;
-	private View fullDayView;
 	private WebView aspenLogin = null;
 	private File settingsCache;
 	private int timesSwiped;
-	private DateFormat dateFormat;
 	private ScheduleChecker scheduleChecker;
 	private int defaultScreen;
 
@@ -66,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		File scheduleFile = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
 		mainUI();
 		setContentView(R.layout.activity_main);
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
