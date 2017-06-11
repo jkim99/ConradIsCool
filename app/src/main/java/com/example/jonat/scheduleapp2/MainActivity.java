@@ -33,7 +33,7 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 	private WebView aspenLogin = null;
 	private File settingsCache;
-	private int timesSwiped;
+	private int timesSwiped = 0;
 	private ScheduleChecker scheduleChecker;
 	private int defaultScreen;
 
