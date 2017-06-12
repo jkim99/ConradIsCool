@@ -34,6 +34,7 @@ public class JSInterface {
 			pw.println("--Schedule--");
 			for(String s : classes)
 				pw.println(s);
+			Log.i("debugging", "Schedule File created");
 			pw.close();
 		}
 		catch(IOException ioe) {}

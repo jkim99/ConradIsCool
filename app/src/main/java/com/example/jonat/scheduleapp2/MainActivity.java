@@ -22,6 +22,7 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 	private WebView aspenLogin = null;
 	private File settingsCache;
+	private File scheduleFile;
 	private int timesSwiped = 0;
 	private ScheduleChecker scheduleChecker;
 	private int defaultScreen;
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 					startActivity(intent2);
 					return true;
 				case R.id.navigation_settings:
-					Intent intent3 = new Intent(MainActivity.this, Settings.class);
-					startActivity(intent3);
+					//Intent intent3 = new Intent(MainActivity.this, Settings.class);
+					//startActivity(intent3);
 					return true;
 			}
 			return false;
@@ -53,15 +54,10 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mainUI();
-		setContentView(R.layout.activity_main);
-		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
-		setSupportActionBar(myToolbar);
+		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
+		if(!scheduleFile.exists())
+			aspenPage();
 
-		BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
-		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
-		changeDayIcon(navigation.getMenu());
-		changePeriodIcon(navigation.getMenu());
 	}
 
 	@Override
@@ -132,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void aspenPage() {
+
 		aspenLogin = new WebView(this);
 		aspenLogin.getSettings().setJavaScriptEnabled(true);
 		aspenLogin.getSettings().setUserAgentString("Mozilla/5.0 (Windows; U; Windows NT 6.2; en-US; rv:1.9) Gecko/2008062901 IceWeasel/3.0");
@@ -162,9 +159,8 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void mainUI() {
-		File scheduleFile = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
-		if(!scheduleFile.exists())
-			aspenPage();
+		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
+		aspenPage();
 		ArrayList<String> classes = new ArrayList<String>();
 		try {
 			Scanner scan = new Scanner(scheduleFile);
@@ -180,12 +176,19 @@ public class MainActivity extends AppCompatActivity {
 				scan.nextLine();
 			}
 			scheduleChecker = new ScheduleChecker(this, classes);
+			setContentView(R.layout.activity_main);
+			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+			setSupportActionBar(myToolbar);
+
+			BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
+			navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
+			changeDayIcon(navigation.getMenu());
+			changePeriodIcon(navigation.getMenu());
 		}
 		catch(IOException ioe) {
 			aspenPage();
 			Log.i("debugging", ioe.toString());
 		}
-
 	}
 
 	public void checkSettings() {

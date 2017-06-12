@@ -24,6 +24,7 @@
 		</activity>
 		<activity android:name=".CurrentViewActivity"/>
 		<activity android:name=".DayViewActivity"/>
+		<activity android:name=".Settings"/>
 	</application>
 
 </manifest>

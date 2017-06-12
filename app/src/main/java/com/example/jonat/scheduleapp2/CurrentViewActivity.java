@@ -38,7 +38,7 @@ public class CurrentViewActivity extends AppCompatActivity {
 					Intent intent2 = new Intent(CurrentViewActivity.this, DayViewActivity.class);
 					startActivity(intent2);
 					return true;
-				case R.id.navigation_notifications:
+				case R.id.navigation_settings:
 					Intent intent3 = new Intent(CurrentViewActivity.this, Settings.class);
 					startActivity(intent3);
 					return true;

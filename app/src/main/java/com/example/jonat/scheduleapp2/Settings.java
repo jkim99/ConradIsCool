@@ -60,7 +60,7 @@ public class Settings extends AppCompatActivity {
 
 		BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
 		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
-		navigation.setSelectedItemId(R.id.navigation_day_view);
+		navigation.setSelectedItemId(R.id.navigation_settings);
 		changeDayIcon(navigation.getMenu());
 		changePeriodIcon(navigation.getMenu());
 		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
