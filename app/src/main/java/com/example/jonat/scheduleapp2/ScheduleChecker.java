@@ -88,15 +88,20 @@ public class ScheduleChecker {
 		else
 			return -10;
 	}
+
+	public String getClass(int day, int period) {
+		return day < 0 ? exceptions(day) : classes[(int)(getBlock(day, period)) - 65];
+	}
+
 	public String getRoom(int dayAfter, int periodAfter) {
 		String time = getTime();
 		int day = getSchoolDayRotation(dayAfter);
 		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3));
 		try {
-			return day < 0 ? exceptions(day) : classes[(int)(getBlock(day - 1, getCurrentPeriod(minutes) + periodAfter))];
+			return day < 0 ? exceptions(day) : classes[(int)(getBlock(day, getCurrentPeriod(minutes) + periodAfter)) - 65];
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
-			return "No Class!";
+			return "error";
 		}
 	}
 

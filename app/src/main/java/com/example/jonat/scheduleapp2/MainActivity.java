@@ -1,32 +1,21 @@
 package com.example.jonat.scheduleapp2;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -63,16 +52,15 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//aspenPage();
-		//mainUI();
-		/*setContentView(R.layout.activity_main);
+		mainUI();
+		setContentView(R.layout.activity_main);
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 		setSupportActionBar(myToolbar);
 
 		BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
 		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
 		changeDayIcon(navigation.getMenu());
-		changePeriodIcon(navigation.getMenu());*/
+		changePeriodIcon(navigation.getMenu());
 	}
 
 	@Override
@@ -143,14 +131,11 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void aspenPage() {
-		Log.i("debugging", "1");
 		aspenLogin = new WebView(this);
 		aspenLogin.getSettings().setJavaScriptEnabled(true);
 		aspenLogin.getSettings().setUserAgentString("Mozilla/5.0 (Windows; U; Windows NT 6.2; en-US; rv:1.9) Gecko/2008062901 IceWeasel/3.0");
-		Log.i("debugging", "2");
 		aspenLogin.loadUrl("https://ma-andover.myfollett.com/aspen/logon.do");
 		aspenLogin.addJavascriptInterface(new JSInterface(this), "HTMLOUT");
-		Log.i("debugging", "3");
 		setContentView(aspenLogin);
 		aspenLogin.setWebViewClient(new WebViewClient() {
 

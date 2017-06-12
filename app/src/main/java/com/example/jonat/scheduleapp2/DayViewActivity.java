@@ -80,11 +80,11 @@ public class DayViewActivity extends AppCompatActivity {
 		Button p3 = (Button)findViewById(R.id.p3);
 		Button p4 = (Button)findViewById(R.id.p4);
 		Button p5 = (Button)findViewById(R.id.p5);
-		p1.setText(scheduleChecker.getRoom(scheduleChecker.getSchoolDayRotation(timesSwiped), 0));
-		p2.setText(scheduleChecker.getRoom(scheduleChecker.getSchoolDayRotation(timesSwiped), 1));
-		p3.setText(scheduleChecker.getRoom(scheduleChecker.getSchoolDayRotation(timesSwiped), 2));
-		p4.setText(scheduleChecker.getRoom(scheduleChecker.getSchoolDayRotation(timesSwiped), 3));
-		p5.setText(scheduleChecker.getRoom(scheduleChecker.getSchoolDayRotation(timesSwiped), 4));
+		p1.setText(scheduleChecker.getClass(timesSwiped, 0));
+		p2.setText(scheduleChecker.getClass(timesSwiped, 1));
+		p3.setText(scheduleChecker.getClass(timesSwiped, 2));
+		p4.setText(scheduleChecker.getClass(timesSwiped, 3));
+		p5.setText(scheduleChecker.getClass(timesSwiped, 4));
 		p1.setOnTouchListener(on);
 		p2.setOnTouchListener(on);
 		p3.setOnTouchListener(on);
