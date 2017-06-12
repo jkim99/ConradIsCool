@@ -16,6 +16,7 @@
 		android:layout_height="?attr/actionBarSize"
 		android:background="#212121"
 		android:elevation="4dp"
+		android:title="@string/title_settings"
 		android:titleTextAppearance="@color/white"
 		app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 		app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
@@ -29,9 +30,11 @@
 
 		<Switch
 			android:id="@+id/switch1"
-			android:layout_width="wrap_content"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="Notifications"/>
+			android:text="Notifications"
+			android:textColor="@color/white"
+			android:layout_margin="25dp"/>
 	</android.support.constraint.ConstraintLayout>
 
 	<android.support.design.widget.BottomNavigationView

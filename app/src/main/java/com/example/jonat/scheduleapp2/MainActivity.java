@@ -40,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
 					Intent intent2 = new Intent(MainActivity.this, DayViewActivity.class);
 					startActivity(intent2);
 					return true;
-				case R.id.navigation_notifications:
-
+				case R.id.navigation_settings:
+					Intent intent3 = new Intent(MainActivity.this, Settings.class);
+					startActivity(intent3);
 					return true;
 			}
 			return false;

@@ -101,7 +101,7 @@ public class ScheduleChecker {
 			return day < 0 ? exceptions(day) : classes[(int)(getBlock(day, getCurrentPeriod(minutes) + periodAfter)) - 65];
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
-			return "error";
+			return "No Class!";
 		}
 	}
 

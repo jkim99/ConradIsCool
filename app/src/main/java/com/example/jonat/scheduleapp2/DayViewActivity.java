@@ -40,7 +40,8 @@ public class DayViewActivity extends AppCompatActivity {
 				case R.id.navigation_day_view:
 					return true;
 				case R.id.navigation_notifications:
-
+					Intent intent3 = new Intent(DayViewActivity.this, Settings.class);
+					startActivity(intent3);
 					return true;
 			}
 			return false;
