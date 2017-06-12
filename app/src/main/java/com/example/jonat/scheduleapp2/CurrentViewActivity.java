@@ -137,7 +137,7 @@ public class CurrentViewActivity extends AppCompatActivity {
 				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
 				break;
 			default:
-				icon.setIcon(R.drawable.ic_dashboard_black_24dp);
+				icon.setIcon(R.drawable.ic_button);
 				break;
 		}
 	}

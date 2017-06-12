@@ -63,15 +63,16 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mainUI();
-		setContentView(R.layout.activity_main);
+		//aspenPage();
+		//mainUI();
+		/*setContentView(R.layout.activity_main);
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 		setSupportActionBar(myToolbar);
 
 		BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
 		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
 		changeDayIcon(navigation.getMenu());
-		changePeriodIcon(navigation.getMenu());
+		changePeriodIcon(navigation.getMenu());*/
 	}
 
 	@Override
@@ -136,20 +137,20 @@ public class MainActivity extends AppCompatActivity {
 				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
 				break;
 			default:
-				icon.setIcon(R.drawable.ic_dashboard_black_24dp);
+				icon.setIcon(R.drawable.ic_button);
 				break;
 		}
 	}
 
 	public void aspenPage() {
-
+		Log.i("debugging", "1");
 		aspenLogin = new WebView(this);
-		aspenLogin.getSettings().setUserAgentString("Mozilla/5.0 (Windows; U; Windows NT 6.2; en-US; rv:1.9) Gecko/2008062901 IceWeasel/3.0");
 		aspenLogin.getSettings().setJavaScriptEnabled(true);
-
+		aspenLogin.getSettings().setUserAgentString("Mozilla/5.0 (Windows; U; Windows NT 6.2; en-US; rv:1.9) Gecko/2008062901 IceWeasel/3.0");
+		Log.i("debugging", "2");
 		aspenLogin.loadUrl("https://ma-andover.myfollett.com/aspen/logon.do");
 		aspenLogin.addJavascriptInterface(new JSInterface(this), "HTMLOUT");
-
+		Log.i("debugging", "3");
 		setContentView(aspenLogin);
 		aspenLogin.setWebViewClient(new WebViewClient() {
 
@@ -166,11 +167,18 @@ public class MainActivity extends AppCompatActivity {
 					mainUI();
 				}
 			}
+
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				return false;
+			}
 		});
 	}
 
 	public void mainUI() {
 		File scheduleFile = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
+		if(!scheduleFile.exists())
+			aspenPage();
 		ArrayList<String> classes = new ArrayList<String>();
 		try {
 			Scanner scan = new Scanner(scheduleFile);
@@ -188,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
 			scheduleChecker = new ScheduleChecker(this, classes);
 		}
 		catch(IOException ioe) {
+			aspenPage();
+			Log.i("debugging", ioe.toString());
 		}
 
 	}

@@ -17,6 +17,7 @@ Known Bugs:
 - ~~Failure to fetch calendar data (FTP server maintenance)~~ FIXED
 - Settings page
 - Search feature
+- Swipe function has yet to be added
 
 Future (possible) addons:
 - Month view
