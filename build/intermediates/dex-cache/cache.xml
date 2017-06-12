@@ -3,6 +3,24 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_d76f9a8aaa5fe66bf96b4b14a98acb6dcddc5f62\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jonat\.android\build-cache\e7055427533095859f0c04e42b90e194f4965569\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3ebae787968aae86d859093c57f2261b330058b6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\jonat\.android\build-cache\3d0074694c441480824bdcdf6727421024409bdf\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -21,12 +39,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-io-2.5\commons-io-2.5.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_d76f9a8aaa5fe66bf96b4b14a98acb6dcddc5f62\classes.dex" />
+        sha1="b24f6678d458e65f08113a079e3724581eca1184">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-io-2.5_5da065535c1062294a65aa8e2b27ddc05c2471b6\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -36,15 +54,6 @@
         revision="25.0.3"
         sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
         <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_529a13d7692760bc5b885dcea36c1c3fd3ae55aa\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jonat\.android\build-cache\e7055427533095859f0c04e42b90e194f4965569\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3ebae787968aae86d859093c57f2261b330058b6\classes.dex" />
     </item>
 
 </items>

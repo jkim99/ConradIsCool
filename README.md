@@ -10,11 +10,11 @@ Please E-mail bugs and suggestions at jkim2018@k12.andoverma.us
 
 Progress:
 - Search and Settings are not yet ready
-- IOS support coming soon over the summer
+- iOS support coming soon over the summer
 - App only works with test data due to not having updated class information on Aspen
 
 Known Bugs:
-- Failure to fetch calendar data (FTP server maintenance)
+- ~~Failure to fetch calendar data (FTP server maintenance)~~ FIXED
 - Settings page
 - Search feature
 
