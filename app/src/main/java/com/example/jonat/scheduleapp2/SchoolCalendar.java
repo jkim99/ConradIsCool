@@ -13,7 +13,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SchoolCalendar {
+public class SchoolCalendar extends Calendar{
+	
 	private File calendar;
 	private Context context;
 	private ArrayList<String> snowDays;
