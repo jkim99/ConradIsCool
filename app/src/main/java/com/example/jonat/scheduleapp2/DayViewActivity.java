@@ -10,8 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionManager;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,7 +25,6 @@ public class DayViewActivity extends AppCompatActivity {
 
 	private OnSwipeTouchListener on;
 	private ScheduleChecker scheduleChecker;
-	private int timesSwiped = 0;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
 			= new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,13 +65,13 @@ public class DayViewActivity extends AppCompatActivity {
 		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
 		on = new OnSwipeTouchListener(this) {
 			public void onSwipeLeft() {
-				timesSwiped++;
+				MainActivity.timesSwiped++;
 				Transition transition = new Slide(3);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
 				startActivity(new Intent(DayViewActivity.this, DayViewActivity.class));
 			}
 			public void onSwipeRight() {
-				timesSwiped--;
+				MainActivity.timesSwiped--;
 				Transition transition = new Slide(5);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
 				startActivity(new Intent(DayViewActivity.this, DayViewActivity.class));
@@ -83,11 +82,11 @@ public class DayViewActivity extends AppCompatActivity {
 		Button p3 = (Button)findViewById(R.id.p3);
 		Button p4 = (Button)findViewById(R.id.p4);
 		Button p5 = (Button)findViewById(R.id.p5);
-		p1.setText(scheduleChecker.getClass(timesSwiped, 0));
-		p2.setText(scheduleChecker.getClass(timesSwiped, 1));
-		p3.setText(scheduleChecker.getClass(timesSwiped, 2));
-		p4.setText(scheduleChecker.getClass(timesSwiped, 3));
-		p5.setText(scheduleChecker.getClass(timesSwiped, 4));
+		p1.setText(scheduleChecker.getClass(MainActivity.timesSwiped, 0));
+		p2.setText(scheduleChecker.getClass(MainActivity.timesSwiped, 1));
+		p3.setText(scheduleChecker.getClass(MainActivity.timesSwiped, 2));
+		p4.setText(scheduleChecker.getClass(MainActivity.timesSwiped, 3));
+		p5.setText(scheduleChecker.getClass(MainActivity.timesSwiped, 4));
 		p1.setOnTouchListener(on);
 		p2.setOnTouchListener(on);
 		p3.setOnTouchListener(on);
@@ -95,8 +94,15 @@ public class DayViewActivity extends AppCompatActivity {
 		p5.setOnTouchListener(on);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.actionbar, menu);
+		return true;
+	}
+
 	public void changeDayIcon(Menu menu) {
-		int day = scheduleChecker.getSchoolDayRotation(timesSwiped);
+		int day = scheduleChecker.getSchoolDayRotation(MainActivity.timesSwiped);
 		MenuItem icon = menu.findItem(R.id.navigation_day_view);
 		switch(day) {
 			case 1:

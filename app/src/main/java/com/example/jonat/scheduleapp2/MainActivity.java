@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 	private File settingsCache;
 	private File scheduleFile;
 	private File errorLogs;
-	private int timesSwiped = 0;
+	public static int timesSwiped = 0;
 	private ScheduleChecker scheduleChecker;
 	private Intent defaultScreen;
 	private boolean notifications;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
 		if(!scheduleFile.exists())
 			aspenPage();
-		if(!settingsCache.exists())
+		if(!settingsCache.exists() && settingsCache.isDirectory())
 			createSettings();
 		checkSettings();
 		mainUI();
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 			pw.println("defaultView:current_view");
 			pw.println("notifications:on");
 			pw.close();
-			Log.i("debugging","created settings file");
+			Log.i("debugging","M:created settings file");
 		}
 		catch(Exception e) {
 			Log.e("debugging", "error creating settings");
@@ -253,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
 					break;
 				default:
 					defaultScreen = new Intent(MainActivity.this, MainActivity.class);
+					Log.e("debugging", "error");
 					Scanner scan = new Scanner(errorLogs);
 					PrintWriter pw = new PrintWriter(errorLogs);
 					while(scan.hasNextLine())

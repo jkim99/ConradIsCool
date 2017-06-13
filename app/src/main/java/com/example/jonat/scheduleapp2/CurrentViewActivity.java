@@ -10,8 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionManager;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,7 +25,6 @@ public class CurrentViewActivity extends AppCompatActivity {
 
 	private OnSwipeTouchListener on;
 	private ScheduleChecker scheduleChecker;
-	private int timesSwiped = 0;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
 			= new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,13 +65,13 @@ public class CurrentViewActivity extends AppCompatActivity {
 		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
 		on = new OnSwipeTouchListener(this) {
 			public void onSwipeLeft() {
-				timesSwiped++;
+				MainActivity.timesSwiped++;
 				Transition transition = new Slide(3);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
 				startActivity(new Intent(CurrentViewActivity.this, CurrentViewActivity.class));
 			}
 			public void onSwipeRight() {
-				timesSwiped--;
+				MainActivity.timesSwiped--;
 				Transition transition = new Slide(5);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
 				startActivity(new Intent(CurrentViewActivity.this, CurrentViewActivity.class));
@@ -80,14 +79,21 @@ public class CurrentViewActivity extends AppCompatActivity {
 		};
 		Button currentClass = (Button)findViewById(R.id.currentClass);
 		Button nextClass = (Button)findViewById(R.id.nextClass);
-		currentClass.setText(scheduleChecker.getRoom(scheduleChecker.getSchoolDayRotation(timesSwiped), 0));
-		nextClass.setText(scheduleChecker.getRoom(scheduleChecker.getSchoolDayRotation(timesSwiped), 1));
+		currentClass.setText(scheduleChecker.getRoom(MainActivity.timesSwiped, 0));
+		nextClass.setText(scheduleChecker.getRoom(MainActivity.timesSwiped, 1));
 		currentClass.setOnTouchListener(on);
 		nextClass.setOnTouchListener(on);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.actionbar, menu);
+		return true;
+	}
+
 	public void changeDayIcon(Menu menu) {
-		int day = scheduleChecker.getSchoolDayRotation(timesSwiped);
+		int day = scheduleChecker.getSchoolDayRotation(MainActivity.timesSwiped);
 		MenuItem icon = menu.findItem(R.id.navigation_day_view);
 		switch(day) {
 			case 1:

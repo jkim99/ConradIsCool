@@ -13,8 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SchoolCalendar extends Calendar{
-	
+public class SchoolCalendar {
 	private File calendar;
 	private Context context;
 	private ArrayList<String> snowDays;
@@ -43,7 +42,7 @@ public class SchoolCalendar extends Calendar{
 		}
 	}
 
-	public int getDayRotation(int day, int month) {
+	public int getDayRotation(int month, int day) {
 		String searchDate = month + "/" + day;
 		String returnValue;
 		try {
