@@ -25,6 +25,7 @@ public class MonthViewActivity extends AppCompatActivity {
 
 	private OnSwipeTouchListener on;
 	private ScheduleChecker scheduleChecker;
+	//private SchoolCalendar calendar;
 	private int timesSwiped = 0;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
@@ -37,17 +38,17 @@ public class MonthViewActivity extends AppCompatActivity {
 					Intent intent2 = new Intent(MonthViewActivity.this, CurrentViewActivity.class);
 					startActivity(intent2);
 					return true;
-				case R.id.navigation_day_view:
+				case R.id.navigation_month_view:
 					return true;
 				case R.id.navigation_settings:
 					Intent intent3 = new Intent(MonthViewActivity.this, Settings.class);
 					startActivity(intent3);
 					return true;
-        case R.id.navigation_day_view:
-          Intent intent4 = newIntent(MonthViewActivity.this, DayViewActivity.class);
-          startActivity(intent4);
-          return true;
-			}
+        			case R.id.navigation_day_view:
+          				Intent intent4 = newIntent(MonthViewActivity.this, DayViewActivity.class);
+          				startActivity(intent4);
+          				return true;
+          			}
 			return false;
 		}
 
@@ -57,14 +58,14 @@ public class MonthViewActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mainUI();
-		setContentView(R.layout.day_view);
+		setContentView(R.layout.month_view);
 
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 		setSupportActionBar(myToolbar);
 
 		BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
 		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
-		navigation.setSelectedItemId(R.id.navigation_day_view);
+		navigation.setSelectedItemId(R.id.navigation_month_view);
 		changeDayIcon(navigation.getMenu());
 		changePeriodIcon(navigation.getMenu());
 		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
@@ -73,13 +74,13 @@ public class MonthViewActivity extends AppCompatActivity {
 				timesSwiped++;
 				Transition transition = new Slide(3);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
-				startActivity(new Intent(DayViewActivity.this, DayViewActivity.class));
+				startActivity(new Intent(MonthViewActivity.this, MonthViewActivity.class));
 			}
 			public void onSwipeRight() {
 				timesSwiped--;
 				Transition transition = new Slide(5);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
-				startActivity(new Intent(DayViewActivity.this, DayViewActivity.class));
+				startActivity(new Intent(MonthViewActivity.this, MonthViewActivity.class));
 			}
 		};
 		Button p1 = (Button)findViewById(R.id.p1);
@@ -97,6 +98,8 @@ public class MonthViewActivity extends AppCompatActivity {
 		p3.setOnTouchListener(on);
 		p4.setOnTouchListener(on);
 		p5.setOnTouchListener(on);
+		
+		showCalendar();
 	}
 
 	public void changeDayIcon(Menu menu) {
@@ -178,5 +181,25 @@ public class MonthViewActivity extends AppCompatActivity {
 		}
 		catch(IOException ioe) {}
 
+	}
+	
+	/* we should use this to help us display the calendar: https://developer.android.com/reference/android/util/MonthDisplayHelper.html*/
+	public void showCalendar() {
+		
+		MonthDisplayHelper showMonth = new MonthDisplayHelper (2017, 9);
+		
+		
+		/*calendar = new SchoolCalendar (new Context());
+		
+		Calendar beginTime = Calendar.getInstance();
+		beginTime.set(2017, 9, 7, 0, 0, 0);
+		Calendar endTime = Calendar.getInstance();
+		endTime.set(2018, 7, 1, 0, 0, 0);
+		Intent intent = new Intent(Intent.ACTION_INSERT)
+        		.setData(Events.CONTENT_URI);
+        		.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis());
+        		.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis());
+			.putExtra(Events.TITLE, calendar.getDayRotation(calendar.).toString());*/
+		
 	}
 }
