@@ -52,6 +52,11 @@ public class Settings extends AppCompatActivity {
 					Intent intent2 = new Intent(Settings.this, DayViewActivity.class);
 					startActivity(intent2);
 					return true;
+				/*case R.id.navigation_month_view:
+					Intent intent3 = new Intent (Settings.this, MonthViewActivity.class);
+					startActivity(intent3);
+					return true;
+				*/
 				case R.id.navigation_settings:
 					return true;
 			}
