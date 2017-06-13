@@ -16,16 +16,19 @@ import android.webkit.WebViewClient;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
-	private WebView aspenLogin = null;
+	private WebView aspenLogin;
 	private File settingsCache;
 	private File scheduleFile;
+	private File errorLogs;
 	private int timesSwiped = 0;
 	private ScheduleChecker scheduleChecker;
-	private int defaultScreen;
+	private Intent defaultScreen;
+	private boolean notifications;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
 			= new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -42,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
 					startActivity(intent2);
 					return true;
 				case R.id.navigation_settings:
-					//Intent intent3 = new Intent(MainActivity.this, Settings.class);
-					//startActivity(intent3);
+					Intent intent3 = new Intent(MainActivity.this, Settings.class);
+					startActivity(intent3);
 					return true;
 			}
 			return false;
@@ -55,9 +58,19 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
+		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
 		if(!scheduleFile.exists())
 			aspenPage();
-
+		if(!settingsCache.exists())
+			createSettings();
+		checkSettings();
+		mainUI();
+		try {
+			Scanner scan = new Scanner(errorLogs);
+			while(scan.hasNextLine())
+				Log.e("debugging", scan.nextLine());
+		}
+		catch(Exception e) {}
 	}
 
 	@Override
@@ -106,19 +119,19 @@ public class MainActivity extends AppCompatActivity {
 		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)));
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
-			case 1:
+			case 0:
 				icon.setIcon(R.drawable.ic_looks_one_black_24dp);
 				break;
-			case 2:
+			case 1:
 				icon.setIcon(R.drawable.ic_looks_two_black_24dp);
 				break;
-			case 3:
+			case 2:
 				icon.setIcon(R.drawable.ic_looks_3_black_24dp);
 				break;
-			case 4:
+			case 3:
 				icon.setIcon(R.drawable.ic_looks_4_black_24dp);
 				break;
-			case 5:
+			case 4:
 				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
 				break;
 			default:
@@ -147,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
 					javascript = "javascript:window.HTMLOUT.processHTML('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');";
 					aspenLogin.loadUrl(javascript);
 					aspenLogin.destroy();
-					mainUI();
 				}
 			}
 
@@ -176,14 +188,14 @@ public class MainActivity extends AppCompatActivity {
 				scan.nextLine();
 			}
 			scheduleChecker = new ScheduleChecker(this, classes);
-			setContentView(R.layout.activity_main);
+			startActivity(defaultScreen);
 			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
 
-			BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
+			/*BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
 			navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
 			changeDayIcon(navigation.getMenu());
-			changePeriodIcon(navigation.getMenu());
+			changePeriodIcon(navigation.getMenu());*/
 		}
 		catch(IOException ioe) {
 			aspenPage();
@@ -191,11 +203,65 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	public void createSettings() {
+		try {
+			PrintWriter pw = new PrintWriter(settingsCache);
+			pw.println("defaultView:current_view");
+			pw.println("notifications:on");
+			pw.close();
+			Log.i("debugging","created settings file");
+		}
+		catch(Exception e) {
+			Log.e("debugging", "error creating settings");
+		}
+	}
 	public void checkSettings() {
+		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
 		try {
 			Scanner scan = new Scanner(settingsCache);
-			//TODO: get settings
+			String line;
+			String opt;
+			while(scan.hasNextLine()) {
+				line = scan.nextLine();
+				opt = line.substring(0, line.indexOf(":") + 1);
+				switch(opt) {
+					case "defaultView:":
+						setDefaultView(line.substring(line.indexOf(":") + 1));
+						break;
+					case "notifications:":
+						notifications = !(line.substring(line.indexOf(":")).equals("off"));
+						break;
+					default:
+						Log.i("debugging", "settings file corrupted or missing");
+						createSettings();
+				}
+			}
 		}
 		catch(IOException ioe) {}
+	}
+
+	public void setDefaultView(String str) {
+		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
+		Log.e("debugging", str);
+		try {
+			switch(str) {
+				case "day_view":
+					defaultScreen = new Intent(MainActivity.this, DayViewActivity.class);
+					break;
+				case "current_view":
+					defaultScreen = new Intent(MainActivity.this, CurrentViewActivity.class);
+					break;
+				default:
+					defaultScreen = new Intent(MainActivity.this, MainActivity.class);
+					Scanner scan = new Scanner(errorLogs);
+					PrintWriter pw = new PrintWriter(errorLogs);
+					while(scan.hasNextLine())
+						pw.println(scan.nextLine());
+					pw.println("error: unable to get default view");
+					pw.close();
+					break;
+			}
+		}
+		catch(Exception e) {}
 	}
 }

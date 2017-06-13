@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -68,11 +69,13 @@ public class CurrentViewActivity extends AppCompatActivity {
 				timesSwiped++;
 				Transition transition = new Slide(3);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
+				startActivity(new Intent(CurrentViewActivity.this, CurrentViewActivity.class));
 			}
 			public void onSwipeRight() {
 				timesSwiped--;
 				Transition transition = new Slide(5);
 				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
+				startActivity(new Intent(CurrentViewActivity.this, CurrentViewActivity.class));
 			}
 		};
 		Button currentClass = (Button)findViewById(R.id.currentClass);
@@ -122,19 +125,19 @@ public class CurrentViewActivity extends AppCompatActivity {
 		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)));
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
-			case 1:
+			case 0:
 				icon.setIcon(R.drawable.ic_looks_one_black_24dp);
 				break;
-			case 2:
+			case 1:
 				icon.setIcon(R.drawable.ic_looks_two_black_24dp);
 				break;
-			case 3:
+			case 2:
 				icon.setIcon(R.drawable.ic_looks_3_black_24dp);
 				break;
-			case 4:
+			case 3:
 				icon.setIcon(R.drawable.ic_looks_4_black_24dp);
 				break;
-			case 5:
+			case 4:
 				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
 				break;
 			default:
