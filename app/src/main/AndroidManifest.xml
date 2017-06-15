@@ -25,6 +25,7 @@
 		</activity>
 		<activity android:name=".CurrentViewActivity"/>
 		<activity android:name=".DayViewActivity"/>
+		<activity android:name=".MonthViewActivity"/>
 		<activity android:name=".Settings"/>
 		<activity android:name=".Notify"/>
 	</application>

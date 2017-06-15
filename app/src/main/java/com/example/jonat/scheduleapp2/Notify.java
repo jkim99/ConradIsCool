@@ -27,7 +27,7 @@ public class Notify extends AppCompatActivity {
 		String course = array[2];
 		Log.e("debugging", course);
 		NotificationCompat.Builder builder = (NotificationCompat.Builder)new NotificationCompat.Builder(this)
-				.setSmallIcon(R.drawable.ic_settings_black_24dp)
+				.setSmallIcon(changeNotificationDayIcon())
 				.setContentTitle(period)
 				.setContentText(course);
 		//Intent resultIntent = new Intent(this, Settings.class);
@@ -45,9 +45,9 @@ public class Notify extends AppCompatActivity {
 			while(scan.hasNextLine()) {
 				classes.add(
 						scan.nextLine() + "\n" +
-								scan.nextLine() + "\n" +
-								scan.nextLine() + "\n" +
-								scan.nextLine() + "\n"
+						scan.nextLine() + "\n" +
+						scan.nextLine() + "\n" +
+						scan.nextLine() + "\n"
 				);
 				scan.nextLine();
 			}
@@ -55,6 +55,30 @@ public class Notify extends AppCompatActivity {
 		}
 		catch(IOException ioe) {}
 
+	}
+
+	public int changeNotificationDayIcon() {
+		int day = scheduleChecker.getSchoolDayRotation(0);
+		switch(day) {
+			case 1:
+				return R.drawable.ic_filter_1_black_24dp;
+			case 2:
+				return R.drawable.ic_filter_2_black_24dp;
+			case 3:
+				return R.drawable.ic_filter_3_black_24dp;
+			case 4:
+				return R.drawable.ic_filter_4_black_24dp;
+			case 5:
+				return R.drawable.ic_filter_5_black_24dp;
+			case 6:
+				return R.drawable.ic_filter_6_black_24dp;
+			case 7:
+				return R.drawable.ic_filter_7_black_24dp;
+			case 8:
+				return R.drawable.ic_filter_8_black_24dp;
+			default:
+				return R.drawable.ic_filter_none_black_24dp;
+		}
 	}
 
 }
