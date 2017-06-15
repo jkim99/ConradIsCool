@@ -101,6 +101,20 @@ public class DayViewActivity extends AppCompatActivity {
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+			case R.id.navigation_settings:
+				Intent intent = new Intent(DayViewActivity.this, Settings.class);
+				startActivity(intent);
+				return true;
+			case R.id.navigation_search:
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
 	public void changeDayIcon(Menu menu) {
 		int day = scheduleChecker.getSchoolDayRotation(MainActivity.timesSwiped);
 		MenuItem icon = menu.findItem(R.id.navigation_day_view);
@@ -137,7 +151,7 @@ public class DayViewActivity extends AppCompatActivity {
 
 	public void changePeriodIcon(Menu menu) {
 		String time = scheduleChecker.getTime();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)));
+		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)), 0);
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
 			case 0:
@@ -156,7 +170,7 @@ public class DayViewActivity extends AppCompatActivity {
 				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
 				break;
 			default:
-				icon.setIcon(R.drawable.ic_button);
+				icon.setIcon(R.drawable.ic_looks_none_black_24dp);
 				break;
 		}
 	}

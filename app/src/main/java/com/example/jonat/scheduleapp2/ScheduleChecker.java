@@ -74,38 +74,44 @@ public class ScheduleChecker {
 		return schoolCalendar.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
 	}
 
-	public int getCurrentPeriod(int minutes) {
+	public int getCurrentPeriod(int minutes, int periodAfter) {
 		if(minutes >= 464 && minutes < 524)
-			return 0;
+			return periodAfter;
 		else if(minutes >= 524 && minutes < 603)
-			return 1;
+			return 1 + periodAfter;
 		else if(minutes >= 603 && minutes < 667)
-			return 2;
+			return 2 + periodAfter;
 		else if(minutes >= 667 && minutes < 781)
-			return 3;
+			return 3 + periodAfter;
 		else if(minutes >= 781 && minutes < 845)
-			return 4;
+			return 4 + periodAfter;
 		else
-			return -10;
+			return 5;
 	}
 
-	public String getClass(int day, int period) {
-		return day < 0 ? exceptions(day) : classes[(int)(getBlock(day, period)) - 65];
+	public String getClass(int dayAfter, int period) {
+		int day = getSchoolDayRotation(dayAfter);
+		return day < 0 ? exceptions(day) : classes[(int)(getBlock(day - 1, period)) - 65];
 	}
 
 	public String getRoom(int dayAfter, int periodAfter) {
 		String time = getTime();
 		int day = getSchoolDayRotation(dayAfter);
 		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3));
+		int period = getCurrentPeriod(minutes, periodAfter);
+		if(period == 5)
+			return "No Class!";
 		try {
-			return day < 0 ? exceptions(day) : classes[(int)(getBlock(day - 1, getCurrentPeriod(minutes) + periodAfter)) - 65];
+			return day < 0 ? exceptions(day) : classes[(int)(getBlock(day - 1, period)) - 65];
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
-			return "No Class!";
+			return "error";
 		}
 	}
 
 	public char getBlock(int day, int period) {
+		if(period == -10)
+			return 'X';
 		try {
 			return schedule[day][period];
 		}

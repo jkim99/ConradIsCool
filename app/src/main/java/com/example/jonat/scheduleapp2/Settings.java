@@ -3,21 +3,16 @@ package com.example.jonat.scheduleapp2;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -52,7 +47,7 @@ public class Settings extends AppCompatActivity {
 					Intent intent2 = new Intent(Settings.this, DayViewActivity.class);
 					startActivity(intent2);
 					return true;
-				case R.id.navigation_settings:
+				case R.id.navigation_month_view:
 					return true;
 			}
 			return false;
@@ -71,24 +66,12 @@ public class Settings extends AppCompatActivity {
 
 		BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
 		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
-		navigation.setSelectedItemId(R.id.navigation_settings);
 		changeDayIcon(navigation.getMenu());
 		changePeriodIcon(navigation.getMenu());
+
+		unCheckAllMenuItems(navigation.getMenu());
+
 		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
-		on = new OnSwipeTouchListener(this) {
-			public void onSwipeLeft() {
-				MainActivity.timesSwiped++;
-				Transition transition = new Slide(3);
-				Log.e("debugging", "" + MainActivity.timesSwiped);
-				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
-			}
-			public void onSwipeRight() {
-				MainActivity.timesSwiped--;
-				Transition transition = new Slide(5);
-				Log.e("debugging", "" + MainActivity.timesSwiped);
-				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
-			}
-		};
 		Switch notification = (Switch)findViewById(R.id.notification);
 		notification.setChecked(notifications);
 		notification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -97,6 +80,7 @@ public class Settings extends AppCompatActivity {
 				updateSettings();
 			}
 		});
+
 		final RadioGroup defaultViews = (RadioGroup)findViewById(R.id.default_view);
 		RadioButton currentViewOption = (RadioButton)findViewById(R.id.current_view_option);
 		RadioButton dayViewOption = (RadioButton)findViewById(R.id.day_view_option);
@@ -176,7 +160,7 @@ public class Settings extends AppCompatActivity {
 
 	public void changePeriodIcon(Menu menu) {
 		String time = scheduleChecker.getTime();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)));
+		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)), 0);
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
 			case 0:
@@ -195,7 +179,7 @@ public class Settings extends AppCompatActivity {
 				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
 				break;
 			default:
-				icon.setIcon(R.drawable.ic_button);
+				icon.setIcon(R.drawable.ic_looks_none_black_24dp);
 				break;
 		}
 	}
@@ -220,6 +204,7 @@ public class Settings extends AppCompatActivity {
 		catch(IOException ioe) {}
 
 	}
+
 	public void checkSettings() {
 		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
 		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
@@ -290,6 +275,17 @@ public class Settings extends AppCompatActivity {
 			//	return R.layout.month_view;
 			default:
 				return R.layout.day_view;
+		}
+	}
+
+	public void unCheckAllMenuItems(@NonNull final Menu menu) {
+		int size = menu.size();
+		for(int i = 0; i < size; i++) {
+			final MenuItem item = menu.getItem(i);
+			if(item.hasSubMenu())
+				unCheckAllMenuItems(item.getSubMenu());
+			else
+				item.setChecked(false);
 		}
 	}
 }

@@ -3,5 +3,6 @@
 	<string name="title_search">SEARCH</string>
 	<string name="title_day_view">DAY VIEW</string>
 	<string name="title_current_view">CURRENT VIEW</string>
+	<string name="title_month_view">MONTH VIEW</string>
 	<string name="title_settings">SETTINGS</string>
 </resources>

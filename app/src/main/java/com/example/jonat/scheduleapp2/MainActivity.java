@@ -1,11 +1,14 @@
 package com.example.jonat.scheduleapp2;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -44,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
 					Intent intent2 = new Intent(MainActivity.this, DayViewActivity.class);
 					startActivity(intent2);
 					return true;
-				case R.id.navigation_settings:
-					Intent intent3 = new Intent(MainActivity.this, Settings.class);
-					startActivity(intent3);
+				case R.id.navigation_month_view:
+					//Intent intent3 = new Intent(MainActivity.this, Settings.class);
+					//startActivity(intent3);
 					return true;
 			}
 			return false;
@@ -59,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
 		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
+
+		/*NotificationCompat.Builder builder = (NotificationCompat.Builder)new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_settings_black_24dp).setContentTitle("My notification").setContentText("Hello World!");
+		Intent resultIntent = new Intent(this, Settings.class);
+		PendingIntent resultPendingIntent = PendingIntent.getActivity( this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		int notificationId = 001;
+		NotificationManager notifyMgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		notifyMgr.notify(notificationId, builder.build());*/
+
 		if(!scheduleFile.exists())
 			aspenPage();
 		if(!settingsCache.exists() && settingsCache.isDirectory())
@@ -78,6 +89,20 @@ public class MainActivity extends AppCompatActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.actionbar, menu);
 		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+			case R.id.navigation_settings:
+				Intent intent = new Intent(MainActivity.this, Settings.class);
+				startActivity(intent);
+				return true;
+			case R.id.navigation_search:
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 	public void changeDayIcon(Menu menu) {
@@ -116,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
 	public void changePeriodIcon(Menu menu) {
 		String time = scheduleChecker.getTime();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)));
+		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)), 0);
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
 			case 0:
@@ -135,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
 				break;
 			default:
-				icon.setIcon(R.drawable.ic_button);
+				icon.setIcon(R.drawable.ic_looks_none_black_24dp);
 				break;
 		}
 	}
@@ -188,7 +213,12 @@ public class MainActivity extends AppCompatActivity {
 				scan.nextLine();
 			}
 			scheduleChecker = new ScheduleChecker(this, classes);
-			startActivity(defaultScreen);
+			try {
+				startActivity(defaultScreen);
+			}
+			catch(NullPointerException npe) {
+				startActivity(new Intent(MainActivity.this, CurrentViewActivity.class));
+			}
 			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
 
@@ -215,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
 			Log.e("debugging", "error creating settings");
 		}
 	}
+
 	public void checkSettings() {
 		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
 		try {
@@ -265,4 +296,5 @@ public class MainActivity extends AppCompatActivity {
 		}
 		catch(Exception e) {}
 	}
+
 }
