@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
 					startActivity(intent2);
 					return true;
 				case R.id.navigation_month_view:
-					//Intent intent3 = new Intent(MainActivity.this, Settings.class);
-					//startActivity(intent3);
+					Intent intent3 = new Intent(MainActivity.this, MonthViewActivity.class);
+					startActivity(intent3);
 					return true;
 			}
 			return false;
