@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,6 +53,7 @@ public class CurrentViewActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mainUI();
+		Log.e("debugging", "55");
 		setContentView(R.layout.current_view);
 
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);

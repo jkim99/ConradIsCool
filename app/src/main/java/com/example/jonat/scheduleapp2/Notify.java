@@ -16,10 +16,12 @@ import java.util.Scanner;
 
 public class Notify extends AppCompatActivity {
 	private ScheduleChecker scheduleChecker;
+	private Intent defaultScreen;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getDefaultScreen();
 		mainUI();
 		String s = scheduleChecker.getRoom(MainActivity.timesSwiped, 0);
 		String[] array = s.split("\n");
@@ -35,7 +37,9 @@ public class Notify extends AppCompatActivity {
 		int notificationId = 001;
 		NotificationManager notifyMgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 		notifyMgr.notify(notificationId, builder.build());
+		startActivity(defaultScreen);
 	}
+
 	public void mainUI() {
 		File scheduleFile = new File((new ContextWrapper(this)).getFilesDir() + "/schedule.txt");
 		ArrayList<String> classes = new ArrayList<String>();
@@ -81,4 +85,37 @@ public class Notify extends AppCompatActivity {
 		}
 	}
 
+	public void getDefaultScreen() {
+		File settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
+		try {
+			Scanner scan = new Scanner(settingsCache);
+			String line;
+			String opt;
+			while(scan.hasNextLine()) {
+				line = scan.nextLine();
+				opt = line.substring(0, line.indexOf(":") + 1);
+				if(opt.equals("defaultView:"))
+					setDefaultView(line.substring(line.indexOf(":") + 1));
+			}
+		}
+		catch(IOException ioe) {}
+	}
+
+	public void setDefaultView(String str) {
+		Log.e("debugging", str);
+		try {
+			switch(str) {
+				case "day_view":
+					defaultScreen = new Intent(Notify.this, DayViewActivity.class);
+					break;
+				case "current_view":
+					defaultScreen = new Intent(Notify.this, CurrentViewActivity.class);
+					break;
+				default:
+					defaultScreen = new Intent(Notify.this, MainActivity.class);
+					Log.e("debugging", "error");
+			}
+		}
+		catch(Exception e) {}
+	}
 }

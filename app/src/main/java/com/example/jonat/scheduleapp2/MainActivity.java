@@ -65,26 +65,15 @@ public class MainActivity extends AppCompatActivity {
 		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
 		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
 
-		Intent myIntent = new Intent(MainActivity.this , Notify.class);
-		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-		PendingIntent pendingIntent = PendingIntent.getService(MainActivity.this, 0, myIntent, 0);
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 12);
-		calendar.set(Calendar.MINUTE, 00);
-		calendar.set(Calendar.SECOND, 00);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
-		startActivity(myIntent);
-
 		/*NotificationCompat.Builder builder = (NotificationCompat.Builder)new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_settings_black_24dp).setContentTitle("My notification").setContentText("Hello World!");
 		Intent resultIntent = new Intent(this, Settings.class);
 		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		int notificationId = 001;
 		NotificationManager notifyMgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 		notifyMgr.notify(notificationId, builder.build());*/
-
-		if(!scheduleFile.exists())
+		if(!verifyScheduleFile(scheduleFile))
 			aspenPage();
-		if(!settingsCache.exists() && settingsCache.isDirectory())
+		if(!settingsCache.exists())
 			createSettings();
 		checkSettings();
 		mainUI();
@@ -207,14 +196,26 @@ public class MainActivity extends AppCompatActivity {
 		});
 	}
 
+	public boolean verifyScheduleFile(File f) {
+		try {
+			Scanner scan = new Scanner(f);
+			return !scan.nextLine().equals("--Schedule--");
+		}
+		catch(Exception e) {
+			Log.e("debugging", "verification failed");
+			Log.e("debugging", e.toString());
+			return false;
+		}
+	}
+
 	public void mainUI() {
 		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
-		aspenPage();
+		//aspenPage();
 		ArrayList<String> classes = new ArrayList<String>();
 		try {
 			Scanner scan = new Scanner(scheduleFile);
-			if(!scan.nextLine().equals("--Schedule--"))
-				aspenPage();
+			verifyScheduleFile(scheduleFile);
+			scan.nextLine();
 			while(scan.hasNextLine()) {
 				classes.add(
 					scan.nextLine() + "\n" +
@@ -226,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 			scheduleChecker = new ScheduleChecker(this, classes);
 			try {
+				Log.e("debugging", "DS:" + defaultScreen);
 				startActivity(defaultScreen);
 			}
 			catch(NullPointerException npe) {
@@ -243,6 +245,16 @@ public class MainActivity extends AppCompatActivity {
 			aspenPage();
 			Log.i("debugging", ioe.toString());
 		}
+
+		Intent myIntent = new Intent(MainActivity.this , Notify.class);
+		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+		PendingIntent pendingIntent = PendingIntent.getService(MainActivity.this, 0, myIntent, 0);
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 12);
+		calendar.set(Calendar.MINUTE, 00);
+		calendar.set(Calendar.SECOND, 00);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
+		startActivity(myIntent);
 	}
 
 	public void createSettings() {
