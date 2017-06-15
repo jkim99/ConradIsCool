@@ -1,6 +1,6 @@
 # ConradIsCool
 
-ALPHA 2.0 IS UP AND RUNNING
+ALPHA 3.0 IS UP AND RUNNING
 
 This is the android app created for Andover High School in order to assist students with adjusting to the new schedule. This is app will also be used to assist teachers and faculty of the school to create schedules and further assist in their planning process.
 
@@ -23,3 +23,7 @@ Future (possible) addons:
 - Month view
 - Grade integration
 - H blocks
+
+*IF YOU ARE JOSH READING THIS, THE APP IS GOING VERY POORLY AND THE WHOLE THING IS EXPLODING MY COMPUTER*
+
+for everyone else it's fine

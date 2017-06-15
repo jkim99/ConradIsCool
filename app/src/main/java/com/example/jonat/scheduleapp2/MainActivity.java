@@ -1,5 +1,6 @@
 package com.example.jonat.scheduleapp2;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContextWrapper;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,9 +65,19 @@ public class MainActivity extends AppCompatActivity {
 		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
 		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
 
+		Intent myIntent = new Intent(MainActivity.this , Notify.class);
+		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+		PendingIntent pendingIntent = PendingIntent.getService(MainActivity.this, 0, myIntent, 0);
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 12);
+		calendar.set(Calendar.MINUTE, 00);
+		calendar.set(Calendar.SECOND, 00);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
+		startActivity(myIntent);
+
 		/*NotificationCompat.Builder builder = (NotificationCompat.Builder)new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_settings_black_24dp).setContentTitle("My notification").setContentText("Hello World!");
 		Intent resultIntent = new Intent(this, Settings.class);
-		PendingIntent resultPendingIntent = PendingIntent.getActivity( this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		int notificationId = 001;
 		NotificationManager notifyMgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 		notifyMgr.notify(notificationId, builder.build());*/
