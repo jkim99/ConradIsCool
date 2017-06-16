@@ -32,7 +32,7 @@ public class SchoolCalendar {
 		try {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
-			FileUtils.copyURLToFile(new URL("https://pastebin.com/raw/9DWb9b74"), calendar);
+			FileUtils.copyURLToFile(new URL("https://pastebin.com/raw/BJQR6gHx"), calendar);
 			Scanner scan = new Scanner(calendar);
 			while(scan.hasNextLine())
 				Log.i("debugging", scan.nextLine());

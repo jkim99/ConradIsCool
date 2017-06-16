@@ -39,8 +39,8 @@ public class CurrentViewActivity extends AppCompatActivity {
 					Intent intent2 = new Intent(CurrentViewActivity.this, DayViewActivity.class);
 					startActivity(intent2);
 					return true;
-				case R.id.navigation_settings:
-					Intent intent3 = new Intent(CurrentViewActivity.this, Settings.class);
+				case R.id.navigation_month_view:
+					Intent intent3 = new Intent(CurrentViewActivity.this, MonthViewActivity.class);
 					startActivity(intent3);
 					return true;
 			}
@@ -53,7 +53,6 @@ public class CurrentViewActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mainUI();
-		Log.e("debugging", "55");
 		setContentView(R.layout.current_view);
 
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
@@ -79,10 +78,12 @@ public class CurrentViewActivity extends AppCompatActivity {
 				startActivity(new Intent(CurrentViewActivity.this, CurrentViewActivity.class));
 			}
 		};
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
+		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
 		Button currentClass = (Button)findViewById(R.id.currentClass);
 		Button nextClass = (Button)findViewById(R.id.nextClass);
-		currentClass.setText(scheduleChecker.getRoom(MainActivity.timesSwiped, 0));
-		nextClass.setText(scheduleChecker.getRoom(MainActivity.timesSwiped, 1));
+		currentClass.setText(scheduleChecker.getClass(MainActivity.timesSwiped, scheduleChecker.getCurrentPeriod(minutes, 0)));
+		nextClass.setText(scheduleChecker.getClass(MainActivity.timesSwiped, scheduleChecker.getCurrentPeriod(minutes, 1)));
 		currentClass.setOnTouchListener(on);
 		nextClass.setOnTouchListener(on);
 	}
@@ -100,8 +101,6 @@ public class CurrentViewActivity extends AppCompatActivity {
 			case R.id.navigation_settings:
 				Intent intent = new Intent(CurrentViewActivity.this, Settings.class);
 				startActivity(intent);
-				return true;
-			case R.id.navigation_search:
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -143,8 +142,8 @@ public class CurrentViewActivity extends AppCompatActivity {
 	}
 
 	public void changePeriodIcon(Menu menu) {
-		String time = scheduleChecker.getTime();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)), 0);
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
+		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
 			case 0:

@@ -1,7 +1,6 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,8 +12,8 @@ public class ScheduleChecker {
 	private SchoolCalendar schoolCalendar;
 	private Context context;
 
-	public ScheduleChecker(Context con, ArrayList<String> classes) {
-		context = con;
+	public ScheduleChecker(Context c, ArrayList<String> classes) {
+		context = c;
 		schoolCalendar = new SchoolCalendar(context);
 		schedule = new char[8][5];
 		this.classes = new String[8];
@@ -62,18 +61,6 @@ public class ScheduleChecker {
 		schedule[7][4] = 'D';
 	}
 
-	public String getTime() {
-		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		return time.substring(0, time.length() - 3);
-	}
-
-	public int getSchoolDayRotation(int off) {
-		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, off);
-		String date = new SimpleDateFormat("MM dd").format(c.getTime());
-		return schoolCalendar.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
-	}
-
 	public int getCurrentPeriod(int minutes, int periodAfter) {
 		if(minutes >= 464 && minutes < 524)
 			return periodAfter;
@@ -89,47 +76,35 @@ public class ScheduleChecker {
 			return 5;
 	}
 
-	public String getClass(int dayAfter, int period) {
-		int day = getSchoolDayRotation(dayAfter);
-		return day < 0 ? exceptions(day) : classes[(int)(getBlock(day - 1, period)) - 65];
+	public String exceptions(int day) {
+		switch(day) {
+			case -1:
+				return "No School";
+			case -2:
+				return "Half day";
+			case -3:
+				return "Snow Day";
+			case -10:
+				return "Error";
+			default:
+				return "null";
+		}
 	}
 
-	public String getRoom(int dayAfter, int periodAfter) {
-		String time = getTime();
-		int day = getSchoolDayRotation(dayAfter);
-		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3));
-		int period = getCurrentPeriod(minutes, periodAfter);
-		if(period == 5)
-			return "No Class!";
-		try {
-			return day < 0 ? exceptions(day) : classes[(int)(getBlock(day - 1, period)) - 65];
-		}
-		catch(ArrayIndexOutOfBoundsException aioobe) {
-			return "error";
-		}
+	public String getClass(int day, int period) {
+		day = getSchoolDayRotation(day);
+		return period == 5 ? "No Class!" : (day < 0 ? exceptions(day) : classes[(int)(getBlock(day - 1, period)) - 65]);
+	}
+
+	public int getSchoolDayRotation(int off) {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, off);
+		String date = new SimpleDateFormat("MM dd").format(c.getTime());
+		return schoolCalendar.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
 	}
 
 	public char getBlock(int day, int period) {
-		if(period == -10)
-			return 'X';
-		try {
-			return schedule[day][period];
-		}
-		catch(ArrayIndexOutOfBoundsException aioobe) {
-			return 'X';
-		}
+		return period == -10 ? 'X' : schedule[day][period];
 	}
 
-	public String exceptions(int day) {
-		if(day == -1)
-			return "No School";
-		else if(day == -2)
-			return "Half day";
-		else if(day == -3)
-			return "Snow Day";
-		else if(day == -10)
-			return "Error";
-		else
-			return "null";
-	}
 }

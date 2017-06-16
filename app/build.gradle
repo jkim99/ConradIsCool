@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/commons-io-2.5/commons-io-2.5.jar')
     compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/commons-io-2.5/commons-io-2.5-javadoc.jar')
+    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/joda-time-2.9.9.jar')
 }

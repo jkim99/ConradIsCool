@@ -23,7 +23,9 @@ public class Notify extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		getDefaultScreen();
 		mainUI();
-		String s = scheduleChecker.getRoom(MainActivity.timesSwiped, 0);
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
+		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
+		String s = scheduleChecker.getClass(MainActivity.timesSwiped, scheduleChecker.getCurrentPeriod(minutes, 0));
 		String[] array = s.split("\n");
 		String period = array[0];
 		String course = array[2];

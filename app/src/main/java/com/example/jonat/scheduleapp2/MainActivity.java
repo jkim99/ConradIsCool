@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -65,12 +64,6 @@ public class MainActivity extends AppCompatActivity {
 		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
 		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
 
-		/*NotificationCompat.Builder builder = (NotificationCompat.Builder)new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_settings_black_24dp).setContentTitle("My notification").setContentText("Hello World!");
-		Intent resultIntent = new Intent(this, Settings.class);
-		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-		int notificationId = 001;
-		NotificationManager notifyMgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-		notifyMgr.notify(notificationId, builder.build());*/
 		if(!verifyScheduleFile(scheduleFile))
 			aspenPage();
 		if(!settingsCache.exists())
@@ -98,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
 			case R.id.navigation_settings:
 				Intent intent = new Intent(MainActivity.this, Settings.class);
 				startActivity(intent);
-				return true;
-			case R.id.navigation_search:
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -141,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void changePeriodIcon(Menu menu) {
-		String time = scheduleChecker.getTime();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)), 0);
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
+		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
 			case 0:
@@ -210,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
 
 	public void mainUI() {
 		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
-		//aspenPage();
 		ArrayList<String> classes = new ArrayList<String>();
 		try {
 			Scanner scan = new Scanner(scheduleFile);
@@ -235,18 +225,13 @@ public class MainActivity extends AppCompatActivity {
 			}
 			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
-
-			/*BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
-			navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
-			changeDayIcon(navigation.getMenu());
-			changePeriodIcon(navigation.getMenu());*/
 		}
 		catch(IOException ioe) {
 			aspenPage();
 			Log.i("debugging", ioe.toString());
 		}
 
-		Intent myIntent = new Intent(MainActivity.this , Notify.class);
+		/*Intent myIntent = new Intent(MainActivity.this , Notify.class);
 		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 		PendingIntent pendingIntent = PendingIntent.getService(MainActivity.this, 0, myIntent, 0);
 		Calendar calendar = Calendar.getInstance();
@@ -254,12 +239,13 @@ public class MainActivity extends AppCompatActivity {
 		calendar.set(Calendar.MINUTE, 00);
 		calendar.set(Calendar.SECOND, 00);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
-		startActivity(myIntent);
+		startActivity(myIntent);*/
 	}
 
 	public void createSettings() {
 		try {
 			PrintWriter pw = new PrintWriter(settingsCache);
+			pw.println("--Settings--");
 			pw.println("defaultView:current_view");
 			pw.println("notifications:on");
 			pw.close();
@@ -274,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
 		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
 		try {
 			Scanner scan = new Scanner(settingsCache);
+			scan.nextLine();
 			String line;
 			String opt;
 			while(scan.hasNextLine()) {

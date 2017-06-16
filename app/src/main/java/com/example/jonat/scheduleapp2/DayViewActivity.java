@@ -38,8 +38,8 @@ public class DayViewActivity extends AppCompatActivity {
 					return true;
 				case R.id.navigation_day_view:
 					return true;
-				case R.id.navigation_settings:
-					Intent intent3 = new Intent(DayViewActivity.this, Settings.class);
+				case R.id.navigation_month_view:
+					Intent intent3 = new Intent(DayViewActivity.this, MonthViewActivity.class);
 					startActivity(intent3);
 					return true;
 			}
@@ -108,8 +108,6 @@ public class DayViewActivity extends AppCompatActivity {
 				Intent intent = new Intent(DayViewActivity.this, Settings.class);
 				startActivity(intent);
 				return true;
-			case R.id.navigation_search:
-				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -150,8 +148,8 @@ public class DayViewActivity extends AppCompatActivity {
 	}
 
 	public void changePeriodIcon(Menu menu) {
-		String time = scheduleChecker.getTime();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)), 0);
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
+		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
 			case 0:

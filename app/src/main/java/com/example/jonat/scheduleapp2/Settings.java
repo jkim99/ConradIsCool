@@ -159,7 +159,7 @@ public class Settings extends AppCompatActivity {
 	}
 
 	public void changePeriodIcon(Menu menu) {
-		String time = scheduleChecker.getTime();
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
 		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3)), 0);
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
