@@ -212,12 +212,32 @@ public class MonthViewActivity extends AppCompatActivity {
 
 	}
 	
-	public void addDayRotationEvent(LocalDate d) {
+	public void addDayRotationEvent(/*LocalDate d*/) {
 		int day = scheduleChecker.getSchoolDayRotation();
 		
 		if (!(day==-1 || day==-2 || day==-3 || day==-10)){
 			
 		}
 	}
+	
+	/*Calendar beginTime = Calendar.getInstance();
+beginTime.set(2012, 0, 19, 7, 30);
+Calendar endTime = Calendar.getInstance();
+endTime.set(2012, 0, 19, 8, 30);
+Intent intent = new Intent(Intent.ACTION_INSERT)
+        .setData(Events.CONTENT_URI)
+        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+        .putExtra(Events.TITLE, "Yoga")
+        .putExtra(Events.DESCRIPTION, "Group class")
+        .putExtra(Events.EVENT_LOCATION, "The gym")
+        .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+        .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
+startActivity(intent);
+
+******** MAYBE USE THIS TO GET THE DAYS ONTO THE CALENDAR *********
+https://developer.android.com/guide/topics/providers/calendar-provider.html#intents
+
+*/
 	
 }
