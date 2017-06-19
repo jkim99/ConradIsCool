@@ -212,4 +212,12 @@ public class MonthViewActivity extends AppCompatActivity {
 
 	}
 	
+	public void addDayRotationEvent(LocalDate d) {
+		int day = scheduleChecker.getSchoolDayRotation();
+		
+		if (!(day==-1 || day==-2 || day==-3 || day==-10)){
+			
+		}
+	}
+	
 }
