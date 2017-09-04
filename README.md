@@ -9,10 +9,10 @@ APK(outdated): ~~https://drive.google.com/file/d/0B25a9GoL5A8hS3pGRXZGSG9tZW8/vi
 Please E-mail bugs and suggestions at jkim2018@k12.andoverma.us
 
 Progress:
-<<<<<<< HEAD
+
 =======
 - Search and Settings are not yet ready
->>>>>>> 8568675ce470a03d69dbe8495c4da233fd6636d1
+
 - iOS support coming soon over the summer
 - App only works with test data due to not having updated class information on Aspen
 
@@ -31,7 +31,7 @@ Future (possible) addons:
 add context (current view and next class)
 add more labels in general
 add layout data collection from users
-=======
+
 - Settings page
 - Search feature
 - Swipe function has yet to be added
@@ -44,4 +44,4 @@ Future (possible) addons:
 *IF YOU ARE JOSH READING THIS, THE APP IS GOING VERY POORLY AND THE WHOLE THING IS EXPLODING MY COMPUTER*
 
 for everyone else it's fine
->>>>>>> 8568675ce470a03d69dbe8495c4da233fd6636d1
+
