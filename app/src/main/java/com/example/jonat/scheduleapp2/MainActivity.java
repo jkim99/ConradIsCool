@@ -1,13 +1,17 @@
+/**
+ * what it does: saves you 10 minutes of time at a specific high school in a specific town for the cost of 1 hour learning this app
+ * who to get mad at: josh krinsky (the jew kid in my AP physics 1 class
+ * @author Jonathan S. Kim
+ * @version whatever the current version of Minecraft is minus 16
+ * @since 7/19/2017
+ **/
+
 package com.example.jonat.scheduleapp2;
 
-import android.app.AlarmManager;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,12 +20,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,53 +33,51 @@ public class MainActivity extends AppCompatActivity {
 	private File settingsCache;
 	private File scheduleFile;
 	private File errorLogs;
-	public static int timesSwiped = 0;
+	public static int swipeDirectionOffset = 0;
 	private ScheduleChecker scheduleChecker;
 	private Intent defaultScreen;
-	private boolean notifications;
-
-	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
-			= new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-		@Override
-		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-			switch(item.getItemId()) {
-				case R.id.navigation_current_view:
-					Intent intent1 = new Intent(MainActivity.this, CurrentViewActivity.class);
-					startActivity(intent1);
-					return true;
-				case R.id.navigation_day_view:
-					Intent intent2 = new Intent(MainActivity.this, DayViewActivity.class);
-					startActivity(intent2);
-					return true;
-				case R.id.navigation_month_view:
-					Intent intent3 = new Intent(MainActivity.this, MonthViewActivity.class);
-					startActivity(intent3);
-					return true;
-			}
-			return false;
-		}
-
-	};
+	public static boolean dailyNotifications;
+	public static boolean periodicNotifications;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
 		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
 
-		if(!verifyScheduleFile(scheduleFile))
-			aspenPage();
 		if(!settingsCache.exists())
 			createSettings();
 		checkSettings();
-		mainUI();
+
+		if(!Utility.verifyScheduleFile(scheduleFile)) {
+			aspenPage();
+		}
+		else {
+			scheduleChecker = Utility.initializeScheduleChecker(this);
+			try {
+				startActivity(defaultScreen);
+			}
+			catch(NullPointerException npe) {
+				startActivity(new Intent(MainActivity.this, CurrentViewActivity.class));
+			}
+			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+			setSupportActionBar(myToolbar);
+		}
 		try {
 			Scanner scan = new Scanner(errorLogs);
 			while(scan.hasNextLine())
 				Log.e("debugging", scan.nextLine());
 		}
 		catch(Exception e) {}
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Utility.initializeCalendar(this);
+		if((dailyNotifications || periodicNotifications)&& Utility.getSchoolDayRotation(0) >= 0)
+			startService(new Intent(this, Notify.class));
 	}
 
 	@Override
@@ -97,68 +99,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	public void changeDayIcon(Menu menu) {
-		int day = scheduleChecker.getSchoolDayRotation(timesSwiped);
-		MenuItem icon = menu.findItem(R.id.navigation_day_view);
-		switch(day) {
-			case 1:
-				icon.setIcon(R.drawable.ic_filter_1_black_24dp);
-				break;
-			case 2:
-				icon.setIcon(R.drawable.ic_filter_2_black_24dp);
-				break;
-			case 3:
-				icon.setIcon(R.drawable.ic_filter_3_black_24dp);
-				break;
-			case 4:
-				icon.setIcon(R.drawable.ic_filter_4_black_24dp);
-				break;
-			case 5:
-				icon.setIcon(R.drawable.ic_filter_5_black_24dp);
-				break;
-			case 6:
-				icon.setIcon(R.drawable.ic_filter_6_black_24dp);
-				break;
-			case 7:
-				icon.setIcon(R.drawable.ic_filter_7_black_24dp);
-				break;
-			case 8:
-				icon.setIcon(R.drawable.ic_filter_8_black_24dp);
-				break;
-			default:
-				icon.setIcon(R.drawable.ic_filter_none_black_24dp);
-				break;
-		}
-	}
-
-	public void changePeriodIcon(Menu menu) {
-		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
-		MenuItem icon = menu.findItem(R.id.navigation_current_view);
-		switch(period) {
-			case 0:
-				icon.setIcon(R.drawable.ic_looks_one_black_24dp);
-				break;
-			case 1:
-				icon.setIcon(R.drawable.ic_looks_two_black_24dp);
-				break;
-			case 2:
-				icon.setIcon(R.drawable.ic_looks_3_black_24dp);
-				break;
-			case 3:
-				icon.setIcon(R.drawable.ic_looks_4_black_24dp);
-				break;
-			case 4:
-				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
-				break;
-			default:
-				icon.setIcon(R.drawable.ic_looks_none_black_24dp);
-				break;
-		}
-	}
-
 	public void aspenPage() {
-
 		aspenLogin = new WebView(this);
 		aspenLogin.getSettings().setJavaScriptEnabled(true);
 		aspenLogin.getSettings().setUserAgentString("Mozilla/5.0 (Windows; U; Windows NT 6.2; en-US; rv:1.9) Gecko/2008062901 IceWeasel/3.0");
@@ -176,78 +117,22 @@ public class MainActivity extends AppCompatActivity {
 					aspenLogin.loadUrl("https://ma-andover.myfollett.com/aspen/studentScheduleContextList.do?navkey=myInfo.sch.list");
 					javascript = "javascript:window.HTMLOUT.processHTML('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');";
 					aspenLogin.loadUrl(javascript);
-					aspenLogin.destroy();
+					try { Thread.sleep(250); }
+					catch(Exception e) {}
+					finishAndRemoveTask();
 				}
 			}
-
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				return false;
-			}
 		});
+		(Toast.makeText(this, "App will close after login, please relaunch app to continue", Toast.LENGTH_SHORT)).show();
 	}
 
-	public boolean verifyScheduleFile(File f) {
-		try {
-			Scanner scan = new Scanner(f);
-			return !scan.nextLine().equals("--Schedule--");
-		}
-		catch(Exception e) {
-			Log.e("debugging", "verification failed");
-			Log.e("debugging", e.toString());
-			return false;
-		}
-	}
-
-	public void mainUI() {
-		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
-		ArrayList<String> classes = new ArrayList<String>();
-		try {
-			Scanner scan = new Scanner(scheduleFile);
-			verifyScheduleFile(scheduleFile);
-			scan.nextLine();
-			while(scan.hasNextLine()) {
-				classes.add(
-					scan.nextLine() + "\n" +
-					scan.nextLine() + "\n" +
-					scan.nextLine() + "\n" +
-					scan.nextLine() + "\n"
-				);
-				scan.nextLine();
-			}
-			scheduleChecker = new ScheduleChecker(this, classes);
-			try {
-				Log.e("debugging", "DS:" + defaultScreen);
-				startActivity(defaultScreen);
-			}
-			catch(NullPointerException npe) {
-				startActivity(new Intent(MainActivity.this, CurrentViewActivity.class));
-			}
-			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
-			setSupportActionBar(myToolbar);
-		}
-		catch(IOException ioe) {
-			aspenPage();
-			Log.i("debugging", ioe.toString());
-		}
-
-		/*Intent myIntent = new Intent(MainActivity.this , Notify.class);
-		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-		PendingIntent pendingIntent = PendingIntent.getService(MainActivity.this, 0, myIntent, 0);
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 12);
-		calendar.set(Calendar.MINUTE, 00);
-		calendar.set(Calendar.SECOND, 00);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
-		startActivity(myIntent);*/
-	}
-
-	public void createSettings() {
+	public void createSettings() { //consider using JSON or using a .properties file for each property
 		try {
 			PrintWriter pw = new PrintWriter(settingsCache);
 			pw.println("--Settings--");
-			pw.println("defaultView:current_view");
-			pw.println("notifications:on");
+			pw.println("defaultView:current_view"); //consider equals
+			pw.println("dailyNotifications:on");
+			pw.println("periodicNotifications:on");
 			pw.close();
 			Log.i("debugging","M:created settings file");
 		}
@@ -270,8 +155,11 @@ public class MainActivity extends AppCompatActivity {
 					case "defaultView:":
 						setDefaultView(line.substring(line.indexOf(":") + 1));
 						break;
-					case "notifications:":
-						notifications = !(line.substring(line.indexOf(":")).equals("off"));
+					case "dailyNotifications:":
+						dailyNotifications = !(line.substring(line.indexOf(":")).equals("off"));
+						break;
+					case "periodicNotifications:":
+						periodicNotifications = !(line.substring(line.indexOf(":")).equals("off"));
 						break;
 					default:
 						Log.i("debugging", "settings file corrupted or missing");
@@ -284,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
 
 	public void setDefaultView(String str) {
 		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
-		Log.e("debugging", str);
 		try {
 			switch(str) {
 				case "day_view":
@@ -292,6 +179,9 @@ public class MainActivity extends AppCompatActivity {
 					break;
 				case "current_view":
 					defaultScreen = new Intent(MainActivity.this, CurrentViewActivity.class);
+					break;
+				case "month_view":
+					defaultScreen = new Intent(MainActivity.this, MonthViewActivity.class);
 					break;
 				default:
 					defaultScreen = new Intent(MainActivity.this, MainActivity.class);

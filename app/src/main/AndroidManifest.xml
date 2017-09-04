@@ -27,7 +27,14 @@
 		<activity android:name=".DayViewActivity"/>
 		<activity android:name=".MonthViewActivity"/>
 		<activity android:name=".Settings"/>
-		<activity android:name=".Notify"/>
+		<service
+			android:name=".Notify"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="your.app.domain.NotificationService" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</service>
 	</application>
 
 </manifest>

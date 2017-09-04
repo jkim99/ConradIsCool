@@ -7,14 +7,13 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	android:background="#212121"
 	tools:context="com.example.jonat.scheduleapp2.MainActivity">
 
 	<android.support.v7.widget.Toolbar
 		android:id="@+id/my_toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="?attr/actionBarSize"
-		android:background="#212121"
+		android:background="@color/colorPrimaryDark"
 		android:elevation="4dp"
 		android:titleTextAppearance="@color/white"
 		app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -24,15 +23,13 @@
 		android:id="@+id/content"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:layout_weight="1"
-		>
+		android:layout_weight="1">
 
 		<Button
 			android:id="@+id/currentClass"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:background="#212121"
-			android:text="TEST1"
+			android:background="@color/colorPrimary"
 			android:textColor="#ffffff"
 			app:layout_constraintBottom_toTopOf="@+id/nextClass"
 			app:layout_constraintLeft_toLeftOf="parent"
@@ -43,8 +40,7 @@
 			android:id="@+id/nextClass"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:background="#212121"
-			android:text="TEST2"
+			android:background="@color/colorPrimary"
 			android:textColor="#ffffff"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintLeft_toLeftOf="parent"
@@ -58,7 +54,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:background="#171717"
+		android:background="@color/colorPrimaryDark"
 		app:menu="@menu/navigation"/>
 
 </LinearLayout>

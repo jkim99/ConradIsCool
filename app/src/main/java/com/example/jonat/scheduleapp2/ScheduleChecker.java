@@ -1,6 +1,7 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,26 +63,28 @@ public class ScheduleChecker {
 	}
 
 	public int getCurrentPeriod(int minutes, int periodAfter) {
-		if(minutes >= 464 && minutes < 524)
+		if(minutes >= Utility.PERIOD_1_BELL && minutes < Utility.PERIOD_2_BELL)
 			return periodAfter;
-		else if(minutes >= 524 && minutes < 603)
+		else if(minutes >= Utility.PERIOD_2_BELL && minutes < Utility.PERIOD_3_BELL)
 			return 1 + periodAfter;
-		else if(minutes >= 603 && minutes < 667)
+		else if(minutes >= Utility.PERIOD_3_BELL && minutes < Utility.PERIOD_4_BELL)
 			return 2 + periodAfter;
-		else if(minutes >= 667 && minutes < 781)
+		else if(minutes >= Utility.PERIOD_4_BELL && minutes < Utility.PERIOD_5_BELL)
 			return 3 + periodAfter;
-		else if(minutes >= 781 && minutes < 845)
+		else if(minutes >= Utility.PERIOD_5_BELL && minutes < 845)
 			return 4 + periodAfter;
 		else
 			return 5;
 	}
 
-	public String exceptions(int day) {
+	public String exceptions(int day, int period) {
+		if(day < -20 && day > -30)
+			return halfDayHandler(Math.abs(day % 10), period);
 		switch(day) {
-			case -1:
+			case -1: //convert to enum classes
 				return "No School";
 			case -2:
-				return "Half day";
+				return "Exam";
 			case -3:
 				return "Snow Day";
 			case -10:
@@ -92,19 +95,37 @@ public class ScheduleChecker {
 	}
 
 	public String getClass(int day, int period) {
-		day = getSchoolDayRotation(day);
-		return period == 5 ? "No Class!" : (day < 0 ? exceptions(day) : classes[(int)(getBlock(day - 1, period)) - 65]);
-	}
-
-	public int getSchoolDayRotation(int off) {
-		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, off);
-		String date = new SimpleDateFormat("MM dd").format(c.getTime());
-		return schoolCalendar.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
+		day = Utility.getSchoolDayRotation(day);
+		return period == 5 ? "No Class!" : (day < 0 ? exceptions(day, period) : classes[(int)(getBlock(day - 1, period)) - 65]); //make more readable
 	}
 
 	public char getBlock(int day, int period) {
 		return period == -10 ? 'X' : schedule[day][period];
 	}
 
+	public String halfDayHandler(int day, int period) {
+		char[][] halfDay = new char[7][3];
+		halfDay[0][0] = 'A';
+		halfDay[0][1] = 'B';
+		halfDay[0][2] = 'C';
+		halfDay[1][0] = 'A';
+		halfDay[1][1] = 'E';
+		halfDay[1][2] = 'P';
+		halfDay[2][0] = 'C';
+		halfDay[2][1] = 'B';
+		halfDay[2][2] = 'F';
+		halfDay[3][0] = 'A';
+		halfDay[3][1] = 'B';
+		halfDay[3][2] = 'C';
+		halfDay[4][0] = 'D';
+		halfDay[4][1] = 'E';
+		halfDay[4][2] = 'A';
+		halfDay[5][0] = 'B';
+		halfDay[5][1] = 'D';
+		halfDay[5][2] = 'F';
+		halfDay[6][0] = 'G';
+		halfDay[6][1] = 'B';
+		halfDay[6][2] = 'D';
+		return period > 2 ? "No Class!" : classes[(int)halfDay[day - 1][period] - 65];
+	}
 }

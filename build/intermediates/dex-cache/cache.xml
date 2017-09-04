@@ -2,6 +2,15 @@
 <items version="2" >
 
     <item
+<<<<<<< HEAD
+        is-multidex="true"
+        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="38c0da18c04f82bbe5ac574fc4fd4ea1d00277fe">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_78854d0302d86f72f890a5a9af33946460dfe19e\classes.dex" />
+=======
         is-multidex="false"
         jar="C:\Users\jonat\.android\build-cache\7c165ad0679de0fc354338f299b667e51c4b497b\output\jars\classes.jar"
         jumboMode="false"
@@ -18,6 +27,7 @@
         revision="25.0.3"
         sha1="95519720620b553f63afc789beba9ad582807f7c">
         <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_3ebae787968aae86d859093c57f2261b330058b6.jar" />
+>>>>>>> 8568675ce470a03d69dbe8495c4da233fd6636d1
     </item>
     <item
         is-multidex="true"
@@ -25,11 +35,17 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
+<<<<<<< HEAD
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+=======
         sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+>>>>>>> 8568675ce470a03d69dbe8495c4da233fd6636d1
         <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_d76f9a8aaa5fe66bf96b4b14a98acb6dcddc5f62\classes.dex" />
     </item>
     <item
         is-multidex="true"
+<<<<<<< HEAD
+=======
         jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
@@ -57,6 +73,7 @@
     </item>
     <item
         is-multidex="true"
+>>>>>>> 8568675ce470a03d69dbe8495c4da233fd6636d1
         jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-io-2.5\commons-io-2.5.jar"
         jumboMode="true"
         optimize="true"

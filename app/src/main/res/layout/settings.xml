@@ -27,10 +27,10 @@
 		android:layout_height="0dp"
 		android:layout_weight="1">
 		<TextView
-			android:id="@+id/general_text"
+			android:id="@+id/notification"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="General"
+			android:text="Notifications"
 			android:textSize="24sp"
 			android:textColor="@color/white"
 			android:layout_marginTop="30dp"
@@ -38,16 +38,26 @@
 			android:layout_marginEnd="53dp"
 			app:layout_constraintTop_toTopOf="parent"/>
 		<Switch
-			android:id="@+id/notification"
+			android:id="@+id/every_class_notification"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="Notifications"
+			android:text="Periodic Notifications"
 			android:textColor="@color/white"
 			android:layout_marginTop="30dp"
 			android:layout_marginStart="53dp"
 			android:layout_marginEnd="53dp"
-			app:layout_constraintTop_toBottomOf="@id/general_text"
+			app:layout_constraintTop_toBottomOf="@id/notification"
 			app:layout_constraintRight_toRightOf="parent"/>
+		<Switch
+			android:id="@+id/daily_notification"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="Daily Notifications"
+			android:textColor="@color/white"
+			android:layout_marginTop="20dp"
+			android:layout_marginStart="53dp"
+			android:layout_marginEnd="53dp"
+			app:layout_constraintTop_toBottomOf="@id/every_class_notification"/>
 		<TextView
 			android:id="@+id/default_text"
 			android:layout_width="fill_parent"
@@ -58,7 +68,7 @@
 			android:layout_marginTop="30dp"
 			android:layout_marginStart="26dp"
 			android:layout_marginEnd="53dp"
-			app:layout_constraintTop_toBottomOf="@id/notification"/>
+			app:layout_constraintTop_toBottomOf="@id/daily_notification"/>
 		<TextView
 			android:id="@+id/current_view_text"
 			android:layout_width="fill_parent"
@@ -120,15 +130,16 @@
 				android:layoutDirection="rtl"/>
 		</RadioGroup>
 
+		<Button
+			android:id="@+id/clear_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Update/Clear Schedule Data"
+			android:layout_marginBottom="10dp"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"/>
 
 	</android.support.constraint.ConstraintLayout>
-
-	<android.support.design.widget.BottomNavigationView
-		android:id="@+id/navigation"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom"
-		android:background="#171717"
-		app:menu="@menu/navigation"/>
 
 </LinearLayout>
