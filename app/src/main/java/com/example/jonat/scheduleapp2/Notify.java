@@ -3,7 +3,6 @@ package com.example.jonat.scheduleapp2;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
@@ -11,8 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class Notify extends Service {
@@ -43,8 +40,10 @@ public class Notify extends Service {
 	public void startTimer() {
 		timer = new Timer();
 		scheduleChecker = Utility.initializeScheduleChecker(this);
-		initializeTimerTask();
-		timer.schedule(timerTask, 5000, 5000);
+		if(scheduleChecker != null) {
+			initializeTimerTask();
+			timer.schedule(timerTask, 5000, 5000);
+		}
 	}
 
 	public void stopTimerTask() {
@@ -61,19 +60,19 @@ public class Notify extends Service {
 				HANDLER.post(new Runnable() {
 					@Override
 					public void run() {
+						String time = new java.sql.Time(System.currentTimeMillis()).toString();
+						int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
 						if(MainActivity.dailyNotifications)
-							dailyNotification();
+							dailyNotification(minutes);
 						if(MainActivity.periodicNotifications)
-							everyClassNotification();
+							everyClassNotification(minutes);
 					}
 				});
 			}
 		};
 	}
 
-	public void everyClassNotification() {
-		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
+	public void everyClassNotification(int minutes) {
 		int[] notificationTimes =  {Utility.PERIOD_1_BELL,
 									Utility.PERIOD_2_BELL,
 									Utility.PERIOD_3_BELL,
@@ -87,28 +86,26 @@ public class Notify extends Service {
 			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
 				.setContentTitle("Your next class")
 				.setContentText(nextClass)
-				.setSmallIcon(R.drawable.ic_launcher_web);
+				.setSmallIcon(R.drawable.ic_launcher_proto);
 			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 			notificationManager.notify(0, builder.build());
 		}
 	}
 
-	public void dailyNotification() {
-		String[][] schedule = new String[5][4];
-		for(int x = 0; x < 5; x++)
-			schedule[x] = scheduleChecker.getClass(0, x).split("\n");
-		String contentText = schedule[0][0] + "\n" +
-							 schedule[1][0] + "\n" +
-							 schedule[2][0] + "\n" +
-							 schedule[3][0] + "\n" +
-							 schedule[4][0] + "\n";
-		Log.e("debugging", contentText);
-		android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-			.setContentTitle("Your schedule for today")
-			.setContentText(contentText)
-			.setSmallIcon(R.drawable.ic_launcher_web);
-		NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(1, builder.build());
+	public void dailyNotification(int minutes) {
+		if(minutes == Utility.SEVEN_AM) {
+			android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+			String[] schedule = Utility.oneLineClassNames(scheduleChecker);
+			for(String s : schedule)
+				inboxStyle.addLine(s);
+			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+				.setContentTitle("Your schedule for today")
+				.setContentText("")
+				.setSmallIcon(R.drawable.ic_launcher_proto)
+				.setStyle(inboxStyle);
+			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+			notificationManager.notify(1, builder.build());
+		}
 	}
 
 }

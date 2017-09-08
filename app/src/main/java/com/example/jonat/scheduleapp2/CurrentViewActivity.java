@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ public class CurrentViewActivity extends AppCompatActivity {
 
 	private OnSwipeTouchListener on;
 	private ScheduleChecker scheduleChecker;
+	private BottomNavigationView navigation;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
 			= new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,35 +47,32 @@ public class CurrentViewActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		scheduleChecker = Utility.initializeScheduleChecker(this);
 		setContentView(R.layout.current_view);
+
+		final BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
+		this.navigation = navigation;
+		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
+		navigation.setSelectedItemId(R.id.navigation_current_view);
 
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 		setSupportActionBar(myToolbar);
 
-		BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
-		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
-		navigation.setSelectedItemId(R.id.navigation_current_view);
-		Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
-		Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
-		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
+		scheduleChecker = Utility.initializeScheduleChecker(this);
+
 		final Button currentClass = (Button)findViewById(R.id.currentClass);
 		final Button nextClass = (Button)findViewById(R.id.nextClass);
+		updateUI(currentClass, nextClass);
+
 		on = new OnSwipeTouchListener(this) {
 			public void onSwipeLeft() {
 				MainActivity.swipeDirectionOffset++;
-//				Transition transition = new Slide(android.view.Gravity.LEFT);
-//				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
-				changeButtons(currentClass, nextClass);
+				updateUI(currentClass, nextClass);
 			}
 			public void onSwipeRight() {
 				MainActivity.swipeDirectionOffset--;
-//				Transition transition = new Slide(android.view.Gravity.RIGHT);
-//				TransitionManager.beginDelayedTransition(transitionsContainer, transition);
-				changeButtons(currentClass, nextClass);
+				updateUI(currentClass, nextClass);
 			}
 		};
-		changeButtons(currentClass, nextClass);
 	}
 
 	@Override
@@ -102,5 +101,17 @@ public class CurrentViewActivity extends AppCompatActivity {
 		next.setText("Next Class: \n" + scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 1)));
 		current.setOnTouchListener(on);
 		next.setOnTouchListener(on);
+	}
+
+	public void updateUI(Button currentClass, Button nextClass) {
+		try {
+			Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
+			Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
+			changeButtons(currentClass, nextClass);
+		}
+		catch(NullPointerException npe) {
+			Log.e("UI_update", npe.toString());
+			startActivity(new Intent(CurrentViewActivity.this, AspenPage.class));
+		}
 	}
 }

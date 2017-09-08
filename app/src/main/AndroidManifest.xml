@@ -26,6 +26,7 @@
 		<activity android:name=".CurrentViewActivity"/>
 		<activity android:name=".DayViewActivity"/>
 		<activity android:name=".MonthViewActivity"/>
+		<activity android:name=".AspenPage"/>
 		<activity android:name=".Settings"/>
 		<service
 			android:name=".Notify"

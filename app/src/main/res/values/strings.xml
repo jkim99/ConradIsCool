@@ -1,6 +1,5 @@
 <resources>
-	<string name="app_name">Seven H Alpha 2.0</string>
-	<string name="title_search">SEARCH</string>
+	<string name="app_name">7H</string>
 	<string name="title_day_view">DAY VIEW</string>
 	<string name="title_current_view">CURRENT VIEW</string>
 	<string name="title_month_view">MONTH VIEW</string>

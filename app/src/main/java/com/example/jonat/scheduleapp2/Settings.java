@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -105,22 +106,10 @@ public class Settings extends AppCompatActivity {
 		clear.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				try {
-					PrintWriter pw = new PrintWriter(scheduleFile);
-					pw.print("");
-					pw.close();
-					stopApp();
-				}
-				catch(Exception e) {
-					Log.e("debugging", e.toString());
-				}
+				Utility.purge(scheduleFile, settingsCache);
+				startActivity(new Intent(Settings.this, MainActivity.class));
 			}
 		});
-	}
-
-	public void stopApp() {
-		finishAndRemoveTask();
-		System.exit(0);
 	}
 
 	public void checkSettings() {

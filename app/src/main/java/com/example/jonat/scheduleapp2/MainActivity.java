@@ -8,9 +8,9 @@
 
 package com.example.jonat.scheduleapp2;
 
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,19 +18,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
-	private WebView aspenLogin;
-	private File settingsCache;
+	Context context = this;
+	private File settings;
 	private File scheduleFile;
 	private File errorLogs;
 	public static int swipeDirectionOffset = 0;
@@ -43,18 +40,24 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		scheduleFile = new File(new ContextWrapper(this).getFilesDir() + "/schedule.txt");
-		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
+		scheduleFile = new File(this.getFilesDir(), "schedule.txt");
+		settings = new File(this.getFilesDir() + "settings.txt");
 
-		if(!settingsCache.exists())
+		try {
+			Scanner scan = new Scanner(scheduleFile);
+			while(scan.hasNextLine())
+				Log.d("schedule_file", scan.nextLine());
+		}
+		catch(Exception e) {}
+
+		if(!settings.exists())
 			createSettings();
 		checkSettings();
 
-		if(!Utility.verifyScheduleFile(scheduleFile)) {
-			aspenPage();
-		}
+		if(!Utility.verifyScheduleFile(scheduleFile))
+			startActivity(new Intent(MainActivity.this, AspenPage.class));
 		else {
-			scheduleChecker = Utility.initializeScheduleChecker(this);
+			scheduleChecker = Utility.initializeScheduleChecker(context);
 			try {
 				startActivity(defaultScreen);
 			}
@@ -64,12 +67,7 @@ public class MainActivity extends AppCompatActivity {
 			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
 		}
-		try {
-			Scanner scan = new Scanner(errorLogs);
-			while(scan.hasNextLine())
-				Log.e("debugging", scan.nextLine());
-		}
-		catch(Exception e) {}
+
 	}
 
 	@Override
@@ -99,36 +97,9 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	public void aspenPage() {
-		aspenLogin = new WebView(this);
-		aspenLogin.getSettings().setJavaScriptEnabled(true);
-		aspenLogin.getSettings().setUserAgentString("Mozilla/5.0 (Windows; U; Windows NT 6.2; en-US; rv:1.9) Gecko/2008062901 IceWeasel/3.0");
-		aspenLogin.loadUrl("https://ma-andover.myfollett.com/aspen/logon.do");
-		aspenLogin.addJavascriptInterface(new JSInterface(this), "HTMLOUT");
-		setContentView(aspenLogin);
-		aspenLogin.setWebViewClient(new WebViewClient() {
-
-			@Override
-			public void onPageFinished(WebView view, String url) {
-				super.onPageFinished(view, url);
-				String javascript = "javascript:window.HTMLOUT.processHTML('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');";
-				aspenLogin.loadUrl(javascript);
-				if(url.contains("home")) {
-					aspenLogin.loadUrl("https://ma-andover.myfollett.com/aspen/studentScheduleContextList.do?navkey=myInfo.sch.list");
-					javascript = "javascript:window.HTMLOUT.processHTML('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');";
-					aspenLogin.loadUrl(javascript);
-					try { Thread.sleep(250); }
-					catch(Exception e) {}
-					finishAndRemoveTask();
-				}
-			}
-		});
-		(Toast.makeText(this, "App will close after login, please relaunch app to continue", Toast.LENGTH_SHORT)).show();
-	}
-
 	public void createSettings() { //consider using JSON or using a .properties file for each property
 		try {
-			PrintWriter pw = new PrintWriter(settingsCache);
+			PrintWriter pw = new PrintWriter(settings);
 			pw.println("--Settings--");
 			pw.println("defaultView:current_view"); //consider equals
 			pw.println("dailyNotifications:on");
@@ -142,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void checkSettings() {
-		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
+		errorLogs = new File(this.getFilesDir(), "logs.txt");
 		try {
-			Scanner scan = new Scanner(settingsCache);
+			Scanner scan = new Scanner(settings);
 			scan.nextLine();
 			String line;
 			String opt;
@@ -197,5 +168,4 @@ public class MainActivity extends AppCompatActivity {
 		}
 		catch(Exception e) {}
 	}
-
 }

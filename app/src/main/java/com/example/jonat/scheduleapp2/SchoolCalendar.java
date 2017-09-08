@@ -74,6 +74,9 @@ public class SchoolCalendar {
 		catch(IOException ioe) {
 			return -10;
 		}
+		catch(NullPointerException npe) {
+			return -10;
+		}
 	}
 
 }
