@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	public void createSettingsFile() { //consider using JSON or using a .properties file for each property
+	public void createSettingsFile() {
 		try {
 			PrintWriter pw = new PrintWriter(settings);
 			pw.println("--Settings--");

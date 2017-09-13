@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2017 copyright things
+ *
+ * @author Jonathan S. Kim
+ * @version Beta 1.1
+ * @since 7/19/2017
+ */
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
@@ -14,6 +21,10 @@ import java.util.Calendar;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/*
+ * Utility Class is the class that holds all static methods needed by
+ * multiple classes and objects.
+ */
 public class Utility {
 	static final int SEVEN_AM = 420;      // 7:00
 	static final int PERIOD_1_BELL = 464; // 7:44
@@ -120,7 +131,7 @@ public class Utility {
 					scan.nextLine();
 					scan.nextLine();
 				}
-				return new ScheduleChecker(context, classes);
+				return new ScheduleChecker(classes);
 			}
 			catch(IOException ioe) {}
 		}
@@ -137,6 +148,7 @@ public class Utility {
 		return CalendarChecker.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
 	}
 
+	
 	static int backgroundFix(Context context, int block) {
 //		ScheduleChecker scheduleChecker = initializeScheduleChecker(context);
 //		char x;

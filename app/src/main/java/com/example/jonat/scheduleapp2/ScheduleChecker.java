@@ -1,13 +1,23 @@
+/*
+ * Copyright (C) 2017 copyright things
+ *
+ * @author Jonathan S. Kim
+ * @version Beta 1.1
+ * @since 7/19/2017
+ */
 package com.example.jonat.scheduleapp2;
 
-import android.content.Context;
 import java.util.ArrayList;
 
+/*
+ * ScheduleChecker is an object that handles the information within the saved
+ * schedule file created by the JSInterface. All methods such
+ */
 public class ScheduleChecker {
 	private String[] classes;
 	private char[][] schedule;
 
-	public ScheduleChecker(Context c, ArrayList<String> classes) {
+	public ScheduleChecker(ArrayList<String> classes) {
 		schedule = new char[8][5];
 		this.classes = new String[8];
 		for(int i = 0; i < classes.size(); i++)
@@ -71,6 +81,9 @@ public class ScheduleChecker {
 			return 5;
 	}
 
+	/** @param day is the day rotation of the week
+	 *  @param period is the period of the day
+	 *  @return explanation for exception within the schedule */
 	public String exceptions(int day, int period) {
 		if(day < -20 && day > -30)
 			return halfDayHandler(Math.abs(day % 10), period);

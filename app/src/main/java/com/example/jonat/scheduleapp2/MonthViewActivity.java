@@ -26,6 +26,11 @@ import org.joda.time.LocalDate;
 
 import java.util.Calendar;
 
+/*
+ * MonthView allows the user to manually chose a specific date for
+ * more information on their schedule for that day. This updates
+ * the rest of the app for more detail available in the other views.
+ */
 public class MonthViewActivity extends AppCompatActivity {
 	private ScheduleChecker scheduleChecker;
 	private BottomNavigationView navigation;
@@ -115,6 +120,7 @@ public class MonthViewActivity extends AppCompatActivity {
 		}
 	}
 
+	/** Changes text on buttons to update based on the <int>swipeDirectionOffset</int> in the <class>MainActivity</class> class*/
 	public void changeButtons(Button[] buttons) {
 		String[] schedule = Utility.oneLineClassNames(scheduleChecker);
 		for(int x = 0; x < buttons.length; x++) {

@@ -1,17 +1,21 @@
+/*
+ * Copyright (C) 2017 copyright things
+ *
+ * @author Jonathan S. Kim
+ * @version Beta 1.1
+ * @since 7/19/2017
+ */
 package com.example.jonat.scheduleapp2;
 
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -22,13 +26,13 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+ * Settings page handles user custom settings and saves them onto settings file
+ */
 public class Settings extends AppCompatActivity {
 
-	private OnSwipeTouchListener on;
-	private ScheduleChecker scheduleChecker;
 	private File settingsCache;
 	private File errorLogs;
 	private boolean dailyNotificationsChecked;
@@ -39,12 +43,10 @@ public class Settings extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		checkSettings();
-		scheduleChecker = Utility.initializeScheduleChecker(this);
 		setContentView(R.layout.settings);
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 		setSupportActionBar(myToolbar);
 
-		final ViewGroup transitionsContainer = (ViewGroup)this.findViewById(android.R.id.content);
 		Switch everyClassNotification = (Switch)findViewById(R.id.every_class_notification);
 		everyClassNotification.setChecked(periodicNotificationsChecked);
 		everyClassNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -188,4 +190,5 @@ public class Settings extends AppCompatActivity {
 				return R.layout.day_view;
 		}
 	}
+
 }

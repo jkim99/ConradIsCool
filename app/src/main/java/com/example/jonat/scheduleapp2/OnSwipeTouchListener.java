@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2017 copyright things
+ *
+ * @author Jonathan S. Kim
+ * @version Beta 1.1
+ * @since 7/19/2017
+ */
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
@@ -7,6 +14,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+/*
+ * OnSwipeTouchListener is a simple swipe listener for the application.
+ * This allows for toggling between different dates throughout the
+ * application.
+ */
 public class OnSwipeTouchListener implements OnTouchListener {
 
 	private final GestureDetector gestureDetector;
@@ -68,4 +80,5 @@ public class OnSwipeTouchListener implements OnTouchListener {
 	public void onSwipeLeft() {}
 	public void onSwipeTop() {}
 	public void onSwipeBottom() {}
+
 }

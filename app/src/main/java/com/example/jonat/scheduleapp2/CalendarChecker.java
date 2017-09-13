@@ -24,8 +24,8 @@ import java.util.Scanner;
  * to update days quickly and does not require a full application
  * update to receive current information.
  */
-
 public class CalendarChecker {
+
 	private static File calendar;
 	private static final String SNOW_DAY = "SSSSS";
 	private static final String EXAM_DAY = "EEEEE";
@@ -50,6 +50,7 @@ public class CalendarChecker {
 	static int getDayRotation(int month, int day) {
 		String searchDate = month + "/" + day;
 		String returnValue;
+
 		try {
 			Scanner scan = new Scanner(calendar);
 			String line = "";
@@ -83,4 +84,5 @@ public class CalendarChecker {
 			return Utility.ERROR_CODE;
 		}
 	}
+
 }

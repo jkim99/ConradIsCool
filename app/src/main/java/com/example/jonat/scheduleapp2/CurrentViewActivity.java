@@ -107,8 +107,8 @@ public class CurrentViewActivity extends AppCompatActivity {
 		Button next = buttons[1];
 		String time = new java.sql.Time(System.currentTimeMillis()).toString();
 		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
-		current.setText(R.string.current_class + "\n" + scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 0)));
-		next.setText(R.string.next_class + "\n" +  scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 1)));
+		current.setText(getResources().getString(R.string.current_class) + "\n" + scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 0)));
+		next.setText(getResources().getString(R.string.next_class) + "\n" +  scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 1)));
 		current.setOnTouchListener(on);
 		next.setOnTouchListener(on);
 	}
@@ -124,4 +124,5 @@ public class CurrentViewActivity extends AppCompatActivity {
 			startActivity(new Intent(CurrentViewActivity.this, AspenPage.class));
 		}
 	}
+
 }
