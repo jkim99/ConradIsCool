@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2017 copyright things
+ *
+ * @author Jonathan S. Kim
+ * @version Beta 1.1
+ * @since 7/19/2017
+ */
 package com.example.jonat.scheduleapp2;
 
 import android.content.Intent;
@@ -6,6 +13,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -64,6 +72,7 @@ public class MonthViewActivity extends AppCompatActivity {
 
 		final Button[] buttons = {(Button)findViewById(R.id.p1),(Button)findViewById(R.id.p2),(Button)findViewById(R.id.p3),(Button)findViewById(R.id.p4),(Button)findViewById(R.id.p5)};
 		final TextView dayRotationTextView = (TextView)findViewById(R.id.day_rotation);
+		dayRotationTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 60);
 
 		updateUI(buttons);
 

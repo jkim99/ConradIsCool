@@ -1,21 +1,13 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
-import android.util.Log;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class ScheduleChecker {
 	private String[] classes;
 	private char[][] schedule;
-	private SchoolCalendar schoolCalendar;
-	private Context context;
 
 	public ScheduleChecker(Context c, ArrayList<String> classes) {
-		context = c;
-		schoolCalendar = new SchoolCalendar(context);
 		schedule = new char[8][5];
 		this.classes = new String[8];
 		for(int i = 0; i < classes.size(); i++)
@@ -63,7 +55,9 @@ public class ScheduleChecker {
 	}
 
 	public int getCurrentPeriod(int minutes, int periodAfter) {
-		if(minutes >= Utility.PERIOD_1_BELL && minutes < Utility.PERIOD_2_BELL)
+		if(minutes >= Utility.SEVEN_AM && minutes <= Utility.PERIOD_1_BELL)
+			return 5 - periodAfter * 5;
+		else if(minutes >= Utility.PERIOD_1_BELL && minutes < Utility.PERIOD_2_BELL)
 			return periodAfter;
 		else if(minutes >= Utility.PERIOD_2_BELL && minutes < Utility.PERIOD_3_BELL)
 			return 1 + periodAfter;
@@ -128,4 +122,5 @@ public class ScheduleChecker {
 		halfDay[6][2] = 'D';
 		return period > 2 ? "No Class!" : classes[(int)halfDay[day - 1][period] - 65];
 	}
+
 }

@@ -4,4 +4,11 @@
 	<string name="title_current_view">CURRENT VIEW</string>
 	<string name="title_month_view">MONTH VIEW</string>
 	<string name="title_settings">SETTINGS</string>
+	<string name="current_class">Current Class:</string>
+	<string name="next_class">Next Class:</string>
+	<string name="time1">7:44</string>
+	<string name="time2">8:44</string>
+	<string name="time3">10:03</string>
+	<string name="time4">11:07</string>
+	<string name="time5">1:04</string>
 </resources>

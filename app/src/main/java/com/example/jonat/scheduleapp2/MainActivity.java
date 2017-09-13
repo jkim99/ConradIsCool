@@ -1,16 +1,17 @@
-/**
- * what it does: saves you 10 minutes of time at a specific high school in a specific town for the cost of 1 hour learning this app
- * who to get mad at: josh krinsky (the jew kid in my AP physics 1 class
+/*
+ * Copyright (C) 2017 copyright things
+ *
  * @author Jonathan S. Kim
- * @version whatever the current version of Minecraft is minus 16
+ * @version Beta 1.1
  * @since 7/19/2017
- **/
+ */
 
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,21 +19,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/*
+ * The MainActivity class is the conventional class that is called for Android applications.
+ * In this class, the startup values and protocols are called and initialized.
+ * Many of these functions and fields are used for initial setup of the app.
+ */
+
 public class MainActivity extends AppCompatActivity {
-	Context context = this;
+
 	private File settings;
-	private File scheduleFile;
 	private File errorLogs;
-	public static int swipeDirectionOffset = 0;
-	private ScheduleChecker scheduleChecker;
 	private Intent defaultScreen;
+	public static int swipeDirectionOffset = 0;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
 
@@ -40,24 +44,22 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		scheduleFile = new File(this.getFilesDir(), "schedule.txt");
-		settings = new File(this.getFilesDir() + "settings.txt");
+		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
+		File calendarFile = new File(this.getFilesDir(), "calendar.txt");
+		settings = new File(this.getFilesDir(), "settings.txt");
+		boolean isScheduleValid = Utility.verifyScheduleFile(scheduleFile);
 
-		try {
-			Scanner scan = new Scanner(scheduleFile);
-			while(scan.hasNextLine())
-				Log.d("schedule_file", scan.nextLine());
+		if(isOnline()) {
+			Log.i("calendar_update", "isOnline");
+			CalendarChecker.updateCalendar(calendarFile);
 		}
-		catch(Exception e) {}
 
-		if(!settings.exists())
-			createSettings();
-		checkSettings();
+		checkSettingsFile();
 
-		if(!Utility.verifyScheduleFile(scheduleFile))
+		if(!isScheduleValid) {
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
+		}
 		else {
-			scheduleChecker = Utility.initializeScheduleChecker(context);
 			try {
 				startActivity(defaultScreen);
 			}
@@ -67,15 +69,14 @@ public class MainActivity extends AppCompatActivity {
 			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
 		}
-
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		Utility.initializeCalendar(this);
-		if((dailyNotifications || periodicNotifications)&& Utility.getSchoolDayRotation(0) >= 0)
+		if((dailyNotifications || periodicNotifications) && Utility.getSchoolDayRotation(0) >= 0) {
 			startService(new Intent(this, Notify.class));
+		}
 	}
 
 	@Override
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	public void createSettings() { //consider using JSON or using a .properties file for each property
+	public void createSettingsFile() { //consider using JSON or using a .properties file for each property
 		try {
 			PrintWriter pw = new PrintWriter(settings);
 			pw.println("--Settings--");
@@ -112,13 +113,12 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	public void checkSettings() {
+	public void checkSettingsFile() {
 		errorLogs = new File(this.getFilesDir(), "logs.txt");
 		try {
 			Scanner scan = new Scanner(settings);
 			scan.nextLine();
-			String line;
-			String opt;
+			String line, opt;
 			while(scan.hasNextLine()) {
 				line = scan.nextLine();
 				opt = line.substring(0, line.indexOf(":") + 1);
@@ -133,12 +133,14 @@ public class MainActivity extends AppCompatActivity {
 						periodicNotifications = !(line.substring(line.indexOf(":")).equals("off"));
 						break;
 					default:
-						Log.i("debugging", "settings file corrupted or missing");
-						createSettings();
+						Log.i("settings_check", "settings file corrupted or missing");
+						createSettingsFile();
 				}
 			}
 		}
-		catch(IOException ioe) {}
+		catch(IOException ioe) {
+			createSettingsFile();
+		}
 	}
 
 	public void setDefaultView(String str) {
@@ -168,4 +170,10 @@ public class MainActivity extends AppCompatActivity {
 		}
 		catch(Exception e) {}
 	}
+
+	public boolean isOnline() {
+		ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
+	}
+
 }

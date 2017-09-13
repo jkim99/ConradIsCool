@@ -1,21 +1,28 @@
+/*
+ * Copyright (C) 2017 copyright things
+ *
+ * @author Jonathan S. Kim
+ * @version Beta 1.1
+ * @since 7/19/2017
+ */
+
 package com.example.jonat.scheduleapp2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.Button;
 
+/*
+ * CurrentViewActivity Class allows the user to view the current class and
+ * next class quickly in a simple view.
+ */
 public class CurrentViewActivity extends AppCompatActivity {
 
 	private OnSwipeTouchListener on;
@@ -26,7 +33,7 @@ public class CurrentViewActivity extends AppCompatActivity {
 			= new BottomNavigationView.OnNavigationItemSelectedListener() {
 
 		@Override
-		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+		public boolean onNavigationItemSelected(MenuItem item) {
 			switch(item.getItemId()) {
 				case R.id.navigation_current_view:
 					return true;
@@ -59,20 +66,20 @@ public class CurrentViewActivity extends AppCompatActivity {
 
 		scheduleChecker = Utility.initializeScheduleChecker(this);
 
-		final Button currentClass = (Button)findViewById(R.id.currentClass);
-		final Button nextClass = (Button)findViewById(R.id.nextClass);
-		updateUI(currentClass, nextClass);
+		final Button[] buttons = {(Button)findViewById(R.id.currentClass), (Button)findViewById(R.id.nextClass)};
+		updateUI(buttons);
 
 		on = new OnSwipeTouchListener(this) {
 			public void onSwipeLeft() {
 				MainActivity.swipeDirectionOffset++;
-				updateUI(currentClass, nextClass);
+				updateUI(buttons);
 			}
 			public void onSwipeRight() {
 				MainActivity.swipeDirectionOffset--;
-				updateUI(currentClass, nextClass);
+				updateUI(buttons);
 			}
 		};
+		updateUI(buttons);
 	}
 
 	@Override
@@ -94,20 +101,23 @@ public class CurrentViewActivity extends AppCompatActivity {
 		}
 	}
 
-	public void changeButtons(Button current, Button next) {
+	/** Changes text on buttons to update based on the <int>swipeDirectionOffset</int> in the <class>MainActivity</class> class*/
+	public void changeButtons(Button[] buttons) {
+		Button current = buttons[0];
+		Button next = buttons[1];
 		String time = new java.sql.Time(System.currentTimeMillis()).toString();
 		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
-		current.setText("Current Class: \n" + scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 0)));
-		next.setText("Next Class: \n" + scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 1)));
+		current.setText(R.string.current_class + "\n" + scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 0)));
+		next.setText(R.string.next_class + "\n" +  scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 1)));
 		current.setOnTouchListener(on);
 		next.setOnTouchListener(on);
 	}
 
-	public void updateUI(Button currentClass, Button nextClass) {
+	public void updateUI(Button[] buttons) {
 		try {
 			Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
 			Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
-			changeButtons(currentClass, nextClass);
+			changeButtons(buttons);
 		}
 		catch(NullPointerException npe) {
 			Log.e("UI_update", npe.toString());

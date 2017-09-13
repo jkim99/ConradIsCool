@@ -80,6 +80,51 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintRight_toRightOf="parent"/>
 
+		<TextView
+			android:id="@+id/time1"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:text="@string/time1"
+			android:textColor="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/p1"
+			app:layout_constraintLeft_toLeftOf="parent"/>
+
+		<TextView
+			android:id="@+id/time2"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:text="@string/time2"
+			android:textColor="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/p2"
+			app:layout_constraintLeft_toLeftOf="parent"/>
+
+		<TextView
+			android:id="@+id/time3"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:text="@string/time3"
+			android:textColor="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/p3"
+			app:layout_constraintLeft_toLeftOf="parent"/>
+
+		<TextView
+			android:id="@+id/time4"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:text="@string/time4"
+			android:textColor="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/p4"
+			app:layout_constraintLeft_toLeftOf="parent"/>
+
+		<TextView
+			android:id="@+id/time5"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:text="@string/time5"
+			android:textColor="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/p5"
+			app:layout_constraintLeft_toLeftOf="parent"/>
+
 	</android.support.constraint.ConstraintLayout>
 
 	<android.support.design.widget.BottomNavigationView

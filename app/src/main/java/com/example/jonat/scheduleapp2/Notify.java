@@ -1,16 +1,28 @@
+/*
+ * Copyright (C) 2017 copyright things
+ *
+ * @author Jonathan S. Kim
+ * @version Beta 1.0
+ * @since 7/19/2017
+ */
+
 package com.example.jonat.scheduleapp2;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 
 import java.util.*;
+
+/*
+ * Notification class sets the timer to send notification at the specified times in the <class>Utility</class> Class
+ */
 
 public class Notify extends Service {
 	private Timer timer;
@@ -18,7 +30,6 @@ public class Notify extends Service {
 	private ScheduleChecker scheduleChecker;
 	final Handler HANDLER = new Handler();
 
-	@Nullable
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -37,6 +48,7 @@ public class Notify extends Service {
 		super.onDestroy();
 	}
 
+	/** Starts timer for boolean check to send notification at regular intervals */
 	public void startTimer() {
 		timer = new Timer();
 		scheduleChecker = Utility.initializeScheduleChecker(this);
@@ -46,6 +58,7 @@ public class Notify extends Service {
 		}
 	}
 
+	/** Stops timer when <variable>timer</variable> is null */
 	public void stopTimerTask() {
 		if(timer != null) {
 			timer.cancel();
@@ -53,6 +66,7 @@ public class Notify extends Service {
 		}
 	}
 
+	/** Calls <method>periodicNotification</method> and/or <method>dailyNotification</method> depending on user settings */
 	public void initializeTimerTask() {
 		timerTask = new TimerTask() {
 			@Override
@@ -62,37 +76,61 @@ public class Notify extends Service {
 					public void run() {
 						String time = new java.sql.Time(System.currentTimeMillis()).toString();
 						int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
-						if(MainActivity.dailyNotifications)
+						if(MainActivity.dailyNotifications) {
 							dailyNotification(minutes);
-						if(MainActivity.periodicNotifications)
-							everyClassNotification(minutes);
+						}
+						if(MainActivity.periodicNotifications) {
+							periodicNotification(minutes);
+						}
 					}
 				});
 			}
 		};
 	}
 
-	public void everyClassNotification(int minutes) {
+	/** @param minutes Number of minutes after 12:00 AM
+	 *  Builds and sends notification if <parameter>minutes</parameter> is equal to one fo the Utility PERIOD constants */
+	public void periodicNotification(int minutes) {
 		int[] notificationTimes =  {Utility.PERIOD_1_BELL,
 									Utility.PERIOD_2_BELL,
 									Utility.PERIOD_3_BELL,
 									Utility.PERIOD_4_BELL,
 									Utility.PERIOD_5_BELL};
 		boolean sendNotification = false;
-		for(int x : notificationTimes)
+		String nextClass;
+		for(int x : notificationTimes) {
 			sendNotification = minutes == x || sendNotification;
-		String nextClass = scheduleChecker.getClass(0, scheduleChecker.getCurrentPeriod(minutes, 0));
+		}
+		try {
+			nextClass = scheduleChecker.getClass(0, scheduleChecker.getCurrentPeriod(minutes, 0));
+		}
+		catch(NullPointerException npe) {
+			nextClass = "";
+		}
 		if((Utility.getSchoolDayRotation(0) >= 0) && sendNotification) {
+			android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+			String[] classInfo = nextClass.split("\n");
+			for(String s : classInfo)
+				inboxStyle.addLine(s);
 			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-				.setContentTitle("Your next class")
-				.setContentText(nextClass)
-				.setSmallIcon(R.drawable.ic_launcher_proto);
+					.setContentTitle("Your schedule for today")
+					.setContentText(nextClass)
+					.setSmallIcon(R.drawable.ic_launcher_proto)
+					.setStyle(inboxStyle);
+			TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+			stackBuilder.addParentStack(CurrentViewActivity.class);
+			stackBuilder.addNextIntent(new Intent(this, CurrentViewActivity.class));
+			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+			builder.setContentIntent(resultPendingIntent);
 			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 			notificationManager.notify(0, builder.build());
 		}
 	}
 
+	/** @param minutes Number of minutes after 12:00 AM
+	 *  Builds and sends notification if <parameter>minutes</parameter> is equal to 7:00 AM constant */
 	public void dailyNotification(int minutes) {
+		scheduleChecker = Utility.initializeScheduleChecker(this);
 		if(minutes == Utility.SEVEN_AM) {
 			android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 			String[] schedule = Utility.oneLineClassNames(scheduleChecker);
@@ -100,9 +138,14 @@ public class Notify extends Service {
 				inboxStyle.addLine(s);
 			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
 				.setContentTitle("Your schedule for today")
-				.setContentText("")
+				.setContentText("Day " + Utility.getSchoolDayRotation(0))
 				.setSmallIcon(R.drawable.ic_launcher_proto)
 				.setStyle(inboxStyle);
+			TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+			stackBuilder.addParentStack(DayViewActivity.class);
+			stackBuilder.addNextIntent(new Intent(this, DayViewActivity.class));
+			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+			builder.setContentIntent(resultPendingIntent);
 			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 			notificationManager.notify(1, builder.build());
 		}
