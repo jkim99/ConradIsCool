@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 /*
  * CurrentViewActivity Class allows the user to view the current class and
@@ -66,20 +67,21 @@ public class CurrentViewActivity extends AppCompatActivity {
 
 		scheduleChecker = Utility.initializeScheduleChecker(this);
 
+		final TextView[] textViews = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.lunch1), (TextView)findViewById(R.id.lunch2)};
 		final Button[] buttons = {(Button)findViewById(R.id.currentClass), (Button)findViewById(R.id.nextClass)};
-		updateUI(buttons);
+		updateUI(buttons, textViews);
 
 		on = new OnSwipeTouchListener(this) {
 			public void onSwipeLeft() {
 				MainActivity.swipeDirectionOffset++;
-				updateUI(buttons);
+				updateUI(buttons, textViews);
 			}
 			public void onSwipeRight() {
 				MainActivity.swipeDirectionOffset--;
-				updateUI(buttons);
+				updateUI(buttons, textViews);
 			}
 		};
-		updateUI(buttons);
+		updateUI(buttons, textViews);
 	}
 
 	@Override
@@ -113,11 +115,56 @@ public class CurrentViewActivity extends AppCompatActivity {
 		next.setOnTouchListener(on);
 	}
 
-	public void updateUI(Button[] buttons) {
+	/** Changes text on TextViews to update based on the time and lunch period*/
+	public void changeTextViews(TextView[] textViews) {
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
+		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
+
+		TextView time1 = textViews[0];
+		TextView time2 = textViews[1];
+		TextView lunch1 = textViews[2];
+		TextView lunch2 = textViews[3];
+
+		time1.setText(getTimeText(0));
+		time2.setText(getTimeText(1));
+
+		if(period == 3)
+			lunch1.setText(Utility.getLunch(Utility.initializeScheduleChecker(this), MainActivity.swipeDirectionOffset));
+		if(period == 2)
+			lunch2.setText(Utility.getLunch(Utility.initializeScheduleChecker(this), MainActivity.swipeDirectionOffset));
+	}
+
+	/** @return string of times depending on the period*/
+	public String getTimeText(int periodAfter) {
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
+		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), periodAfter);
+		if(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) >= 0) {
+			switch(period) {
+				case 0:
+					return getResources().getString(R.string.time1);
+				case 1:
+					return getResources().getString(R.string.time2);
+				case 2:
+					return getResources().getString(R.string.time3);
+				case 3:
+					return getResources().getString(R.string.time4);
+				case 4:
+					return getResources().getString(R.string.time5);
+				default:
+					return "";
+			}
+		}
+		else {
+			return "";
+		}
+	}
+
+	public void updateUI(Button[] buttons, TextView[] textViews) {
 		try {
 			Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
 			Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
 			changeButtons(buttons);
+			changeTextViews(textViews);
 		}
 		catch(NullPointerException npe) {
 			Log.e("UI_update", npe.toString());
