@@ -148,7 +148,9 @@ public class Utility {
 		return CalendarChecker.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
 	}
 
-	
+	/** @param context simply to initialize the scheduleChecker
+	 *  @param block determines which background source to use
+	 *  @return resource drawable file associated with <param>block</param> */
 	static int backgroundFix(Context context, int block) {
 //		ScheduleChecker scheduleChecker = initializeScheduleChecker(context);
 //		char x;
@@ -220,8 +222,14 @@ public class Utility {
 		}
 	}
 
-	static String getLunch() {
-		return "";
+	static String getLunch(ScheduleChecker scheduleChecker, int off) {
+		String course = scheduleChecker.getClass(off, 3);
+		try {
+			return "Lunch: " + LunchChecker.getLunchBlock(course.split("\n")[1]);
+		}
+		catch(ArrayIndexOutOfBoundsException aioobe) {
+			return "";
+		}
 	}
 
 }

@@ -46,17 +46,18 @@ public class MainActivity extends AppCompatActivity {
 
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
 		File calendarFile = new File(this.getFilesDir(), "calendar.txt");
+		File lunchFile = new File(this.getFilesDir(), "lunch.txt");
 		settings = new File(this.getFilesDir(), "settings.txt");
-		boolean isScheduleValid = Utility.verifyScheduleFile(scheduleFile);
 
 		if(isOnline()) {
-			Log.i("calendar_update", "isOnline");
+			Log.i("updates", "isOnline");
 			CalendarChecker.updateCalendar(calendarFile);
+			LunchChecker.updateLunch(lunchFile);
 		}
 
 		checkSettingsFile();
 
-		if(!isScheduleValid) {
+		if(!Utility.verifyScheduleFile(scheduleFile)) {
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
 		}
 		else {
@@ -69,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
 			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
 		}
+
+		Log.d("lunch", Utility.getLunch(Utility.initializeScheduleChecker(this), 0));
+		//DEBUG NOTIFICATIONS
+		//for(int i = 1; i <= 5; i++)
+			//new Notify(i);
 	}
 
 	@Override

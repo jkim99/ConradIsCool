@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /* DayViewActivity allows the user to view their full schedule for that day.
  * This view also displays the times of each class.
  */
@@ -28,6 +30,7 @@ public class DayViewActivity extends AppCompatActivity {
 	private OnSwipeTouchListener on;
 	private ScheduleChecker scheduleChecker;
 	private BottomNavigationView navigation;
+	private TextView lunch;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
 			= new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -69,6 +72,9 @@ public class DayViewActivity extends AppCompatActivity {
 		TextView[] times = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.time3), (TextView)findViewById(R.id.time4), (TextView)findViewById(R.id.time5)};
 		for(TextView t : times)
 			t.setElevation(1000);
+
+		lunch = (TextView)findViewById(R.id.lunch);
+		lunch.setElevation(1000);
 
 		final Button[] buttons = {(Button)findViewById(R.id.p1),(Button)findViewById(R.id.p2),(Button)findViewById(R.id.p3),(Button)findViewById(R.id.p4),(Button)findViewById(R.id.p5)};
 		updateUI(buttons);
@@ -124,6 +130,7 @@ public class DayViewActivity extends AppCompatActivity {
 			Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
 			Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
 			changeButtons(buttons);
+			lunch.setText(Utility.getLunch(scheduleChecker, MainActivity.swipeDirectionOffset));
 		}
 		catch(NullPointerException npe) {
 			Log.e("UI_update", npe.toString());

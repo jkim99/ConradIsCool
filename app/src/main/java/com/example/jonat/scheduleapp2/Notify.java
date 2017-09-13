@@ -151,4 +151,33 @@ public class Notify extends Service {
 		}
 	}
 
+	//DEBUG NOTIFICATIONS
+
+	public void debugNotifications(int period) {
+		dailyNotification(Utility.SEVEN_AM);
+		int x;
+		switch(period) {
+			case 1:
+				x = Utility.PERIOD_1_BELL;
+			case 2:
+				x = Utility.PERIOD_2_BELL;
+			case 3:
+				x = Utility.PERIOD_3_BELL;
+			case 4:
+				x = Utility.PERIOD_4_BELL;
+			case 5:
+				x = Utility.PERIOD_5_BELL;
+			default:
+				x = 1;
+		}
+		periodicNotification(x);
+	}
+	public Notify() {
+		super();
+	}
+
+	public Notify(int period) {
+		debugNotifications(period);
+	}
+
 }
