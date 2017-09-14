@@ -41,10 +41,12 @@ public class CurrentViewActivity extends AppCompatActivity {
 				case R.id.navigation_day_view:
 					Intent intent2 = new Intent(CurrentViewActivity.this, DayViewActivity.class);
 					startActivity(intent2);
+					overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 					return true;
 				case R.id.navigation_month_view:
 					Intent intent3 = new Intent(CurrentViewActivity.this, MonthViewActivity.class);
 					startActivity(intent3);
+					overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 					return true;
 			}
 			return false;

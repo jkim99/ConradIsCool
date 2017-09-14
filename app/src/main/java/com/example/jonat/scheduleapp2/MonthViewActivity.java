@@ -44,10 +44,12 @@ public class MonthViewActivity extends AppCompatActivity {
 				case R.id.navigation_current_view:
 					Intent intent1 = new Intent(MonthViewActivity.this, CurrentViewActivity.class);
 					startActivity(intent1);
+					overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 					return true;
 				case R.id.navigation_day_view:
 					Intent intent2 = new Intent(MonthViewActivity.this, DayViewActivity.class);
 					startActivity(intent2);
+					overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 					return true;
 				case R.id.navigation_month_view:
 					return true;
@@ -91,7 +93,8 @@ public class MonthViewActivity extends AppCompatActivity {
 			public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 				MainActivity.swipeDirectionOffset = Days.daysBetween(new LocalDate(), new LocalDate(year, month + 1, dayOfMonth)).getDays();
 				int dayRotation = Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset);
-				dayRotationTextView.setText(dayRotation < 0 ? "No School" : "" + dayRotation);
+				Log.e("d", dayRotation + "");
+				dayRotationTextView.setText((dayRotation <= -20 && dayRotation > -30) ? "Half Day" : (dayRotation < 0 ? "No School" : "" + dayRotation));
 				updateUI(buttons);
 
 			}

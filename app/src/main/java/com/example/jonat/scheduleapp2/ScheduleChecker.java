@@ -117,7 +117,7 @@ public class ScheduleChecker {
 		halfDay[0][2] = 'C';
 		halfDay[1][0] = 'A';
 		halfDay[1][1] = 'E';
-		halfDay[1][2] = 'P';
+		halfDay[1][2] = 'P'; //pep rally
 		halfDay[2][0] = 'C';
 		halfDay[2][1] = 'B';
 		halfDay[2][2] = 'F';
@@ -133,7 +133,13 @@ public class ScheduleChecker {
 		halfDay[6][0] = 'G';
 		halfDay[6][1] = 'B';
 		halfDay[6][2] = 'D';
-		return period > 2 ? "No Class!" : classes[(int)halfDay[day - 1][period] - 65];
+		try {
+			int classIndex = (int)halfDay[day - 1][period] - 65;
+			return period > 2 ? "No Class!" : (classIndex != 15 ? classes[classIndex] : "Pep Rally");
+		}
+		catch(ArrayIndexOutOfBoundsException aioobe) {
+			return "No Class";
+		}
 	}
 
 }
