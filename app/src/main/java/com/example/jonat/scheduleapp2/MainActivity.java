@@ -20,9 +20,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Scanner;
 
 /*
@@ -36,9 +42,11 @@ public class MainActivity extends AppCompatActivity {
 	private File settings;
 	private File errorLogs;
 	private Intent defaultScreen;
+	public static double version;
 	public static int swipeDirectionOffset = 0;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
+	public static boolean needsUpdate;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +57,34 @@ public class MainActivity extends AppCompatActivity {
 		File lunchFile = new File(this.getFilesDir(), "lunch.txt");
 		settings = new File(this.getFilesDir(), "settings.txt");
 
+		checkSettingsFile();
+
 		if(isOnline()) {
 			Log.i("updates", "isOnline");
 			CalendarChecker.updateCalendar(calendarFile);
 			LunchChecker.updateLunch(lunchFile);
+			try {
+				URL url = new URL("https://rawgit.com/jkim99/ConradIsCool/master/README.md");
+				URLConnection urlConnection = url.openConnection();
+				BufferedReader buff = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+				String line;
+				while((line = buff.readLine()) != null) {
+					Log.i("xxx", line);
+					if(line.contains("Version: "))
+						break;
+				}
+				needsUpdate = version < Double.valueOf(line.substring(line.indexOf("Version: ") + 9));
+			}
+			catch(MalformedURLException mue) {
+				Log.e("updates", mue.toString());
+			}
+			catch(NullPointerException npe) {
+				Log.e("updates", npe.toString());
+			}
+			catch(IOException ioe) {
+				Log.e("updates", ioe.toString());
+			}
 		}
-
-		checkSettingsFile();
 
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
@@ -107,12 +136,13 @@ public class MainActivity extends AppCompatActivity {
 	public void createSettingsFile() {
 		try {
 			PrintWriter pw = new PrintWriter(settings);
-			pw.println("--Settings--");
-			pw.println("defaultView:current_view"); //consider equals
+			pw.println("--Settings--3");
+			pw.println("version:1.0");
+			pw.println("defaultView:current_view");
 			pw.println("dailyNotifications:on");
 			pw.println("periodicNotifications:on");
 			pw.close();
-			Log.i("debugging","M:created settings file");
+			Log.i("settings","M:created settings file");
 		}
 		catch(Exception e) {
 			Log.e("debugging", "error creating settings");
@@ -123,12 +153,17 @@ public class MainActivity extends AppCompatActivity {
 		errorLogs = new File(this.getFilesDir(), "logs.txt");
 		try {
 			Scanner scan = new Scanner(settings);
-			scan.nextLine();
+			if(!scan.nextLine().equals("-Settings--3"))
+				createSettingsFile();
 			String line, opt;
 			while(scan.hasNextLine()) {
 				line = scan.nextLine();
 				opt = line.substring(0, line.indexOf(":") + 1);
+				Log.i("settings", line);
 				switch(opt) {
+					case "version:":
+						version = Double.valueOf(line.substring(line.indexOf(":") + 1));
+						break;
 					case "defaultView:":
 						setDefaultView(line.substring(line.indexOf(":") + 1));
 						break;

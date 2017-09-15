@@ -14,6 +14,7 @@ import android.app.Service;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.NotificationCompat;
@@ -81,6 +82,9 @@ public class Notify extends Service {
 						}
 						if(MainActivity.periodicNotifications) {
 							periodicNotification(minutes);
+						}
+						if(MainActivity.needsUpdate) {
+							versionUpdateNotification(minutes);
 						}
 					}
 				});
@@ -151,33 +155,19 @@ public class Notify extends Service {
 		}
 	}
 
-	//DEBUG NOTIFICATIONS
-
-	public void debugNotifications(int period) {
-		dailyNotification(Utility.SEVEN_AM);
-		int x;
-		switch(period) {
-			case 1:
-				x = Utility.PERIOD_1_BELL;
-			case 2:
-				x = Utility.PERIOD_2_BELL;
-			case 3:
-				x = Utility.PERIOD_3_BELL;
-			case 4:
-				x = Utility.PERIOD_4_BELL;
-			case 5:
-				x = Utility.PERIOD_5_BELL;
-			default:
-				x = 1;
+	public void versionUpdateNotification(int minutes) {
+		if(minutes == Utility.SEVEN_AM) {
+			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+					.setContentTitle("Your app could use an update")
+					.setContentText("Go to: https://drive.google.com/file/d/0B25a9GoL5A8hM1YyNDV3YUFUTU0/view?usp=sharing")
+					.setSmallIcon(R.drawable.ic_launcher_proto);
+			TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+			stackBuilder.addNextIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://drive.google.com/file/d/0B25a9GoL5A8hM1YyNDV3YUFUTU0/view?usp=sharing")));
+			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+			builder.setContentIntent(resultPendingIntent);
+			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+			notificationManager.notify(1, builder.build());
 		}
-		periodicNotification(x);
-	}
-	public Notify() {
-		super();
-	}
-
-	public Notify(int period) {
-		debugNotifications(period);
 	}
 
 }

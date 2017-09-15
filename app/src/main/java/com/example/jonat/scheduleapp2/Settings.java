@@ -21,7 +21,6 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +32,7 @@ import java.util.Scanner;
  */
 public class Settings extends AppCompatActivity {
 
-	private File settingsCache;
+	private File settings;
 	private File errorLogs;
 	private boolean dailyNotificationsChecked;
 	private boolean periodicNotificationsChecked;
@@ -108,7 +107,7 @@ public class Settings extends AppCompatActivity {
 		clear.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Utility.purge(scheduleFile, settingsCache);
+				Utility.purge(scheduleFile, settings);
 				startActivity(new Intent(Settings.this, MainActivity.class));
 			}
 		});
@@ -116,15 +115,18 @@ public class Settings extends AppCompatActivity {
 
 	public void checkSettings() {
 		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
-		settingsCache = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
+		settings = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
 		try {
-			Scanner scan = new Scanner(settingsCache);
+			Scanner scan = new Scanner(settings);
 			String line;
 			String opt;
 			while(scan.hasNextLine()) {
 				line = scan.nextLine();
 				opt = line.substring(0, line.indexOf(":") + 1);
 				switch(opt) {
+					case "version:":
+						MainActivity.version = Double.valueOf(line.substring(line.indexOf(":") + 1));
+						break;
 					case "defaultView:":
 						defaultView = stringToView(line.substring(line.indexOf(":") + 1));
 						break;
@@ -135,7 +137,7 @@ public class Settings extends AppCompatActivity {
 						periodicNotificationsChecked = !(line.substring(line.indexOf(":") + 1).equals("off"));
 						break;
 					default:
-						Log.i("debugging", "settings file corrupted or missing");
+						Log.i("checkSettings", "settings file corrupted or missing");
 				}
 			}
 		}
@@ -153,7 +155,8 @@ public class Settings extends AppCompatActivity {
 		try {
 			File f = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
 			PrintWriter pw = new PrintWriter(f);
-			pw.println("--Settings--");
+			pw.println("--Settings--3");
+			pw.println("version:" + MainActivity.version);
 			pw.println("defaultView:" + viewToString(defaultView));
 			pw.println("dailyNotifications:" + (dailyNotificationsChecked ? "on" : "off"));
 			pw.println("periodicNotifications:" + (periodicNotificationsChecked ? "on" : "off"));
