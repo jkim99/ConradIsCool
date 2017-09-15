@@ -1,6 +1,6 @@
 # 7H App for Andover High School
 
-Beta 1.0
+Beta 1.2
 
 This is the android app created for Andover High School in order to assist students with adjusting to the new schedule. This is app will also be used to assist teachers and faculty of the school to create schedules and further assist in their planning process.
 
