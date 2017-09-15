@@ -17,7 +17,7 @@ Future (possible) addons:
 - Icons for exam days, half days, each date of the year, and app logo
 - **ARTISTS AND DESIGNERS** send us your logo designs! We'd be happy to implement it (you get credit don't worry)
 
-Installation Guide (Android Users only):
+# Installation Guide (Android Users only):
 
 1. Go to Settings and locate the "Unknown sources" option and turn that on. This setting is usually located in the security tab, however it may differ between devices.
 2. Download the app onto your phone: https://drive.google.com/file/d/0B25a9GoL5A8hM1YyNDV3YUFUTU0/view?usp=sharing
@@ -29,6 +29,6 @@ Installation Guide (Android Users only):
 
 Last Updated: September 8th, 2017
 
-This application is for convience and educational purposes only and is not associated with Aspen or Follet School Sollutions. This app does not save or store any personal information such as usernames, passwords or grades.
+This application is for convenience and educational purposes only and is not associated with Aspen or Follet School Sollutions. This app does not save or store any personal information such as usernames, passwords or grades.
 
 In no event shall I be liable for any special, direct, indirect, consquential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use or contents of this service. 
