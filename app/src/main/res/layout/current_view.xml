@@ -7,6 +7,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
+	android:background="@color/colorPrimary"
 	tools:context="com.example.jonat.scheduleapp2.MainActivity">
 
 	<android.support.v7.widget.Toolbar
@@ -23,7 +24,8 @@
 		android:id="@+id/content"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:layout_weight="1">
+		android:layout_weight="1"
+		android:background="@color/colorPrimary">
 
 		<Button
 			android:id="@+id/currentClass"

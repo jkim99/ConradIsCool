@@ -10,6 +10,7 @@ package com.example.jonat.scheduleapp2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,10 +18,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 /* DayViewActivity allows the user to view their full schedule for that day.
  * This view also displays the times of each class.
@@ -79,22 +81,23 @@ public class DayViewActivity extends AppCompatActivity {
 		lunch.setElevation(1000);
 
 		final Button[] buttons = {(Button)findViewById(R.id.p1),(Button)findViewById(R.id.p2),(Button)findViewById(R.id.p3),(Button)findViewById(R.id.p4),(Button)findViewById(R.id.p5)};
-		updateUI(buttons);
+		final ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.content);
+		updateUI(constraintLayout, 'x', buttons);
 
 		on = new OnSwipeTouchListener(this) {
 
 			public void onSwipeLeft() {
 				MainActivity.swipeDirectionOffset++;
-				updateUI(buttons);
+				updateUI(constraintLayout, 'l', buttons);
 			}
 
 			public void onSwipeRight() {
 				MainActivity.swipeDirectionOffset--;
-				updateUI(buttons);
+				updateUI(constraintLayout, 'r', buttons);
 			}
 
 		};
-		updateUI(buttons);
+		updateUI(constraintLayout, 'x', buttons);
 	}
 
 	@Override
@@ -127,10 +130,21 @@ public class DayViewActivity extends AppCompatActivity {
 		}
 	}
 
-	public void updateUI(Button[] buttons) {
+	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons) {
 		try {
 			Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
 			Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
+
+			int direction = R.anim.fade_in;
+
+			if(dir == 'l')
+				direction = R.anim.slide_left;
+			if(dir == 'r')
+				direction = R.anim.slide_right;
+
+			Animation animation = AnimationUtils.loadAnimation(this, direction);
+			constraintLayout.startAnimation(animation);
+
 			changeButtons(buttons);
 			lunch.setText(Utility.getLunch(scheduleChecker, MainActivity.swipeDirectionOffset));
 		}

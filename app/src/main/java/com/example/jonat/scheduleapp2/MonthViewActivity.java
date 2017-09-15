@@ -93,7 +93,6 @@ public class MonthViewActivity extends AppCompatActivity {
 			public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 				MainActivity.swipeDirectionOffset = Days.daysBetween(new LocalDate(), new LocalDate(year, month + 1, dayOfMonth)).getDays();
 				int dayRotation = Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset);
-				Log.e("d", dayRotation + "");
 				dayRotationTextView.setText((dayRotation <= -20 && dayRotation > -30) ? "Half Day" : (dayRotation < 0 ? "No School" : "" + dayRotation));
 				updateUI(buttons);
 
