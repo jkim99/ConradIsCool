@@ -20,6 +20,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -54,6 +55,7 @@ public class AspenPage extends AppCompatActivity {
 
 				//starts downloading info
 				else if(url.contains("studentScheduleMatrix")) {
+					setContentView(R.layout.logo_page);
 					aspenLogin.loadUrl("javascript:window.HTMLOUT.processHTML('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
 					(Toast.makeText(context, "Schedule downloaded successfully", Toast.LENGTH_SHORT)).show();
 					startActivity(new Intent(AspenPage.this, MainActivity.class));
@@ -90,7 +92,7 @@ public class AspenPage extends AppCompatActivity {
 				pw.close();
 			}
 			catch(Exception e) {
-				Log.e("debugging", e.toString());
+				e.printStackTrace();
 			}
 		}
 
@@ -98,7 +100,7 @@ public class AspenPage extends AppCompatActivity {
 			Utility.validateHTML(html);
 			String[] lines = html.split("<");
 			String line, course;
-			ArrayList<String> scheduleInfoLines = new ArrayList<String>(); //rename variables and allocate memory needed
+			ArrayList<String> scheduleInfoLines = new ArrayList<String>();
 			ArrayList<String> scheduleInfoGrouped = new ArrayList<String>();
 			int x = -1;
 			for(int i = 0; i < lines.length; i++) {

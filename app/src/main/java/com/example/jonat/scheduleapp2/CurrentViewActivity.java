@@ -30,7 +30,6 @@ import android.widget.TextView;
 public class CurrentViewActivity extends AppCompatActivity {
 
 	private OnSwipeTouchListener on;
-	private ScheduleChecker scheduleChecker;
 	private BottomNavigationView navigation;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
@@ -69,8 +68,6 @@ public class CurrentViewActivity extends AppCompatActivity {
 
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 		setSupportActionBar(myToolbar);
-
-		scheduleChecker = Utility.initializeScheduleChecker(this);
 
 		final TextView[] textViews = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.lunch1), (TextView)findViewById(R.id.lunch2)};
 		final Button[] buttons = {(Button)findViewById(R.id.currentClass), (Button)findViewById(R.id.nextClass)};
@@ -113,10 +110,9 @@ public class CurrentViewActivity extends AppCompatActivity {
 	public void changeButtons(Button[] buttons) {
 		Button current = buttons[0];
 		Button next = buttons[1];
-		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
-		current.setText(getResources().getString(R.string.current_class) + "\n" + scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 0)));
-		next.setText(getResources().getString(R.string.next_class) + "\n" +  scheduleChecker.getClass(MainActivity.swipeDirectionOffset, scheduleChecker.getCurrentPeriod(minutes, 1)));
+		int minutes = Utility.getCurrentMinutes();
+		current.setText(getResources().getString(R.string.current_class) + "\n" + MainActivity.scheduleChecker.getClass(MainActivity.swipeDirectionOffset, MainActivity.scheduleChecker.getCurrentPeriod(minutes, 0)));
+		next.setText(getResources().getString(R.string.next_class) + "\n" +  MainActivity.scheduleChecker.getClass(MainActivity.swipeDirectionOffset, MainActivity.scheduleChecker.getCurrentPeriod(minutes, 1)));
 		current.setOnTouchListener(on);
 		next.setOnTouchListener(on);
 	}
@@ -124,7 +120,7 @@ public class CurrentViewActivity extends AppCompatActivity {
 	/** Changes text on TextViews to update based on the time and lunch period*/
 	public void changeTextViews(TextView[] textViews) {
 		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
+		int period = MainActivity.scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
 
 		TextView time1 = textViews[0];
 		TextView time2 = textViews[1];
@@ -135,15 +131,15 @@ public class CurrentViewActivity extends AppCompatActivity {
 		time2.setText(getTimeText(1));
 
 		if(period == 3)
-			lunch1.setText(Utility.getLunch(Utility.initializeScheduleChecker(this), MainActivity.swipeDirectionOffset));
+			lunch1.setText(Utility.getLunch(MainActivity.swipeDirectionOffset));
 		if(period == 2)
-			lunch2.setText(Utility.getLunch(Utility.initializeScheduleChecker(this), MainActivity.swipeDirectionOffset));
+			lunch2.setText(Utility.getLunch(MainActivity.swipeDirectionOffset));
 	}
 
 	/** @return string of times depending on the period*/
 	public String getTimeText(int periodAfter) {
 		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), periodAfter);
+		int period = MainActivity.scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), periodAfter);
 		if(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) >= 0) {
 			switch(period) {
 				case 0:
@@ -168,8 +164,8 @@ public class CurrentViewActivity extends AppCompatActivity {
 	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons, TextView[] textViews) {
 		try {
 
-			Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
-			Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
+			Utility.changeDayIcon(navigation.getMenu());
+			Utility.changePeriodIcon(navigation.getMenu());
 
 			int direction = R.anim.fade_in;
 

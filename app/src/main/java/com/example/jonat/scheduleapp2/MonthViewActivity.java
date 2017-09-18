@@ -32,7 +32,6 @@ import java.util.Calendar;
  * the rest of the app for more detail available in the other views.
  */
 public class MonthViewActivity extends AppCompatActivity {
-	private ScheduleChecker scheduleChecker;
 	private BottomNavigationView navigation;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
@@ -66,8 +65,6 @@ public class MonthViewActivity extends AppCompatActivity {
 
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, 0);
-
-		scheduleChecker = Utility.initializeScheduleChecker(this);
 
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 		setSupportActionBar(myToolbar);
@@ -124,7 +121,7 @@ public class MonthViewActivity extends AppCompatActivity {
 
 	/** Changes text on buttons to update based on the <int>swipeDirectionOffset</int> in the <class>MainActivity</class> class*/
 	public void changeButtons(Button[] buttons) {
-		String[] schedule = Utility.oneLineClassNames(scheduleChecker);
+		String[] schedule = Utility.oneLineClassNames();
 		for(int x = 0; x < buttons.length; x++) {
 			buttons[x].setText(schedule[x]);
 			buttons[x].setBackgroundResource(Utility.backgroundFix(this, x));
@@ -134,8 +131,8 @@ public class MonthViewActivity extends AppCompatActivity {
 
 	public void updateUI(Button[] buttons) {
 		try {
-			Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
-			Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
+			Utility.changeDayIcon(navigation.getMenu());
+			Utility.changePeriodIcon(navigation.getMenu());
 			changeButtons(buttons);
 		}
 		catch(NullPointerException npe) {

@@ -30,7 +30,6 @@ import android.widget.TextView;
 public class DayViewActivity extends AppCompatActivity {
 
 	private OnSwipeTouchListener on;
-	private ScheduleChecker scheduleChecker;
 	private BottomNavigationView navigation;
 	private TextView lunch;
 
@@ -62,8 +61,6 @@ public class DayViewActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.day_view);
-
-		scheduleChecker = Utility.initializeScheduleChecker(this);
 
 		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 		setSupportActionBar(myToolbar);
@@ -123,7 +120,7 @@ public class DayViewActivity extends AppCompatActivity {
 	public void changeButtons(Button[] buttons) {
 		int x = 0;
 		for(Button b : buttons) {
-			b.setText(scheduleChecker.getClass(MainActivity.swipeDirectionOffset, x));
+			b.setText(MainActivity.scheduleChecker.getClass(MainActivity.swipeDirectionOffset, x));
 			b.setBackgroundResource(Utility.backgroundFix(this, x));
 			b.setOnTouchListener(on);
 			x++;
@@ -132,8 +129,8 @@ public class DayViewActivity extends AppCompatActivity {
 
 	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons) {
 		try {
-			Utility.changeDayIcon(scheduleChecker, navigation.getMenu());
-			Utility.changePeriodIcon(scheduleChecker, navigation.getMenu());
+			Utility.changeDayIcon(navigation.getMenu());
+			Utility.changePeriodIcon(navigation.getMenu());
 
 			int direction = R.anim.fade_in;
 
@@ -146,7 +143,7 @@ public class DayViewActivity extends AppCompatActivity {
 			constraintLayout.startAnimation(animation);
 
 			changeButtons(buttons);
-			lunch.setText(Utility.getLunch(scheduleChecker, MainActivity.swipeDirectionOffset));
+			lunch.setText(Utility.getLunch(MainActivity.swipeDirectionOffset));
 		}
 		catch(NullPointerException npe) {
 			Log.e("UI_update", npe.toString());

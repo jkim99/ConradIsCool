@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.*;
 
@@ -28,8 +29,10 @@ import java.util.*;
 public class Notify extends Service {
 	private Timer timer;
 	private TimerTask timerTask;
-	private ScheduleChecker scheduleChecker;
 	final Handler HANDLER = new Handler();
+	int periodicNotificationID = 0;
+	int dailyNotificationID = 1;
+	int updateNotificationID = 2;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -52,10 +55,9 @@ public class Notify extends Service {
 	/** Starts timer for boolean check to send notification at regular intervals */
 	public void startTimer() {
 		timer = new Timer();
-		scheduleChecker = Utility.initializeScheduleChecker(this);
-		if(scheduleChecker != null) {
+		if(MainActivity.scheduleChecker != null) {
 			initializeTimerTask();
-			timer.schedule(timerTask, 5000, 5000);
+			timer.schedule(timerTask, 5000, 30000);
 		}
 	}
 
@@ -75,8 +77,8 @@ public class Notify extends Service {
 				HANDLER.post(new Runnable() {
 					@Override
 					public void run() {
-						String time = new java.sql.Time(System.currentTimeMillis()).toString();
-						int minutes = Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
+						int minutes = Utility.getCurrentMinutes();
+						Log.d("notification", minutes + "");
 						if(MainActivity.dailyNotifications) {
 							dailyNotification(minutes);
 						}
@@ -106,7 +108,7 @@ public class Notify extends Service {
 			sendNotification = minutes == x || sendNotification;
 		}
 		try {
-			nextClass = scheduleChecker.getClass(0, scheduleChecker.getCurrentPeriod(minutes, 0));
+			nextClass = MainActivity.scheduleChecker.getClass(0, MainActivity.scheduleChecker.getCurrentPeriod(minutes, 0));
 		}
 		catch(NullPointerException npe) {
 			nextClass = "";
@@ -127,17 +129,17 @@ public class Notify extends Service {
 			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 			builder.setContentIntent(resultPendingIntent);
 			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-			notificationManager.notify(0, builder.build());
+			notificationManager.notify(periodicNotificationID, builder.build());
 		}
 	}
 
 	/** @param minutes Number of minutes after 12:00 AM
 	 *  Builds and sends notification if <parameter>minutes</parameter> is equal to 7:00 AM constant */
 	public void dailyNotification(int minutes) {
-		scheduleChecker = Utility.initializeScheduleChecker(this);
 		if(minutes == Utility.SEVEN_AM) {
+			Log.d("notification", "daily");
 			android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-			String[] schedule = Utility.oneLineClassNames(scheduleChecker);
+			String[] schedule = Utility.oneLineClassNames();
 			for(String s : schedule)
 				inboxStyle.addLine(s);
 			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
@@ -151,7 +153,7 @@ public class Notify extends Service {
 			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 			builder.setContentIntent(resultPendingIntent);
 			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-			notificationManager.notify(1, builder.build());
+			notificationManager.notify(dailyNotificationID, builder.build());
 		}
 	}
 
@@ -166,7 +168,7 @@ public class Notify extends Service {
 			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 			builder.setContentIntent(resultPendingIntent);
 			NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-			notificationManager.notify(1, builder.build());
+			notificationManager.notify(updateNotificationID, builder.build());
 		}
 	}
 

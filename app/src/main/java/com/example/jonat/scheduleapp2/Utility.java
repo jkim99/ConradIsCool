@@ -37,6 +37,7 @@ public class Utility {
 	static final int SNOW_DAY = -3;
 	static final int DIFF_DAY = -4;
 	static final int ERROR_CODE = -10;
+	static final double LAV = 1.3;
 
 	static boolean verifyScheduleFile(File f) {
 		try {
@@ -55,7 +56,7 @@ public class Utility {
 		}
 	}
 
-	static void changeDayIcon(ScheduleChecker scheduleChecker, Menu menu) {
+	static void changeDayIcon(Menu menu) {
 		int day = Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset);
 		MenuItem icon = menu.findItem(R.id.navigation_day_view);
 		switch(day) {
@@ -89,9 +90,9 @@ public class Utility {
 		}
 	}
 
-	static void changePeriodIcon(ScheduleChecker scheduleChecker, Menu menu) {
+	static void changePeriodIcon(Menu menu) {
 		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		int period = scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
+		int period = MainActivity.scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
 		MenuItem icon = menu.findItem(R.id.navigation_current_view);
 		switch(period) {
 			case 0:
@@ -113,32 +114,6 @@ public class Utility {
 				icon.setIcon(R.drawable.ic_looks_none_black_24dp);
 				break;
 		}
-	}
-
-	static ScheduleChecker initializeScheduleChecker(Context context) {
-		File scheduleFile = new File(context.getFilesDir(), "schedule.txt");
-		ArrayList<String> classes = new ArrayList<String>();
-		if(Utility.verifyScheduleFile(scheduleFile)) {
-			try {
-				Scanner scan = new Scanner(scheduleFile);
-				scan.nextLine();
-				while(scan.hasNextLine()) {
-					classes.add(
-						scan.nextLine() + "\n" +
-						scan.nextLine() + "\n" +
-						scan.nextLine()
-					);
-					scan.nextLine();
-					scan.nextLine();
-				}
-				return new ScheduleChecker(classes);
-			}
-			catch(IOException ioe) {}
-		}
-
-		//should never get to this point unless there is an error
-		Log.e("schedule_init", "initialization may have failed");
-		return null;
 	}
 
 	static int getSchoolDayRotation(int off) {
@@ -181,14 +156,14 @@ public class Utility {
 		return R.drawable.x;
 	}
 
-	static String[] oneLineClassNames(ScheduleChecker scheduleChecker) {
+	static String[] oneLineClassNames() {
 		String[][] schedule = new String[5][4];
 		String[] returnArray = new String[5];
 		for(int x = 0; x < 5; x++)
-			schedule[x] = scheduleChecker.getClass(MainActivity.swipeDirectionOffset, x).split("\n");
+			schedule[x] = MainActivity.scheduleChecker.getClass(MainActivity.swipeDirectionOffset, x).split("\n");
 		for(int i = 0; i < 5; i++) {
 			try {
-				returnArray[i] = scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) - 1, i) + ": " + schedule[i][0];
+				returnArray[i] = MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) - 1, i) + ": " + schedule[i][0];
 			}
 			catch(ArrayIndexOutOfBoundsException aioobe) {
 				returnArray[i] = schedule[i][0];
@@ -222,14 +197,19 @@ public class Utility {
 		}
 	}
 
-	static String getLunch(ScheduleChecker scheduleChecker, int off) {
-		String course = scheduleChecker.getClass(off, 3);
+	static String getLunch(int off) {
+		String course = MainActivity.scheduleChecker.getClass(off, 3);
 		try {
 			return "Lunch: " + LunchChecker.getLunchBlock(course.split("\n")[1]);
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
 			return "";
 		}
+	}
+
+	static int getCurrentMinutes() {
+		String time = new java.sql.Time(System.currentTimeMillis()).toString();
+		return Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
 	}
 
 }

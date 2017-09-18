@@ -29,6 +29,7 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -40,13 +41,13 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
 	private File settings;
-	private File errorLogs;
 	private Intent defaultScreen;
 	public static double version;
 	public static int swipeDirectionOffset = 0;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
 	public static boolean needsUpdate;
+	public static ScheduleChecker scheduleChecker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +74,10 @@ public class MainActivity extends AppCompatActivity {
 					if(line.contains("Version: "))
 						break;
 				}
-				needsUpdate = version < Double.valueOf(line.substring(line.indexOf("Version: ") + 9));
+				needsUpdate = version < Double.valueOf(line.replaceAll("[^\\d.]", ""));
 			}
-			catch(MalformedURLException mue) {
-				Log.e("updates", mue.toString());
-			}
-			catch(NullPointerException npe) {
-				Log.e("updates", npe.toString());
-			}
-			catch(IOException ioe) {
-				Log.e("updates", ioe.toString());
+			catch(Exception e) {
+				Log.e("updates", e.toString());
 			}
 		}
 
@@ -99,11 +94,7 @@ public class MainActivity extends AppCompatActivity {
 			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
 		}
-
-		Log.d("lunch", Utility.getLunch(Utility.initializeScheduleChecker(this), 0));
-		//DEBUG NOTIFICATIONS
-		//for(int i = 1; i <= 5; i++)
-			//new Notify(i);
+		initializeScheduleChecker(scheduleFile);
 	}
 
 	@Override
@@ -137,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 		try {
 			PrintWriter pw = new PrintWriter(settings);
 			pw.println("--Settings--3");
-			pw.println("version:1.0");
+			pw.println("version:" + Utility.LAV);
 			pw.println("defaultView:current_view");
 			pw.println("dailyNotifications:on");
 			pw.println("periodicNotifications:on");
@@ -149,8 +140,15 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if((dailyNotifications || periodicNotifications) && Utility.getSchoolDayRotation(0) >= 0) {
+			startService(new Intent(this, Notify.class));
+		}
+	}
+
 	public void checkSettingsFile() {
-		errorLogs = new File(this.getFilesDir(), "logs.txt");
 		try {
 			Scanner scan = new Scanner(settings);
 			if(!scan.nextLine().equals("-Settings--3"))
@@ -184,8 +182,28 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	private void initializeScheduleChecker(File scheduleFile) {
+		ArrayList<String> classes = new ArrayList<String>();
+		if(Utility.verifyScheduleFile(scheduleFile)) {
+			try {
+				Scanner scan = new Scanner(scheduleFile);
+				scan.nextLine();
+				while(scan.hasNextLine()) {
+					classes.add(
+							scan.nextLine() + "\n" +
+									scan.nextLine() + "\n" +
+									scan.nextLine()
+					);
+					scan.nextLine();
+					scan.nextLine();
+				}
+				scheduleChecker = new ScheduleChecker(classes);
+			}
+			catch(IOException ioe) {}
+		}
+	}
+
 	public void setDefaultView(String str) {
-		errorLogs = new File(new ContextWrapper(this).getFilesDir() + "/logs.txt");
 		try {
 			switch(str) {
 				case "day_view":
@@ -199,13 +217,6 @@ public class MainActivity extends AppCompatActivity {
 					break;
 				default:
 					defaultScreen = new Intent(MainActivity.this, MainActivity.class);
-					Log.e("debugging", "error");
-					Scanner scan = new Scanner(errorLogs);
-					PrintWriter pw = new PrintWriter(errorLogs);
-					while(scan.hasNextLine())
-						pw.println(scan.nextLine());
-					pw.println("error: unable to get default view");
-					pw.close();
 					break;
 			}
 		}
