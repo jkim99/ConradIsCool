@@ -84,14 +84,17 @@ public class MainActivity extends AppCompatActivity {
 				String line;
 				while((line = buff.readLine()) != null) {
 					if(line.contains("Version: "))
-						break;
+						needsUpdate = version < Double.valueOf(line.replaceAll("[^\\d.]", ""));
 					if(line.contains("APK: "))
 						apkDownload = line.replace("APK: ", "");
 				}
-				needsUpdate = version < Double.valueOf(line.replaceAll("[^\\d.]", ""));
-			}catch(Exception e) {
+			}
+			catch(Exception e) {
 				Log.e("updates", e.toString());
 			}
+		}
+		else {
+			needsUpdate = false;
 		}
 
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
@@ -118,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 		else {
 			cancelAlarm(dailyAlarmManager);
 		}
-		if(needsUpdate) {
+		if(needsUpdate && isOnline()) {
 			updateNotification();
 		}
 		else {
