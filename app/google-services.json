@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "989630227502",
+    "firebase_url": "https://scheduleapp2-b67b9.firebaseio.com",
+    "project_id": "scheduleapp2-b67b9",
+    "storage_bucket": "scheduleapp2-b67b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989630227502:android:5d05dd282119869f",
+        "android_client_info": {
+          "package_name": "com.example.jonat.scheduleapp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989630227502-gp9uop68v84k9tcb0rihium8ev5hgf4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jonat.scheduleapp2",
+            "certificate_hash": "be7e2e045d0a1d33dc9dc12995399ac7c84e8f59"
+          }
+        },
+        {
+          "client_id": "989630227502-p7f38r09j2a45o9i4jedv4pp370lfhan.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjHSZmdSWHh2Q8rWRc_NJVfpk8vY-ueW8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989630227502-p7f38r09j2a45o9i4jedv4pp370lfhan.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

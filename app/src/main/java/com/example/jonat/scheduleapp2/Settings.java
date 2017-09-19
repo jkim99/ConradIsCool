@@ -7,7 +7,6 @@
  */
 package com.example.jonat.scheduleapp2;
 
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -132,9 +131,6 @@ public class Settings extends AppCompatActivity {
 				line = scan.nextLine();
 				opt = line.substring(0, line.indexOf(":") + 1);
 				switch(opt) {
-					case "version:":
-						MainActivity.version = Double.valueOf(line.substring(line.indexOf(":") + 1));
-						break;
 					case "defaultView:":
 						defaultView = stringToView(line.substring(line.indexOf(":") + 1));
 						break;
@@ -164,7 +160,6 @@ public class Settings extends AppCompatActivity {
 			File f = new File(this.getFilesDir(), "settings.txt");
 			PrintWriter pw = new PrintWriter(f);
 			pw.println("--Settings--");
-			pw.println("version:" + MainActivity.version);
 			pw.println("defaultView:" + viewToString(defaultView));
 			pw.println("dailyNotifications:" + (dailyNotificationsChecked ? "on" : "off"));
 			pw.println("periodicNotifications:" + (periodicNotificationsChecked ? "on" : "off"));
@@ -213,7 +208,7 @@ public class Settings extends AppCompatActivity {
 			mail.setType("vnd.android.cursor.dir/email");
 			mail.putExtra(Intent.EXTRA_EMAIL, addressTo);
 			mail.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(logs));
-			mail.putExtra(Intent.EXTRA_SUBJECT, "Seven H App Version: " + MainActivity.version);
+			mail.putExtra(Intent.EXTRA_SUBJECT, "Seven H App Version: " + Utility.version);
 			startActivityForResult(Intent.createChooser(mail, "Send Logs..."), 0);
 		}
 		catch(Exception e) {
