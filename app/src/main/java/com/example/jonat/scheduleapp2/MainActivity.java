@@ -51,15 +51,15 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
+	private double latestVersion;
 	private File settings;
 	private Intent defaultScreen;
-	public double latestVersion = 1.5;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
-	public static int swipeDirectionOffset = 0;
 	public static ScheduleChecker scheduleChecker;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
+	public static int swipeDirectionOffset = 0;
 	public static final int[] periodNotificationID = {1, 2, 3, 4, 5};
 	public static final int[] notificationTimes = {Utility.PERIOD_1_BELL,
 												   Utility.PERIOD_2_BELL,
@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		double version = 1.6;
 
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
 		File calendarFile = new File(this.getFilesDir(), "calendar.txt");
@@ -82,6 +84,20 @@ public class MainActivity extends AppCompatActivity {
 			Log.i("updates", "isOnline");
 			CalendarChecker.updateCalendar(calendarFile);
 			LunchChecker.updateLunch(lunchFile);
+			try {
+				URL url = new URL("https://rawgit.com/jkim99/ConradIsCool/master/README.md");
+				URLConnection urlConnection = url.openConnection();
+				BufferedReader buff = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+				String line;
+				while((line = buff.readLine()) != null) {
+					if(line.contains("Version: "))
+						break;
+				}
+				latestVersion = Double.valueOf(line.replaceAll("[^\\d.]", ""));
+			}
+			catch(Exception e) {
+				Log.e("updates", e.toString());
+			}
 		}
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
@@ -93,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 			catch(NullPointerException npe) {
 				startActivity(new Intent(MainActivity.this, CurrentViewActivity.class));
 			}
-			Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
 		}
 		initializeScheduleChecker(scheduleFile);
@@ -109,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 		else {
 			cancelAlarm(dailyAlarmManager, 20);
 		}
-		if(latestVersion > Utility.version) {
+		if(latestVersion > version) {
 			FirebaseMessaging.getInstance().subscribeToTopic("update");
 		}
 		else {
