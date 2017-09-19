@@ -21,12 +21,12 @@ public class LunchChecker {
 	private static String lunchCode;
 	private static String lastUpdated;
 
-	private static void setLunchFile(File file) {
+	public LunchChecker(File file) {
 		lunchFile = file;
 		setLunchSchedule(file);
 	}
 
-	private static void setLunchSchedule(File file) {
+	private void setLunchSchedule(File file) {
 		try {
 			Scanner scan = new Scanner(file);
 
@@ -68,19 +68,7 @@ public class LunchChecker {
 		}
 	}
 
-	static void updateLunch(File file) {
-		try {
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-			FileUtils.copyURLToFile(new URL("https://rawgit.com/jkim99/ConradIsCool/master/lunch"), file);
-			setLunchFile(file);
-		}
-		catch(IOException ioe) {
-			Log.e("calendar", ioe.toString());
-		}
-	}
-
-	static int getLunchBlock(String teacher) {
+	public int getLunchBlock(String teacher) {
 		for(int i = 0; i < lunchSchedule.length; i++) {
 			for(int j = 0; j < lunchSchedule[i].length; j++) {
 				if(lunchSchedule[i][j] != null && lunchSchedule[i][j].equals(teacher))

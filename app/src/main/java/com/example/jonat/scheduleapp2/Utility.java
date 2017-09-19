@@ -198,8 +198,22 @@ public class Utility {
 
 	static String getLunch(int off) {
 		String course = MainActivity.scheduleChecker.getClass(off, 3);
+		File f;
+		switch(MainActivity.scheduleChecker.getBlock(getSchoolDayRotation(off), 3)) {
+			case 'C':
+				break;
+			case 'D':
+				break;
+			case 'E':
+				break;
+			case 'F':
+				break;
+			case 'G':
+				break;
+		}
+		LunchChecker lunchChecker = new LunchChecker();
 		try {
-			return "Lunch: " + LunchChecker.getLunchBlock(course.split("\n")[1]);
+			return "Lunch: " + lunchChecker.getLunchBlock(course.split("\n")[1]);
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
 			return "";

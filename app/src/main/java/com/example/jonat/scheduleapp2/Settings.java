@@ -208,7 +208,7 @@ public class Settings extends AppCompatActivity {
 			mail.setType("vnd.android.cursor.dir/email");
 			mail.putExtra(Intent.EXTRA_EMAIL, addressTo);
 			mail.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(logs));
-			mail.putExtra(Intent.EXTRA_SUBJECT, "Seven H App Version: " + Utility.version);
+			mail.putExtra(Intent.EXTRA_SUBJECT, "Seven H App Version: " + MainActivity.version);
 			startActivityForResult(Intent.createChooser(mail, "Send Logs..."), 0);
 		}
 		catch(Exception e) {

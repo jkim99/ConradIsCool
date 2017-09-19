@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 	private Intent defaultScreen;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
+	public static double version = 1.6;
 	public static ScheduleChecker scheduleChecker;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
@@ -70,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		double version = 1.6;
 
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
 		File calendarFile = new File(this.getFilesDir(), "calendar.txt");
