@@ -1,10 +1,10 @@
 # 7H App for Andover High School
 
-Version: Beta 1.4
+Version: Beta 1.5
 
 This is the android app created for Andover High School in order to assist students with adjusting to the new schedule. This is app will also be used to assist teachers and faculty of the school to create schedules and further assist in their planning process.
 
-APK: https://drive.google.com/file/d/0B25a9GoL5A8hMmxRTFBNSGZDaWs/view?usp=sharing
+APK: https://drive.google.com/file/d/0B25a9GoL5A8hdVlnb3VMTWdLRGs/view?usp=sharing
 
 Please E-mail bugs and suggestions at jkim2018@k12.andoverma.us
 
@@ -20,7 +20,7 @@ Future (possible) addons:
 # Installation Guide (Android Users only):
 
 1. Go to Settings and locate the "Unknown sources" option and turn that on. This setting is usually located in the security tab, however it may differ between devices.
-2. Download the app onto your phone: https://drive.google.com/file/d/0B25a9GoL5A8hMmxRTFBNSGZDaWs/view?usp=sharing
+2. Download the app onto your phone: https://drive.google.com/file/d/0B25a9GoL5A8hdVlnb3VMTWdLRGs/view?usp=sharing
 3. Once downloaded, open and install the apk onto your device.
 4. Initial setup of the app requires an internet connection and login onto Aspen, to grab the schedule information for the app.
 5. Please send any questions, comments or concerns at jkim2018@k12.andoverma.us

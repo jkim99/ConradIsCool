@@ -37,7 +37,7 @@ public class Utility {
 	static final int SNOW_DAY = -3;
 	static final int DIFF_DAY = -4;
 	static final int ERROR_CODE = -10;
-	static final double LAV = 1.4;
+	static final double LAV = 1.5;
 
 	static boolean verifyScheduleFile(File f) {
 		try {
