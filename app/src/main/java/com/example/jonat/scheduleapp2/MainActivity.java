@@ -8,12 +8,20 @@
 
 package com.example.jonat.scheduleapp2;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +38,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 /*
@@ -48,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
 	public static boolean periodicNotifications;
 	public static boolean needsUpdate;
 	public static ScheduleChecker scheduleChecker;
+	public AlarmManager periodicAlarmManager;
+	public AlarmManager dailyAlarmManager;
+	public AlarmManager updateAlarmManager;
+	public String apkDownload;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,38 +83,46 @@ public class MainActivity extends AppCompatActivity {
 				BufferedReader buff = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 				String line;
 				while((line = buff.readLine()) != null) {
-					Log.i("xxx", line);
 					if(line.contains("Version: "))
 						break;
+					if(line.contains("APK: "))
+						apkDownload = line.replace("APK: ", "");
 				}
 				needsUpdate = version < Double.valueOf(line.replaceAll("[^\\d.]", ""));
-			}
-			catch(Exception e) {
+			}catch(Exception e) {
 				Log.e("updates", e.toString());
 			}
 		}
 
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
-		}
-		else {
+		}else {
 			try {
 				startActivity(defaultScreen);
-			}
-			catch(NullPointerException npe) {
+			}catch(NullPointerException npe) {
 				startActivity(new Intent(MainActivity.this, CurrentViewActivity.class));
 			}
-			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+			Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 			setSupportActionBar(myToolbar);
 		}
 		initializeScheduleChecker(scheduleFile);
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		if((dailyNotifications || periodicNotifications) && Utility.getSchoolDayRotation(0) >= 0) {
-			startService(new Intent(this, Notify.class));
+		if(periodicNotifications) {
+			setPeriodicAlarms();
+		}
+		else {
+			cancelAlarm(periodicAlarmManager);
+		}
+		if(dailyNotifications) {
+			setDailyAlarms();
+		}
+		else {
+			cancelAlarm(dailyAlarmManager);
+		}
+		if(needsUpdate) {
+			updateNotification();
+		}
+		else {
+			cancelAlarm(updateAlarmManager);
 		}
 	}
 
@@ -127,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 	public void createSettingsFile() {
 		try {
 			PrintWriter pw = new PrintWriter(settings);
-			pw.println("--Settings--3");
+			pw.println("--Settings--");
 			pw.println("version:" + Utility.LAV);
 			pw.println("defaultView:current_view");
 			pw.println("dailyNotifications:on");
@@ -140,18 +161,10 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if((dailyNotifications || periodicNotifications) && Utility.getSchoolDayRotation(0) >= 0) {
-			startService(new Intent(this, Notify.class));
-		}
-	}
-
 	public void checkSettingsFile() {
 		try {
 			Scanner scan = new Scanner(settings);
-			if(!scan.nextLine().equals("-Settings--3"))
+			if(!scan.nextLine().equals("--Settings--"))
 				createSettingsFile();
 			String line, opt;
 			while(scan.hasNextLine()) {
@@ -190,9 +203,9 @@ public class MainActivity extends AppCompatActivity {
 				scan.nextLine();
 				while(scan.hasNextLine()) {
 					classes.add(
-							scan.nextLine() + "\n" +
-									scan.nextLine() + "\n" +
-									scan.nextLine()
+						scan.nextLine() + "\n" +
+						scan.nextLine() + "\n" +
+						scan.nextLine()
 					);
 					scan.nextLine();
 					scan.nextLine();
@@ -226,6 +239,104 @@ public class MainActivity extends AppCompatActivity {
 	public boolean isOnline() {
 		ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
+	}
+
+	public void setAlarm(int hour, int minute, Notification notification) {
+		Intent intent = new Intent(this, Notify.class);
+		intent.putExtra("notification_id", 10);
+		intent.putExtra("notification_object", notification);
+		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 10, intent, 0);
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(System.currentTimeMillis());
+		cal.set(Calendar.HOUR_OF_DAY, hour);
+		cal.set(Calendar.MINUTE, minute);
+		periodicAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+		periodicAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+	}
+
+	public void setPeriodicAlarms() {
+		String nextClass = MainActivity.scheduleChecker.getClass(0, MainActivity.scheduleChecker.getCurrentPeriod(Utility.getCurrentMinutes(), 1));
+		android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+		String[] classInfo = nextClass.split("\n");
+		for(String s : classInfo)
+			inboxStyle.addLine(s);
+		android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+				.setContentTitle("Your next class: ")
+				.setContentText(nextClass)
+				.setSmallIcon(R.drawable.ic_launcher_proto)
+				.setStyle(inboxStyle);
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		stackBuilder.addParentStack(CurrentViewActivity.class);
+		stackBuilder.addNextIntent(new Intent(this, MainActivity.class));
+		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+		builder.setContentIntent(resultPendingIntent);
+		Notification notification = builder.build();
+		int[] notificationTimes =  {Utility.PERIOD_1_BELL,
+									Utility.PERIOD_2_BELL,
+									Utility.PERIOD_3_BELL,
+									Utility.PERIOD_4_BELL,
+									Utility.PERIOD_5_BELL};
+		for(int times : notificationTimes) {
+			setAlarm(times / 60, times % 60, notification);
+		}
+	}
+
+	public void setDailyAlarms() {
+		android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+		String[] schedule = Utility.oneLineClassNames();
+		for(String s : schedule)
+			inboxStyle.addLine(s);
+		android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+				.setContentTitle("Your schedule for today")
+				.setContentText("Day " + Utility.getSchoolDayRotation(0))
+				.setSmallIcon(R.drawable.ic_launcher_proto)
+				.setStyle(inboxStyle);
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		stackBuilder.addParentStack(DayViewActivity.class);
+		stackBuilder.addNextIntent(new Intent(this, MainActivity.class));
+		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+		builder.setContentIntent(resultPendingIntent);
+		Notification notification = builder.build();
+		Intent intent = new Intent(this, Notify.class);
+		intent.putExtra("notification_id", 20);
+		intent.putExtra("notification_object", notification);
+		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 20, intent, 0);
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(System.currentTimeMillis());
+		cal.set(Calendar.HOUR_OF_DAY, 7);
+		dailyAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+		dailyAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+	}
+
+	public void updateNotification() {
+		android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+				.setContentTitle("Your app could use an update")
+				.setContentText("Go to: " + apkDownload)
+				.setSmallIcon(R.drawable.ic_launcher_proto);
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		stackBuilder.addNextIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(apkDownload)));
+		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+		builder.setContentIntent(resultPendingIntent);
+		Notification notification = builder.build();
+		Intent intent = new Intent(this, Notify.class);
+		intent.putExtra("notification_id", 10);
+		intent.putExtra("notification_object", notification);
+		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 10, intent, 0);
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(System.currentTimeMillis());
+		cal.set(Calendar.HOUR_OF_DAY, 7);
+		updateAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+		updateAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+	}
+
+	public void cancelAlarm(AlarmManager am) {
+		try {
+			PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, new Intent(), 0);
+			am.cancel(alarmIntent);
+		}
+		catch(NullPointerException npe) {
+
+		}
 	}
 
 }

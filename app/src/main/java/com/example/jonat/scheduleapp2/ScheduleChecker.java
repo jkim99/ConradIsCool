@@ -65,7 +65,7 @@ public class ScheduleChecker {
 	}
 
 	public int getCurrentPeriod(int minutes, int periodAfter) {
-		if(minutes >= Utility.SEVEN_AM && minutes <= Utility.PERIOD_1_BELL)
+		if(minutes >= Utility.SEVEN_O_CLOCK && minutes <= Utility.PERIOD_1_BELL)
 			return 5 - periodAfter * 5;
 		else if(minutes >= Utility.PERIOD_1_BELL && minutes < Utility.PERIOD_2_BELL)
 			return periodAfter;

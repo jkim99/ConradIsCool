@@ -26,12 +26,12 @@ import java.util.Scanner;
  * multiple classes and objects.
  */
 public class Utility {
-	static final int SEVEN_AM = 420;      // 7:00
-	static final int PERIOD_1_BELL = 464; // 7:44
-	static final int PERIOD_2_BELL = 524; // 8:44
-	static final int PERIOD_3_BELL = 603; //10:03
-	static final int PERIOD_4_BELL = 667; //11:07
-	static final int PERIOD_5_BELL = 781; // 1:04
+	static final int SEVEN_O_CLOCK = 420; //  7:00
+	static final int PERIOD_1_BELL = 464; //  7:44
+	static final int PERIOD_2_BELL = 524; //  8:44
+	static final int PERIOD_3_BELL = 603; // 10:03
+	static final int PERIOD_4_BELL = 667; // 11:07
+	static final int PERIOD_5_BELL = 784; //  1:04
 	static final int NO_SCHOOL = -1;
 	static final int EXAM = -2;
 	static final int SNOW_DAY = -3;

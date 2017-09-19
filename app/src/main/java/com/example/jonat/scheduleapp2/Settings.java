@@ -123,7 +123,7 @@ public class Settings extends AppCompatActivity {
 	}
 
 	public void checkSettings() {
-		settings = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
+		settings = new File(this.getFilesDir(), "settings.txt");
 		try {
 			Scanner scan = new Scanner(settings);
 			String line;
@@ -161,9 +161,9 @@ public class Settings extends AppCompatActivity {
 
 	public void updateSettings() {
 		try {
-			File f = new File(new ContextWrapper(this).getFilesDir() + "/settings.txt");
+			File f = new File(this.getFilesDir(), "settings.txt");
 			PrintWriter pw = new PrintWriter(f);
-			pw.println("--Settings--3");
+			pw.println("--Settings--");
 			pw.println("version:" + MainActivity.version);
 			pw.println("defaultView:" + viewToString(defaultView));
 			pw.println("dailyNotifications:" + (dailyNotificationsChecked ? "on" : "off"));
