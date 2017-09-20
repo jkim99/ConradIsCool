@@ -8,13 +8,18 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -155,11 +160,11 @@ public class Utility {
 		return R.drawable.x;
 	}
 
-	static String[] oneLineClassNames() {
+	static String[] oneLineClassNames(int off) {
 		String[][] schedule = new String[5][4];
 		String[] returnArray = new String[5];
 		for(int x = 0; x < 5; x++)
-			schedule[x] = MainActivity.scheduleChecker.getClass(MainActivity.swipeDirectionOffset, x).split("\n");
+			schedule[x] = MainActivity.scheduleChecker.getClass(off, x).split("\n");
 		for(int i = 0; i < 5; i++) {
 			try {
 				returnArray[i] = MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) - 1, i) + ": " + schedule[i][0];
@@ -196,26 +201,22 @@ public class Utility {
 		}
 	}
 
-	static String getLunch(int off) {
-		String course = MainActivity.scheduleChecker.getClass(off, 3);
-		File f;
-		switch(MainActivity.scheduleChecker.getBlock(getSchoolDayRotation(off), 3)) {
-			case 'C':
-				break;
-			case 'D':
-				break;
-			case 'E':
-				break;
-			case 'F':
-				break;
-			case 'G':
-				break;
-		}
-		LunchChecker lunchChecker = new LunchChecker();
+	static String getLunch(File lunchFile, int off) {
 		try {
+			String course = MainActivity.scheduleChecker.getClass(off, 3);
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+			FileUtils.copyURLToFile(new URL("https://rawgit.com/jkim99/ConradIsCool/master/data-resources/lunch" + MainActivity.scheduleChecker.getBlock(getSchoolDayRotation(off), 3)), lunchFile);
+			LunchChecker lunchChecker = new LunchChecker(lunchFile);
 			return "Lunch: " + lunchChecker.getLunchBlock(course.split("\n")[1]);
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
+			return "";
+		}
+		catch(MalformedURLException mue) {
+			return "";
+		}
+		catch(IOException e) {
 			return "";
 		}
 	}

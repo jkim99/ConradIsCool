@@ -23,6 +23,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+
 
 /* DayViewActivity allows the user to view their full schedule for that day.
  * This view also displays the times of each class.
@@ -143,7 +145,7 @@ public class DayViewActivity extends AppCompatActivity {
 			constraintLayout.startAnimation(animation);
 
 			changeButtons(buttons);
-			lunch.setText(Utility.getLunch(MainActivity.swipeDirectionOffset));
+			lunch.setText(Utility.getLunch(new File(this.getFilesDir(), "lunch" + MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset), 3) + ".txt"), MainActivity.swipeDirectionOffset));
 		}
 		catch(NullPointerException npe) {
 			Log.e("UI_update", npe.toString());

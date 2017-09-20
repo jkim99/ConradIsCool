@@ -121,7 +121,7 @@ public class MonthViewActivity extends AppCompatActivity {
 
 	/** Changes text on buttons to update based on the <int>swipeDirectionOffset</int> in the <class>MainActivity</class> class*/
 	public void changeButtons(Button[] buttons) {
-		String[] schedule = Utility.oneLineClassNames();
+		String[] schedule = Utility.oneLineClassNames(MainActivity.swipeDirectionOffset);
 		for(int x = 0; x < buttons.length; x++) {
 			buttons[x].setText(schedule[x]);
 			buttons[x].setBackgroundResource(Utility.backgroundFix(this, x));

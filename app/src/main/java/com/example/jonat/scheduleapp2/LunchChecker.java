@@ -1,13 +1,9 @@
 package com.example.jonat.scheduleapp2;
 
-import android.os.StrictMode;
 import android.util.Log;
-
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Scanner;
 
 /*
@@ -15,18 +11,17 @@ import java.util.Scanner;
  */
 
 public class LunchChecker {
-	private static File lunchFile;
 	private static String[][] lunchSchedule;
-	private static String[] lunchGroups;
-	private static String lunchCode;
-	private static String lastUpdated;
 
 	public LunchChecker(File file) {
-		lunchFile = file;
 		setLunchSchedule(file);
 	}
 
 	private void setLunchSchedule(File file) {
+		String[] lunchGroups;
+		String lunchCode;
+		String lastUpdated;
+
 		try {
 			Scanner scan = new Scanner(file);
 

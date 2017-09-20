@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
 		if(isOnline()) {
 			Log.i("updates", "isOnline");
 			CalendarChecker.updateCalendar(calendarFile);
-			LunchChecker.updateLunch(lunchFile);
 			try {
 				URL url = new URL("https://rawgit.com/jkim99/ConradIsCool/master/README.md");
 				URLConnection urlConnection = url.openConnection();
@@ -292,12 +291,12 @@ public class MainActivity extends AppCompatActivity {
 
 	public int setDailyAlarms() {
 		android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-		String[] schedule = Utility.oneLineClassNames();
+		String[] schedule = Utility.oneLineClassNames(1);
 		for(String s : schedule)
 			inboxStyle.addLine(s);
 		android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
 				.setContentTitle("Your schedule for today")
-				.setContentText("Day " + Utility.getSchoolDayRotation(0))
+				.setContentText("Day " + Utility.getSchoolDayRotation(1))
 				.setSmallIcon(R.drawable.ic_launcher_proto)
 				.setStyle(inboxStyle);
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
@@ -310,6 +309,7 @@ public class MainActivity extends AppCompatActivity {
 		intent.putExtra("notification_id", 20);
 		intent.putExtra("notification_object", notification);
 		intent.putExtra("notification_times", notificationTimes);
+		Log.d("notification: ", notification.toString());
 		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 20, intent, 0);
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(System.currentTimeMillis());

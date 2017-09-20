@@ -23,6 +23,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+
 /*
  * CurrentViewActivity Class allows the user to view the current class and
  * next class quickly in a simple view.
@@ -131,9 +133,9 @@ public class CurrentViewActivity extends AppCompatActivity {
 		time2.setText(getTimeText(1));
 
 		if(period == 3)
-			lunch1.setText(Utility.getLunch(MainActivity.swipeDirectionOffset));
+			lunch1.setText(Utility.getLunch(new File(this.getFilesDir(), "lunch" + MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset), 3) + ".txt"), MainActivity.swipeDirectionOffset));
 		if(period == 2)
-			lunch2.setText(Utility.getLunch(MainActivity.swipeDirectionOffset));
+			lunch2.setText(Utility.getLunch(new File(this.getFilesDir(), "lunch" + MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset), 3) + ".txt"), MainActivity.swipeDirectionOffset));
 	}
 
 	/** @return string of times depending on the period*/
