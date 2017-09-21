@@ -145,10 +145,10 @@ public class DayViewActivity extends AppCompatActivity {
 			constraintLayout.startAnimation(animation);
 
 			changeButtons(buttons);
-			lunch.setText(Utility.getLunch(new File(this.getFilesDir(), "lunch" + MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset), 3) + ".txt"), MainActivity.swipeDirectionOffset));
+			lunch.setText(Utility.getLunch(this, MainActivity.swipeDirectionOffset, 3));
 		}
 		catch(NullPointerException npe) {
-			Log.e("UI_update", npe.toString());
+			npe.printStackTrace();
 			startActivity(new Intent(DayViewActivity.this, AspenPage.class));
 		}
 	}

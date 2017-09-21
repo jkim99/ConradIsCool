@@ -32,7 +32,12 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile 'com.google.firebase:firebase-config:10.0.1'
-    testCompile 'junit:junit:4.12'
+    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/opencsv-4.0.jar')
+    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/commons-lang3-3.6/commons-lang3-3.6.jar')
+    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/commons-lang3-3.6/commons-lang3-3.6-sources.jar')
+    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/commons-lang3-3.6/commons-lang3-3.6-tests.jar')
+    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/commons-csv-1.5/commons-csv-1.5.jar')
+    compile files('C:/Users/jonat/AndroidStudioProjects/ScheduleApp2/commons-csv-1.5/commons-csv-1.5-sources.jar')
 }
 
 

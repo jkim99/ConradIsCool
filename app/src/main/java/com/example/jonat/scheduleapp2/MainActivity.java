@@ -10,16 +10,13 @@ package com.example.jonat.scheduleapp2;
 
 import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
@@ -30,17 +27,18 @@ import android.view.MenuItem;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.io.BufferedInputStream;
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /*
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private double latestVersion;
 	private File settings;
+	private File calendarFile;
 	private Intent defaultScreen;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
@@ -71,65 +70,22 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
-		File calendarFile = new File(this.getFilesDir(), "calendar.txt");
-		File lunchFile = new File(this.getFilesDir(), "lunch.txt");
-		settings = new File(this.getFilesDir(), "settings.txt");
+			 calendarFile = new File(this.getFilesDir(), "calendar.txt");
+				 settings = new File(this.getFilesDir(), "settings.txt");
 
 		checkSettingsFile();
+		update(isOnline());
 
-		if(isOnline()) {
-			Log.i("updates", "isOnline");
-			CalendarChecker.updateCalendar(calendarFile);
-			try {
-				URL url = new URL("https://rawgit.com/jkim99/ConradIsCool/master/README.md");
-				URLConnection urlConnection = url.openConnection();
-				BufferedReader buff = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-				String line;
-				while((line = buff.readLine()) != null) {
-					if(line.contains("Version: "))
-						break;
-				}
-				latestVersion = Double.valueOf(line.replaceAll("[^\\d.]", ""));
-			}
-			catch(Exception e) {
-				Log.e("updates", e.toString());
-			}
-		}
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
 		}
-		else {
-			try {
-				startActivity(defaultScreen);
-			}
-			catch(NullPointerException npe) {
-				startActivity(new Intent(MainActivity.this, CurrentViewActivity.class));
-			}
-			Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
-			setSupportActionBar(myToolbar);
-		}
-		initializeScheduleChecker(scheduleFile);
-		if(periodicNotifications) {
-			setPeriodicAlarms();
-		}
-		else {
-			cancelAlarms(periodicAlarmManager, periodNotificationID);
-		}
-		if(dailyNotifications) {
-			setDailyAlarms();
-		}
-		else {
-			cancelAlarm(dailyAlarmManager, 20);
-		}
-		if(latestVersion > version) {
-			FirebaseMessaging.getInstance().subscribeToTopic("update");
-		}
-		else {
-			FirebaseMessaging.getInstance().unsubscribeFromTopic("update");
-		}
 
+		initializeScheduleChecker(scheduleFile);
+		setAllAlarms();
+
+		startActivity(defaultScreen);
+		setSupportActionBar((Toolbar)findViewById(R.id.my_toolbar));
 	}
 
 	@Override
@@ -160,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
 			pw.println("periodicNotifications:on");
 			pw.close();
 			Log.i("settings","M:created settings file");
+			checkSettingsFile();
 		}
 		catch(Exception e) {
 			Log.e("debugging", "error creating settings");
@@ -195,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
 		catch(IOException ioe) {
 			createSettingsFile();
 		}
+		catch(NoSuchElementException nsee) {
+			createSettingsFile();
+		}
 	}
 
 	private void initializeScheduleChecker(File scheduleFile) {
@@ -218,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	public void setDefaultView(String str) {
+	private void setDefaultView(String str) {
 		try {
 			switch(str) {
 				case "day_view":
@@ -238,6 +198,49 @@ public class MainActivity extends AppCompatActivity {
 		catch(Exception e) {}
 	}
 
+	public void update(boolean isOnline) {
+		if(isOnline) {
+			Log.i("updates", "isOnline");
+			CalendarChecker.updateCalendar(calendarFile);
+			updateLunchFiles();
+			try {
+				URL url = new URL("https://rawgit.com/jkim99/ConradIsCool/master/README.md");
+				URLConnection urlConnection = url.openConnection();
+				BufferedReader buff = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+				String line;
+				while((line = buff.readLine()) != null) {
+					if(line.contains("Version: "))
+						break;
+				}
+				latestVersion = Double.valueOf(line.replaceAll("[^\\d.]", ""));
+			}
+			catch(Exception e) {
+				Log.e("updates", e.toString());
+			}
+		}
+	}
+
+	private void setAllAlarms() {
+		if(periodicNotifications) {
+			setPeriodicAlarms();
+		}
+		else {
+			cancelAlarms(periodicAlarmManager, periodNotificationID);
+		}
+		if(dailyNotifications) {
+			setDailyAlarms();
+		}
+		else {
+			cancelAlarm(dailyAlarmManager, 20);
+		}
+		if(latestVersion > version) {
+			FirebaseMessaging.getInstance().subscribeToTopic("update");
+		}
+		else {
+			FirebaseMessaging.getInstance().unsubscribeFromTopic("update");
+		}
+	}
+
 	public boolean isOnline() {
 		ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
@@ -248,11 +251,14 @@ public class MainActivity extends AppCompatActivity {
 		intent.putExtra("notification_id", 10);
 		intent.putExtra("notification_object", notification);
 		intent.putExtra("notification_times", notificationTimes);
+
 		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, pendingIntentId, intent, 0);
+
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(System.currentTimeMillis());
 		cal.set(Calendar.HOUR_OF_DAY, hour);
 		cal.set(Calendar.MINUTE, minute);
+
 		periodicAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
 		periodicAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
 	}
@@ -277,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
 					.setContentText(nextClass)
 					.setSmallIcon(R.drawable.ic_launcher_proto)
 					.setStyle(inboxStyle);
+
 			stackBuilder = TaskStackBuilder.create(this);
 			stackBuilder.addParentStack(CurrentViewActivity.class);
 			stackBuilder.addNextIntent(new Intent(this, MainActivity.class));
@@ -299,24 +306,31 @@ public class MainActivity extends AppCompatActivity {
 				.setContentText("Day " + Utility.getSchoolDayRotation(1))
 				.setSmallIcon(R.drawable.ic_launcher_proto)
 				.setStyle(inboxStyle);
+
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		stackBuilder.addParentStack(DayViewActivity.class);
 		stackBuilder.addNextIntent(new Intent(this, MainActivity.class));
 		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 		builder.setContentIntent(resultPendingIntent);
 		Notification notification = builder.build();
+
 		Intent intent = new Intent(this, Notify.class);
 		intent.putExtra("notification_id", 20);
 		intent.putExtra("notification_object", notification);
 		intent.putExtra("notification_times", notificationTimes);
+
 		Log.d("notification: ", notification.toString());
+
 		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 20, intent, 0);
+
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(System.currentTimeMillis());
 		cal.set(Calendar.HOUR_OF_DAY, 7);
 		cal.set(Calendar.MINUTE, 0);
+
 		dailyAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
 		dailyAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
 		return 0;
 	}
 
@@ -334,6 +348,22 @@ public class MainActivity extends AppCompatActivity {
 		}
 		catch(NullPointerException npe) {
 
+		}
+	}
+
+	public void updateLunchFiles() {
+		File[] files = new File[5];
+		for(int i = 0; i < 5; i++) {
+			char x = (char) (67 + i);
+			files[i] = new File(this.getFilesDir(), "lunch" + x + ".csv");
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+			try {
+				FileUtils.copyURLToFile(new URL("https://rawgit.com/jkim99/ConradIsCool/master/lunch" + x + ".csv"), files[i]);
+			}
+			catch(IOException ioe) {
+				ioe.printStackTrace();
+			}
 		}
 	}
 

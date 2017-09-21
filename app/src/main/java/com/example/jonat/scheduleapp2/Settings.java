@@ -115,7 +115,8 @@ public class Settings extends AppCompatActivity {
 		clear.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Utility.purge(scheduleFile, settings);
+				File[] files = {scheduleFile};
+				Utility.purge(files);
 				startActivity(new Intent(Settings.this, MainActivity.class));
 			}
 		});

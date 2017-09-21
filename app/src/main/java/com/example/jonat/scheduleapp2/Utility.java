@@ -189,34 +189,28 @@ public class Utility {
 		}
 	}
 
-	static void purge(File scheduleFile, File settingsFile) {
+	static void purge(File[] files) {
 		try {
-			PrintWriter pw = new PrintWriter(scheduleFile);
-			pw.print("");
-			pw.close();
-			Log.i("purge", "Schedule File deleted");
+			for(File f : files) {
+				PrintWriter pw = new PrintWriter(f);
+				pw.print("");
+				pw.close();
+				Log.i("purge", f.getAbsolutePath() + " deleted.");
+			}
 		}
 		catch(Exception e) {
 			Log.e("purge", e.toString());
 		}
 	}
 
-	static String getLunch(File lunchFile, int off) {
+	static String getLunch(Context context, int off, int period) {
 		try {
-			String course = MainActivity.scheduleChecker.getClass(off, 3);
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-			FileUtils.copyURLToFile(new URL("https://rawgit.com/jkim99/ConradIsCool/master/data-resources/lunch" + MainActivity.scheduleChecker.getBlock(getSchoolDayRotation(off), 3)), lunchFile);
-			LunchChecker lunchChecker = new LunchChecker(lunchFile);
-			return "Lunch: " + lunchChecker.getLunchBlock(course.split("\n")[1]);
+			char block = MainActivity.scheduleChecker.getBlock(off, 3);
+			String teacher = MainActivity.scheduleChecker.getClass(off, period).split("\n")[1];
+			LunchChecker lunchChecker = new LunchChecker(context, block);
+			return "Lunch: " + lunchChecker.getLunchBlock(teacher);
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
-			return "";
-		}
-		catch(MalformedURLException mue) {
-			return "";
-		}
-		catch(IOException e) {
 			return "";
 		}
 	}

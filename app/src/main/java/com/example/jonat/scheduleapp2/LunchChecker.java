@@ -1,76 +1,62 @@
 package com.example.jonat.scheduleapp2;
 
+import android.content.Context;
 import android.util.Log;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.Reader;
+import java.util.List;
 
 /*
  * Created by jonat on 9/13/2017.
  */
 
 public class LunchChecker {
-	private static String[][] lunchSchedule;
+	private String[][] lunchSchedule;
 
-	public LunchChecker(File file) {
+	public LunchChecker(Context context, char block) {
+		Log.i("lunch", "const");
+		File file = new File(context.getFilesDir(), "lunch" + block + ".csv");
 		setLunchSchedule(file);
 	}
 
 	private void setLunchSchedule(File file) {
-		String[] lunchGroups;
-		String lunchCode;
-		String lastUpdated;
-
 		try {
-			Scanner scan = new Scanner(file);
-
-			String verify = scan.nextLine();
-			if(!verify.substring(0, 8).equals("CONFIRM:"))
-				Log.e("lunch", "lunch schedule file invalid");
-			lunchCode = verify.substring(8, verify.indexOf('-'));
-			lastUpdated = verify.substring(verify.indexOf("-LU") + 3, verify.lastIndexOf('-'));
-
-			Log.d("lunch", "Lunch Code: " + lunchCode);
-			Log.d("lunch", "Last Updated: " + lastUpdated);
-
-			int groups = Integer.valueOf(verify.substring(verify.lastIndexOf('-') + 1, verify.lastIndexOf('x')));
-			int teachersPerGroup = Integer.valueOf(verify.substring(verify.lastIndexOf('x') + 1));
-			lunchGroups = new String[groups];
-			lunchSchedule = new String[groups][teachersPerGroup];
-
-			String line = scan.nextLine();
-			int x = 0;
-			int y = 0;
-			while(scan.hasNextLine()) {
-				if(line.substring(0, 7).equals("Group: ")) {
-					lunchGroups[x] = line.substring(7);
-					x++;
-					y = 0;
-				}
-				else {
-					lunchSchedule[x - 1][y] = line;
-					y++;
-				}
-				line = scan.nextLine();
+			Reader in = new FileReader(file);
+			CSVParser parser = new CSVParser(in, CSVFormat.RFC4180);
+			List<CSVRecord> records = parser.getRecords();
+			lunchSchedule = new String[records.size()][];
+			for(int i = 0; i < records.size(); i++) {
+				CSVRecord record = records.get(i);
+				lunchSchedule[i] = new String[record.size()];
+				for(int j = 0; j < record.size(); j++)
+					lunchSchedule[i][j] = record.get(j);
 			}
 		}
-		catch(ArrayIndexOutOfBoundsException aioobe) {
-			Log.e("lunch", aioobe.toString());
-		}
 		catch(IOException ioe) {
-			Log.e("lunch", ioe.toString());
+			ioe.printStackTrace();
 		}
 	}
 
 	public int getLunchBlock(String teacher) {
-		for(int i = 0; i < lunchSchedule.length; i++) {
-			for(int j = 0; j < lunchSchedule[i].length; j++) {
-				if(lunchSchedule[i][j] != null && lunchSchedule[i][j].equals(teacher))
-					return i + 1;
+		try {
+			for(int i = 0; i < lunchSchedule.length; i++) {
+				for(int j = 0; j < lunchSchedule[i].length; j++) {
+					if(lunchSchedule[i][j] != null && lunchSchedule[i][j].equals(teacher))
+						return j + 1;
+				}
 			}
+			return -1;
 		}
-		return -1;
+		catch(NullPointerException npe) {
+			return -1;
+		}
 	}
 
 }
