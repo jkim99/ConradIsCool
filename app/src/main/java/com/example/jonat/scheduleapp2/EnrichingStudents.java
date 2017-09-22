@@ -38,22 +38,6 @@ public class EnrichingStudents extends AppCompatActivity {
 				}
 			}
 		};
-		String email = "jkim2018@k12.andoverma.us";
-		String password = "RAMP478serf";
-
-		auth.addAuthStateListener(authStateListener);
-		auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-			@Override
-			public void onComplete(Task<AuthResult> task) {
-				if(task.isSuccessful()) {
-					Log.d(TAG, "sign in success");
-					FirebaseUser user = auth.getCurrentUser();
-				}
-				else {
-					Log.d(TAG, "sign in #naw");
-				}
-			}
-		});
 
 //		final WebView enrichingStudents = new WebView(this);
 //		enrichingStudents.getSettings().setJavaScriptEnabled(true);
