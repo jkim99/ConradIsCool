@@ -70,9 +70,14 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		//startActivity(new Intent(MainActivity.this, EnrichingStudents.class));
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
 			 calendarFile = new File(this.getFilesDir(), "calendar.txt");
 				 settings = new File(this.getFilesDir(), "settings.txt");
+
+//		File[] files = {scheduleFile, calendarFile};
+//		Utility.purge(files);
 
 		checkSettingsFile();
 		update(isOnline());
@@ -80,12 +85,13 @@ public class MainActivity extends AppCompatActivity {
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
 		}
+		else {
+			initializeScheduleChecker(scheduleFile);
+			setAllAlarms();
 
-		initializeScheduleChecker(scheduleFile);
-		setAllAlarms();
-
-		startActivity(defaultScreen);
-		setSupportActionBar((Toolbar)findViewById(R.id.my_toolbar));
+			startActivity(defaultScreen);
+			setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
+		}
 	}
 
 	@Override
@@ -167,14 +173,17 @@ public class MainActivity extends AppCompatActivity {
 					classes.add(
 						scan.nextLine() + "\n" +
 						scan.nextLine() + "\n" +
-						scan.nextLine()
+						scan.nextLine() + "\n" +
+						scan.nextLine() + "\n" +
+						scan.nextLine() + "\n"
 					);
-					scan.nextLine();
 					scan.nextLine();
 				}
 				scheduleChecker = new ScheduleChecker(classes);
 			}
-			catch(IOException ioe) {}
+			catch(IOException ioe) {
+				ioe.printStackTrace();
+			}
 		}
 	}
 
@@ -202,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
 		if(isOnline) {
 			Log.i("updates", "isOnline");
 			CalendarChecker.updateCalendar(calendarFile);
-			updateLunchFiles();
 			try {
 				URL url = new URL("https://rawgit.com/jkim99/ConradIsCool/master/README.md");
 				URLConnection urlConnection = url.openConnection();
@@ -297,41 +305,46 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public int setDailyAlarms() {
-		android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-		String[] schedule = Utility.oneLineClassNames(1);
-		for(String s : schedule)
-			inboxStyle.addLine(s);
-		android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-				.setContentTitle("Your schedule for today")
-				.setContentText("Day " + Utility.getSchoolDayRotation(1))
-				.setSmallIcon(R.drawable.ic_launcher_proto)
-				.setStyle(inboxStyle);
+		try {
+			android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+			String[] schedule = Utility.oneLineClassNames(1);
+			for(String s : schedule)
+				inboxStyle.addLine(s);
+			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+					.setContentTitle("Your schedule for today")
+					.setContentText("Day " + Utility.getSchoolDayRotation(1))
+					.setSmallIcon(R.drawable.ic_launcher_proto)
+					.setStyle(inboxStyle);
 
-		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-		stackBuilder.addParentStack(DayViewActivity.class);
-		stackBuilder.addNextIntent(new Intent(this, MainActivity.class));
-		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-		builder.setContentIntent(resultPendingIntent);
-		Notification notification = builder.build();
+			TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+			stackBuilder.addParentStack(DayViewActivity.class);
+			stackBuilder.addNextIntent(new Intent(this, MainActivity.class));
+			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+			builder.setContentIntent(resultPendingIntent);
+			Notification notification = builder.build();
 
-		Intent intent = new Intent(this, Notify.class);
-		intent.putExtra("notification_id", 20);
-		intent.putExtra("notification_object", notification);
-		intent.putExtra("notification_times", notificationTimes);
+			Intent intent = new Intent(this, Notify.class);
+			intent.putExtra("notification_id", 20);
+			intent.putExtra("notification_object", notification);
+			intent.putExtra("notification_times", notificationTimes);
 
-		Log.d("notification: ", notification.toString());
+			Log.d("notification: ", notification.toString());
 
-		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 20, intent, 0);
+			PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 20, intent, 0);
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(System.currentTimeMillis());
-		cal.set(Calendar.HOUR_OF_DAY, 7);
-		cal.set(Calendar.MINUTE, 0);
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(System.currentTimeMillis());
+			cal.set(Calendar.HOUR_OF_DAY, 7);
+			cal.set(Calendar.MINUTE, 0);
 
-		dailyAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-		dailyAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+			dailyAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+			dailyAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
 
-		return 0;
+			return 0;
+		}
+		catch(ArrayIndexOutOfBoundsException aioobe) {
+			return -1;
+		}
 	}
 
 	public void cancelAlarms(AlarmManager am, int[] id) {
@@ -348,22 +361,6 @@ public class MainActivity extends AppCompatActivity {
 		}
 		catch(NullPointerException npe) {
 
-		}
-	}
-
-	public void updateLunchFiles() {
-		File[] files = new File[5];
-		for(int i = 0; i < 5; i++) {
-			char x = (char) (67 + i);
-			files[i] = new File(this.getFilesDir(), "lunch" + x + ".csv");
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-			try {
-				FileUtils.copyURLToFile(new URL("https://rawgit.com/jkim99/ConradIsCool/master/lunch" + x + ".csv"), files[i]);
-			}
-			catch(IOException ioe) {
-				ioe.printStackTrace();
-			}
 		}
 	}
 

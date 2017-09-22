@@ -7,6 +7,8 @@
  */
 package com.example.jonat.scheduleapp2;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /*
@@ -16,12 +18,19 @@ import java.util.ArrayList;
 public class ScheduleChecker {
 	private String[] classes;
 	private char[][] schedule;
+	private String[] lunches;
 
 	public ScheduleChecker(ArrayList<String> classes) {
 		schedule = new char[8][5];
 		this.classes = new String[8];
-		for(int i = 0; i < classes.size(); i++)
-			this.classes[i] = classes.get(i);
+		lunches = new String[5];
+		for(int i = 0; i < classes.size(); i++) {
+			String[] lines = classes.get(i).split("\n");
+			char block = lines[1].charAt(0);
+			this.classes[block - 65] = lines[0] + "\n" + lines[3] + "\n" + lines[2] + "\n";
+			if(block > 66 && block < 72)
+				lunches[block - 67] = lines[4].replace("Lunch ", "Lunch: ");
+		}
 		schedule[0][0] = 'A';
 		schedule[0][1] = 'C';
 		schedule[0][2] = 'H';
@@ -101,10 +110,20 @@ public class ScheduleChecker {
 		}
 	}
 
-	public String getClass(int day, int period) {
-		day = Utility.getSchoolDayRotation(day);
+	public String getClass(int off, int period) {
+		int day = Utility.getSchoolDayRotation(off);
 		return period == 5 ? "No Class!" : (day < 0 ? exceptions(day, period) : classes[(int)(getBlock(day - 1, period)) - 65]); //make more readable
 	}
+
+	public String getClassName(int off, int period) {
+		String course = getClass(off, period);
+		return course.split("\n")[0];
+	}
+
+	public String getLunchBlock(int off, int period) {
+		return lunches[getBlock(Utility.getSchoolDayRotation(off), period) - 67];
+	}
+
 
 	public char getBlock(int day, int period) {
 		return period == -10 ? 'X' : schedule[day][period];

@@ -133,9 +133,9 @@ public class CurrentViewActivity extends AppCompatActivity {
 		time2.setText(getTimeText(1));
 
 		if(period == 3)
-			lunch1.setText(Utility.getLunch(this, MainActivity.swipeDirectionOffset, 3));
+			lunch1.setText(Utility.getLunch(MainActivity.swipeDirectionOffset, 3));
 		if(period == 2)
-			lunch2.setText(Utility.getLunch(this, MainActivity.swipeDirectionOffset, 2));
+			lunch2.setText(Utility.getLunch(MainActivity.swipeDirectionOffset, 2));
 
 		for(TextView t : textViews)
 			t.setElevation(1000);

@@ -28,6 +28,7 @@
 		<activity android:name=".DayViewActivity"/>
 		<activity android:name=".MonthViewActivity"/>
 		<activity android:name=".AspenPage"/>
+		<activity android:name=".EnrichingStudents"/>
 		<activity android:name=".Settings"/>
 		<service android:name="Firebase">
 			<intent-filter>

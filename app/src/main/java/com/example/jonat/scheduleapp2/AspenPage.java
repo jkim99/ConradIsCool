@@ -9,7 +9,6 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -47,13 +46,19 @@ public class AspenPage extends AppCompatActivity {
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
 
+				Log.d("html", url);
+
 				//redirects webview to schedule info page
 				if(url.contains("home")) {
 					aspenLogin.loadUrl("https://ma-andover.myfollett.com/aspen/studentScheduleContextList.do?navkey=myInfo.sch.list");
 				}
 
-				//starts downloading info
 				else if(url.contains("studentScheduleMatrix")) {
+					aspenLogin.loadUrl("javascript:doParamSubmit(360, document.forms['scheduleMatrixForm'], '')");
+				}
+
+				//starts downloading info
+				else if(url.contains("studentScheduleContext")) {
 					setContentView(R.layout.logo_page);
 					aspenLogin.loadUrl("javascript:window.HTMLOUT.processHTML('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
 					(Toast.makeText(context, "Schedule downloaded successfully", Toast.LENGTH_SHORT)).show();
@@ -70,7 +75,6 @@ public class AspenPage extends AppCompatActivity {
 	 */
 	private class JSInterface {
 		private Context context;
-		private String html;
 
 		JSInterface(Context c) {
 			context = c;
@@ -78,10 +82,9 @@ public class AspenPage extends AppCompatActivity {
 
 		@JavascriptInterface
 		public void processHTML(String html) {
-			this.html = html;
 			ArrayList<String> classes = parse(html);
 			try {
-				PrintWriter pw = new PrintWriter(new File(new ContextWrapper(context).getFilesDir() + "/schedule.txt"));
+				PrintWriter pw = new PrintWriter(new File(context.getFilesDir(), "schedule.txt"));
 				pw.println("--Schedule--");
 				for(String s : classes) {
 					pw.println(s);
@@ -96,41 +99,32 @@ public class AspenPage extends AppCompatActivity {
 		}
 
 		private ArrayList<String> parse(String html) {
-			Utility.validateHTML(html);
 			String[] lines = html.split("<");
-			String line, course;
-			ArrayList<String> scheduleInfoLines = new ArrayList<String>();
-			ArrayList<String> scheduleInfoGrouped = new ArrayList<String>();
+			String line;
 			int x = -1;
+			ArrayList<String> scheduleInfoLines = new ArrayList<>();
+			ArrayList<String> classes = new ArrayList<>();
+
 			for(int i = 0; i < lines.length; i++) {
-				line = lines[i];
-				if(line.contains("1-1 Period")) {
+				if(lines[i].contains("Lunch")) {
 					x = i;
 					break;
 				}
 			}
-			for(int j = x + 21; j < lines.length; j++) {
-				line = lines[j].replace("br>", "").replace("!--", "").replace("List view", "").replace("amp;", "");
-				if(!line.contains(">"))
-					scheduleInfoLines.add(line);
+			for(int i = x; i < lines.length; i++) {
+				line = lines[i].replaceAll("\n", "").replaceAll("td>", "").replaceAll("/", "");
+				if(line.contains("td nowrap=\"\">")) {
+					scheduleInfoLines.add(line.replaceAll("td nowrap=\"\">", "").replaceAll("&nbsp;", "").replaceAll("&amp;", ""));
+				}
 			}
-			for(int i = 0; i < scheduleInfoLines.size() - 4; i+=5) {
-				course = scheduleInfoLines.get(i) + "\n" + scheduleInfoLines.get(i + 1) + "\n" + scheduleInfoLines.get(i + 2) + "\n" + scheduleInfoLines.get(i + 3) + "\n";
-				if(!scheduleInfoGrouped.contains(course))
-					scheduleInfoGrouped.add(course);
+			for(int j = 0; j < scheduleInfoLines.size(); j+=7) {
+				if(scheduleInfoLines.get(j + 1).equals(""))
+					scheduleInfoLines.set(j + 1, "Lunch 0");
+				if(!scheduleInfoLines.get(j + 3).equals("2"))
+					classes.add(scheduleInfoLines.get(j) + "\n" + scheduleInfoLines.get(j + 2) + "\n" + scheduleInfoLines.get(j + 5) + "\n" + scheduleInfoLines.get(j + 6) + "\n" + scheduleInfoLines.get(j + 1) + "\n");
 			}
 
-			//correcting order
-			String a, h;
-			a = scheduleInfoGrouped.get(1);
-			h = scheduleInfoGrouped.get(4);
-			scheduleInfoGrouped.set(1, scheduleInfoGrouped.get(0));
-			scheduleInfoGrouped.set(0, a);
-			scheduleInfoGrouped.set(4, scheduleInfoGrouped.get(6));
-			scheduleInfoGrouped.set(6, h);
-			scheduleInfoGrouped.set(6, scheduleInfoGrouped.get(7));
-			scheduleInfoGrouped.set(7, h);
-			return scheduleInfoGrouped;
+			return classes;
 		}
 	}
 

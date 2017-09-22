@@ -161,32 +161,16 @@ public class Utility {
 	}
 
 	static String[] oneLineClassNames(int off) {
-		String[][] schedule = new String[5][4];
-		String[] returnArray = new String[5];
-		for(int x = 0; x < 5; x++)
-			schedule[x] = MainActivity.scheduleChecker.getClass(off, x).split("\n");
+		String[] classNames = new String[5];
 		for(int i = 0; i < 5; i++) {
 			try {
-				returnArray[i] = MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) - 1, i) + ": " + schedule[i][0];
+				classNames[i] = MainActivity.scheduleChecker.getBlock(getSchoolDayRotation(off) - 1, i) + ": " + MainActivity.scheduleChecker.getClassName(off, i);
 			}
 			catch(ArrayIndexOutOfBoundsException aioobe) {
-				returnArray[i] = schedule[i][0];
+				classNames[i] = MainActivity.scheduleChecker.getClassName(off, i);
 			}
 		}
-		return returnArray;
-	}
-
-	static boolean validateHTML(String html) {
-		try {
-			String[] lines = html.split("\n");
-			boolean check = lines.length > 1000;
-			Log.d("HTML_verification", "" + check);
-			return check;
-		}
-		catch(Exception e) {
-			Log.e("HTML_verification", "Invalid html. Possibly due to user internet failure");
-			return false;
-		}
+		return classNames;
 	}
 
 	static void purge(File[] files) {
@@ -203,12 +187,9 @@ public class Utility {
 		}
 	}
 
-	static String getLunch(Context context, int off, int period) {
+	static String getLunch(int off, int period) {
 		try {
-			char block = MainActivity.scheduleChecker.getBlock(off, 3);
-			String teacher = MainActivity.scheduleChecker.getClass(off, period).split("\n")[1];
-			LunchChecker lunchChecker = new LunchChecker(context, block);
-			return "Lunch: " + lunchChecker.getLunchBlock(teacher);
+			return MainActivity.scheduleChecker.getLunchBlock(off, period);
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
 			return "";

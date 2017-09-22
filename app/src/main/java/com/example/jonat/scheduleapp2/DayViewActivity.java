@@ -145,7 +145,7 @@ public class DayViewActivity extends AppCompatActivity {
 			constraintLayout.startAnimation(animation);
 
 			changeButtons(buttons);
-			lunch.setText(Utility.getLunch(this, MainActivity.swipeDirectionOffset, 3));
+			lunch.setText(Utility.getLunch(MainActivity.swipeDirectionOffset, 3));
 		}
 		catch(NullPointerException npe) {
 			npe.printStackTrace();
