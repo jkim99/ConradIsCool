@@ -12,6 +12,33 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\jonat\.android\build-cache\3e2a8db668c56350b31b4e9c81fffd3839dec8df\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="486371f97baad8e607f332f20fee1d3dd00a731a">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_e0ac560e70fc7441f891f44821851f561f5d42d1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jonat\.android\build-cache\d379a5ab64ca6583a1fac384ccbc028ad8a788b5\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_d8710b06a1414fb61a04ebd88983a23af143fc15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jonat\.android\build-cache\29aa07f518afa09d4e397d2acb60e39f361c8e0c\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_b84782e0d1901beca7545d4f02d1ffb6624f95a5.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\jonat\.android\build-cache\5fc42ca7e4451800abab6a8eb9c4f1c1ca54326d\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -27,6 +54,24 @@
         revision="25.0.3"
         sha1="433f4d6aa5f21f19552afe0e6c5eff0fedba73ad">
         <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_6c2c9e926c15feca6ef75c5723d0d1631d1d8e11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-io-2.5\commons-io-2.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b24f6678d458e65f08113a079e3724581eca1184">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\commons-io-2.5_5da065535c1062294a65aa8e2b27ddc05c2471b6.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-io-2.5\commons-io-2.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b24f6678d458e65f08113a079e3724581eca1184">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-io-2.5_5da065535c1062294a65aa8e2b27ddc05c2471b6\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -84,66 +129,21 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="3eca22703635a25b9466206a9e76e9675bf2cfd8">
+        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_78854d0302d86f72f890a5a9af33946460dfe19e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\joda-time-2.9.9.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
         sha1="f7b520c458572890807d143670c9b24f4de90897">
         <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\joda-time-2.9.9_b8f000ab5f62f0ef56c92d506a492dac775beee9\classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\jonat\.android\build-cache\3e2a8db668c56350b31b4e9c81fffd3839dec8df\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="486371f97baad8e607f332f20fee1d3dd00a731a">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_e0ac560e70fc7441f891f44821851f561f5d42d1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\jonat\.android\build-cache\d379a5ab64ca6583a1fac384ccbc028ad8a788b5\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_d8710b06a1414fb61a04ebd88983a23af143fc15.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\jonat\.android\build-cache\29aa07f518afa09d4e397d2acb60e39f361c8e0c\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_b84782e0d1901beca7545d4f02d1ffb6624f95a5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-io-2.5\commons-io-2.5.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="b24f6678d458e65f08113a079e3724581eca1184">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\commons-io-2.5_5da065535c1062294a65aa8e2b27ddc05c2471b6.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-io-2.5\commons-io-2.5.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="b24f6678d458e65f08113a079e3724581eca1184">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-io-2.5_5da065535c1062294a65aa8e2b27ddc05c2471b6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="6e36aab25664f1a286cd0eaf223cd8bf915559de">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_78854d0302d86f72f890a5a9af33946460dfe19e\classes.dex" />
     </item>
 
 </items>
