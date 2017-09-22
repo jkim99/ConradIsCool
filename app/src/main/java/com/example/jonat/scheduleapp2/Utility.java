@@ -164,7 +164,8 @@ public class Utility {
 		String[] classNames = new String[5];
 		for(int i = 0; i < 5; i++) {
 			try {
-				classNames[i] = MainActivity.scheduleChecker.getBlock(getSchoolDayRotation(off) - 1, i) + ": " + MainActivity.scheduleChecker.getClassName(off, i);
+				String block =  MainActivity.scheduleChecker.getBlock(getSchoolDayRotation(off) - 1, i) + ": ";
+				classNames[i] = block + MainActivity.scheduleChecker.getClassName(off, i);
 			}
 			catch(ArrayIndexOutOfBoundsException aioobe) {
 				classNames[i] = MainActivity.scheduleChecker.getClassName(off, i);
