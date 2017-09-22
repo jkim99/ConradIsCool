@@ -30,12 +30,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /*
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 		//startActivity(new Intent(MainActivity.this, EnrichingStudents.class));
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
 		calendarFile = new File(this.getFilesDir(), "calendar.txt");
-		settingsFile = new File(this.getFilesDir(), "settings.txt");
+		settingsFile = new File(this.getFilesDir(), "settingsHandler.txt");
 
 //		if(b) {
 //			File[] files = {scheduleFile, calendarFile, settingsFile};
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 //		}
 
 		update(isOnline());
-		Settings settings = new Settings(settingsFile);
+		SettingsHandler settingsHandler = new SettingsHandler(settingsFile);
 
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
 			 b = false;
@@ -89,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 			initializeScheduleChecker(scheduleFile);
 			setAllAlarms();
 
-			startActivity(Utility.stringtoIntent(this, settings.getDefaultView()));
+			startActivity(Utility.stringtoIntent(this, settingsHandler.getDefaultView()));
 			setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
 		}
 	}

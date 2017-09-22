@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -23,24 +22,21 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
 
 /*
- * SettingsActivity page handles user custom settings and saves them onto settings file
+ * SettingsActivity page handles user custom settingsHandler and saves them onto settingsHandler file
  */
 public class SettingsActivity extends AppCompatActivity {
 
 	private File settingsFile;
-	private Settings settings;
+	private SettingsHandler settingsHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		settingsFile = new File(this.getFilesDir(), "settings.txt");
-		settings = new Settings(settingsFile);
+		settingsFile = new File(this.getFilesDir(), "settingsHandler.txt");
+		settingsHandler = new SettingsHandler(settingsFile);
 
 
 		setContentView(R.layout.settings);
@@ -48,18 +44,18 @@ public class SettingsActivity extends AppCompatActivity {
 		setSupportActionBar(myToolbar);
 
 		Switch periodicNotification = (Switch)findViewById(R.id.every_class_notification);
-		periodicNotification.setChecked(settings.getPNotification());
+		periodicNotification.setChecked(settingsHandler.getPNotification());
 		periodicNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				settings.setPNotification(isChecked);
+				settingsHandler.setPNotification(isChecked);
 			}
 		});
 
 		Switch dailyNotification = (Switch)findViewById(R.id.daily_notification);
-		dailyNotification.setChecked(settings.getDNotification());
+		dailyNotification.setChecked(settingsHandler.getDNotification());
 		dailyNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				settings.setDNotification(isChecked);
+				settingsHandler.setDNotification(isChecked);
 			}
 		});
 
@@ -71,7 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
 		dayViewOption.setTextColor(getResources().getColor(R.color.white));
 		monthViewOption.setTextColor(getResources().getColor(R.color.white));
 
-		switch(settings.getDefaultView()) {
+		switch(settingsHandler.getDefaultView()) {
 			case "current_view":
 				defaultViews.check(currentViewOption.getId());
 				break;
@@ -86,19 +82,19 @@ public class SettingsActivity extends AppCompatActivity {
 		currentViewOption.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				settings.setDefaultView(viewToString(R.layout.current_view));
+				settingsHandler.setDefaultView(viewToString(R.layout.current_view));
 			}
 		});
 		dayViewOption.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				settings.setDefaultView(viewToString(R.layout.day_view));
+				settingsHandler.setDefaultView(viewToString(R.layout.day_view));
 			}
 		});
 		monthViewOption.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				settings.setDefaultView(viewToString(R.layout.month_view));
+				settingsHandler.setDefaultView(viewToString(R.layout.month_view));
 			}
 		});
 
