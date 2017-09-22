@@ -27,7 +27,7 @@ public class ScheduleChecker {
 		for(int i = 0; i < classes.size(); i++) {
 			String[] lines = classes.get(i).split("\n");
 			char block = lines[1].charAt(0);
-			this.classes[block - 65] = lines[0] + "\n" + lines[3] + "\n" + lines[2] + "\n";
+			this.classes[block - 65] = lines[0].replace("STUDENT ENRICHMENT", "H BLOCK") + "\n" + lines[3] + "\n" + lines[2] + "\n";
 			if(block > 66 && block < 72)
 				lunches[block - 67] = lines[4].replace("Lunch ", "Lunch: ");
 		}
