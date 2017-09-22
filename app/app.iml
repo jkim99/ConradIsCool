@@ -106,13 +106,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="firebase-analytics-10.0.1" level="project" />
     <orderEntry type="library" exported="" name="commons-io-2.5" level="project" />
-    <orderEntry type="library" exported="" name="opencsv-4.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="runner-0.5" level="project" />
     <orderEntry type="library" exported="" name="firebase-config-10.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="espresso-idling-resource-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="firebase-core-10.0.1" level="project" />
     <orderEntry type="library" exported="" name="firebase-auth-10.0.1" level="project" />
-    <orderEntry type="library" exported="" name="commons-lang3-3.6-sources" level="project" />
     <orderEntry type="library" exported="" name="constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-library-1.3" level="project" />
     <orderEntry type="library" exported="" name="play-services-tasks-10.0.1" level="project" />
@@ -121,10 +119,8 @@
     <orderEntry type="library" exported="" name="design-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-base-10.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="commons-lang3-3.6" level="project" />
     <orderEntry type="library" exported="" name="joda-time-2.9.9" level="project" />
     <orderEntry type="library" exported="" name="commons-io-2.5-javadoc" level="project" />
-    <orderEntry type="library" exported="" name="commons-csv-1.5" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-fragment-25.3.1" level="project" />
@@ -139,8 +135,6 @@
     <orderEntry type="library" exported="" name="firebase-common-10.0.1" level="project" />
     <orderEntry type="library" exported="" name="firebase-messaging-10.0.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-basement-10.0.1" level="project" />
-    <orderEntry type="library" exported="" name="commons-lang3-3.6-tests" level="project" />
-    <orderEntry type="library" exported="" name="commons-csv-1.5-sources" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javawriter-2.1.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-media-compat-25.3.1" level="project" />
