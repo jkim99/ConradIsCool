@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
 	public static double version = 1.6;
+	public static boolean b = true;
 	public static ScheduleChecker scheduleChecker;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
@@ -72,10 +73,16 @@ public class MainActivity extends AppCompatActivity {
 		calendarFile = new File(this.getFilesDir(), "calendar.txt");
 		settingsFile = new File(this.getFilesDir(), "settings.txt");
 
+//		if(b) {
+//			File[] files = {scheduleFile, calendarFile, settingsFile};
+//			Utility.purge(files);
+//		}
+
 		update(isOnline());
 		Settings settings = new Settings(settingsFile);
 
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
+			 b = false;
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
 		}
 		else {

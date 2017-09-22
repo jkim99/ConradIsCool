@@ -7,6 +7,8 @@
  */
 package com.example.jonat.scheduleapp2;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /*
@@ -25,10 +27,14 @@ public class ScheduleChecker {
 		for(int i = 0; i < classes.size(); i++) {
 			String[] lines = classes.get(i).split("\n");
 			char block = lines[1].charAt(0);
+			Log.e("m", (block - 67) + ": " + lines[4]);
 			this.classes[block - 65] = lines[0].replace("STUDENT ENRICHMENT", "H BLOCK") + "\n" + lines[2] + "\n" + lines[3] + "\n";
-			if(block > 66 && block < 72)
+			if(block > 66 && block < 72) {
 				lunches[block - 67] = lines[4].replace("Lunch ", "Lunch: ");
+			}
 		}
+		for(String s : lunches)
+			Log.d("xxx3", s);
 		schedule[0][0] = 'A';
 		schedule[0][1] = 'C';
 		schedule[0][2] = 'H';
@@ -119,7 +125,7 @@ public class ScheduleChecker {
 	}
 
 	public String getLunchBlock(int off, int period) {
-		return lunches[getBlock(Utility.getSchoolDayRotation(off), period) - 67];
+		return lunches[getBlock(Utility.getSchoolDayRotation(off) - 1, period) - 67];
 	}
 
 

@@ -41,7 +41,7 @@ public class CalendarChecker {
 		try {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
-			FileUtils.copyURLToFile(new URL("https://rawgit.com/jkim99/ConradIsCool/master/data-resources/calendar"), calendar);
+			FileUtils.copyURLToFile(new URL("https://rawgit.com/jkim99/ConradIsCool/master/data-resources/calendar.txt"), calendar);
 		}
 		catch(IOException ioe) {
 			Log.e("calendar", ioe.toString());

@@ -4,21 +4,19 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
 public class Settings {
 	private final String SETTINGS_TAG = "settings";
-	private final String CURRENT_VIEW_STRING = "current_view";
-	private final String DAY_VIEW_STRING = "day_view";
-	private final String MONTH_VIEW_STRING = "month_view";
 	private String defaultView;
 	private boolean pNotifications;
 	private boolean dNotifications;
 
 	public Settings() {
 		this("current_view", true, true);
-		Log.i(SETTINGS_TAG, "creating settings file");
+		//Log.i(SETTINGS_TAG, "creating settings file");
 	}
 
 	public Settings(String defaultView, boolean pNotifications, boolean dNotifications) {
@@ -44,6 +42,7 @@ public class Settings {
 	}
 
 	public void setDefaultView(String view) {
+		Log.d(SETTINGS_TAG, view);
 		defaultView = view;
 	}
 
@@ -56,6 +55,8 @@ public class Settings {
 	}
 
 	public void writeFile(File file) {
+		if(defaultView == null)
+			defaultView = "current_view";
 		try {
 			PrintWriter pw = new PrintWriter(file);
 			pw.println(Utility.SETTINGS_FILE_VERIFICATION_TAG);
@@ -72,6 +73,9 @@ public class Settings {
 			Scanner scan = new Scanner(file);
 			return scan.nextLine().equals(Utility.SETTINGS_FILE_VERIFICATION_TAG);
 		}
+		catch(NoSuchElementException nsee) {
+			return false;
+		}
 		catch(Exception e) {
 			e.printStackTrace();
 			return false;
@@ -82,10 +86,10 @@ public class Settings {
 		try {
 			Scanner scan = new Scanner(file);
 			if(!verifyFile(file)) {
-				return;
+				writeFile(file);
 			}
 			else {
-				for(int i = 0; i < 5; i++) {
+				for(int i = 0; i < 4; i++) {
 					String line = scan.nextLine();
 					switch(line.substring(0, line.indexOf(":") + 1)) {
 						case "defaultView:":
