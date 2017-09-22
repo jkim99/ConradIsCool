@@ -8,20 +8,14 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Context;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.NoSuchElementException;
 import java.util.Scanner;

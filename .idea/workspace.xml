@@ -16,431 +16,19 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1230e168-277d-4f42-95c5-444121625669" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_csv_1_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_csv_1_5_sources.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_6_sources.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_6_tests.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/opencsv_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/NOTICE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/RELEASE-NOTES.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/index-all.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/CSVFormat.Predefined.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/CSVFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/CSVParser.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/CSVPrinter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/CSVRecord.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/QuoteMode.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/class-use/CSVFormat.Predefined.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/class-use/CSVFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/class-use/CSVParser.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/class-use/CSVPrinter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/class-use/CSVRecord.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/class-use/QuoteMode.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/org/apache/commons/csv/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/serialized-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/src-html/org/apache/commons/csv/CSVFormat.Predefined.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/src-html/org/apache/commons/csv/CSVFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/src-html/org/apache/commons/csv/CSVParser.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/src-html/org/apache/commons/csv/CSVPrinter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/src-html/org/apache/commons/csv/CSVRecord.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/src-html/org/apache/commons/csv/QuoteMode.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/apidocs/stylesheet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/commons-csv-1.5-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-csv-1.5/commons-csv-1.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/NOTICE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/RELEASE-NOTES.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/index-all.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/AnnotationUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ArchUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ArrayUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/BitField.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/BooleanUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharEncoding.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharSequenceUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharSet.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharSetUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ClassPathUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ClassUtils.Interfaces.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ClassUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/Conversion.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/EnumUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/JavaVersion.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/LocaleUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/NotImplementedException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ObjectUtils.Null.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ObjectUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/RandomStringUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/RandomUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/Range.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/SerializationException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/SerializationUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/StringEscapeUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/StringUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/SystemUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.NamePredicate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.ThreadGroupPredicate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.ThreadIdPredicate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.ThreadPredicate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/Validate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/Processor.Arch.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/Processor.Type.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/Processor.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/class-use/Processor.Arch.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/class-use/Processor.Type.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/class-use/Processor.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/Builder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/CompareToBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/Diff.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/DiffBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/DiffResult.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/Diffable.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/EqualsBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/EqualsExclude.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/HashCodeBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/HashCodeExclude.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/MultilineRecursiveToStringStyle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/RecursiveToStringStyle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ReflectionDiffBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ReflectionToStringBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/StandardToStringStyle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ToStringBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ToStringExclude.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ToStringStyle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/Builder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/CompareToBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/Diff.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/DiffBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/DiffResult.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/Diffable.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/EqualsBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/EqualsExclude.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/HashCodeBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/HashCodeExclude.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/MultilineRecursiveToStringStyle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/RecursiveToStringStyle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ReflectionDiffBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ReflectionToStringBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/StandardToStringStyle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ToStringBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ToStringExclude.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ToStringStyle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/AnnotationUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ArchUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ArrayUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/BitField.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/BooleanUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharEncoding.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharSequenceUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharSet.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharSetUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ClassPathUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ClassUtils.Interfaces.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ClassUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/Conversion.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/EnumUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/JavaVersion.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/LocaleUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/NotImplementedException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ObjectUtils.Null.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ObjectUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/RandomStringUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/RandomUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/Range.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/SerializationException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/SerializationUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/StringEscapeUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/StringUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/SystemUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.NamePredicate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.ThreadGroupPredicate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.ThreadIdPredicate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.ThreadPredicate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/Validate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/AbstractCircuitBreaker.State.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/AbstractCircuitBreaker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/AtomicInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/AtomicSafeInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/BackgroundInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/BasicThreadFactory.Builder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/BasicThreadFactory.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/CallableBackgroundInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/CircuitBreaker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/CircuitBreakingException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/Computable.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConcurrentException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConcurrentInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConcurrentRuntimeException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConcurrentUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConstantInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/EventCountCircuitBreaker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/LazyInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/Memoizer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/MultiBackgroundInitializer.MultiBackgroundInitializerResults.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/MultiBackgroundInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ThresholdCircuitBreaker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/TimedSemaphore.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/AbstractCircuitBreaker.State.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/AbstractCircuitBreaker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/AtomicInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/AtomicSafeInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/BackgroundInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/BasicThreadFactory.Builder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/BasicThreadFactory.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/CallableBackgroundInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/CircuitBreaker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/CircuitBreakingException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/Computable.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConcurrentException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConcurrentInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConcurrentRuntimeException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConcurrentUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConstantInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/EventCountCircuitBreaker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/LazyInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/Memoizer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/MultiBackgroundInitializer.MultiBackgroundInitializerResults.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/MultiBackgroundInitializer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ThresholdCircuitBreaker.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/TimedSemaphore.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/EventListenerSupport.ProxyInvocationHandler.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/EventListenerSupport.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/EventUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/class-use/EventListenerSupport.ProxyInvocationHandler.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/class-use/EventListenerSupport.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/class-use/EventUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/CloneFailedException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/ContextedException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/ContextedRuntimeException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/DefaultExceptionContext.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/ExceptionContext.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/ExceptionUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/CloneFailedException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/ContextedException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/ContextedRuntimeException.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/DefaultExceptionContext.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/ExceptionContext.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/ExceptionUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/Fraction.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/IEEE754rUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/NumberUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/class-use/Fraction.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/class-use/IEEE754rUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/class-use/NumberUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/Mutable.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableBoolean.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableByte.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableDouble.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableFloat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableInt.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableLong.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableObject.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableShort.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/Mutable.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableBoolean.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableByte.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableDouble.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableFloat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableInt.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableLong.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableObject.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableShort.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/ConstructorUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/FieldUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/InheritanceUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/MethodUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/TypeLiteral.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/TypeUtils.WildcardTypeBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/TypeUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/Typed.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/ConstructorUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/FieldUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/InheritanceUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/MethodUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/TypeLiteral.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/TypeUtils.WildcardTypeBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/TypeUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/Typed.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/CompositeFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/ExtendedMessageFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/FormatFactory.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/FormattableUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrLookup.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrMatcher.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrSubstitutor.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrTokenizer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/WordUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/CompositeFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/ExtendedMessageFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/FormatFactory.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/FormattableUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrBuilder.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrLookup.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrMatcher.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrSubstitutor.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrTokenizer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/WordUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/AggregateTranslator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/CharSequenceTranslator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/CodePointTranslator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/EntityArrays.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/JavaUnicodeEscaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/LookupTranslator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/NumericEntityEscaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.OPTION.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/OctalUnescaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/UnicodeEscaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/UnicodeUnescaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/UnicodeUnpairedSurrogateRemover.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/AggregateTranslator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/CharSequenceTranslator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/CodePointTranslator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/EntityArrays.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/JavaUnicodeEscaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/LookupTranslator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/NumericEntityEscaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/NumericEntityUnescaper.OPTION.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/NumericEntityUnescaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/OctalUnescaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/UnicodeEscaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/UnicodeUnescaper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/UnicodeUnpairedSurrogateRemover.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DateFormatUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DateParser.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DatePrinter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DateUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DurationFormatUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/FastDateFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/FastDateParser.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/FastDatePrinter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/StopWatch.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DateFormatUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DateParser.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DatePrinter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DateUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DurationFormatUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/FastDateFormat.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/FastDateParser.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/FastDatePrinter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/StopWatch.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/ImmutablePair.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/ImmutableTriple.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/MutablePair.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/MutableTriple.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/Pair.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/Triple.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/ImmutablePair.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/ImmutableTriple.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/MutablePair.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/MutableTriple.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/Pair.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/Triple.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/package-use.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/overview-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/overview-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/resources/background.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/resources/tab.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/resources/titlebar.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/resources/titlebar_end.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/serialized-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/apidocs/stylesheet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/commons-lang3-3.6-javadoc.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/commons-lang3-3.6-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/commons-lang3-3.6-test-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/commons-lang3-3.6-tests.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.6/commons-lang3-3.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/opencsv-4.0.jar" afterPath="" />
+    <list default="true" id="1230e168-277d-4f42-95c5-444121625669" name="Default" comment="Everything is now more efficient">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/ScheduleChecker.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/ScheduleChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/Utility.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/Utility.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
     <ignored path="ScheduleApp2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -497,10 +85,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AspenPage.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AspenPage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/AspenPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
+            <state relative-caret-position="1768">
               <caret line="116" column="127" selection-start-line="116" selection-start-column="127" selection-end-line="116" selection-end-column="127" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -509,27 +97,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScheduleChecker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/ScheduleChecker.java">
+      <file leaf-file-name="Utility.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/Utility.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+            <state relative-caret-position="51">
+              <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#getCurrentPeriod#0;class#ScheduleChecker#0" expanded="false" />
-                <element signature="e#3695#3696#0" expanded="true" />
-                <element signature="method#halfDayHandler#0;class#ScheduleChecker#0" expanded="false" />
+                <element signature="method#changeDayIcon#0;class#Utility#0" expanded="false" />
+                <element signature="method#changePeriodIcon#0;class#Utility#0" expanded="false" />
+                <element signature="e#3659#3732#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <file leaf-file-name="ScheduleChecker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/ScheduleChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="90" selection-start-line="28" selection-start-column="90" selection-end-line="28" selection-end-column="90" />
-              <folding />
+            <state relative-caret-position="17">
+              <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+              <folding>
+                <element signature="method#getCurrentPeriod#0;class#ScheduleChecker#0" expanded="false" />
+                <element signature="e#3653#3654#0" expanded="true" />
+                <element signature="e#3710#3711#0" expanded="true" />
+                <element signature="method#halfDayHandler#0;class#ScheduleChecker#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -547,13 +139,12 @@
       <file leaf-file-name="EnrichingStudents.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/EnrichingStudents.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
+            <state relative-caret-position="391">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#885#1182#0" expanded="true" />
                 <element signature="e#1181#1182#0" expanded="true" />
-                <element signature="e#1673#1674#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2652,20 +2243,20 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/CurrentViewActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/DayViewActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/EnrichingStudents.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/AspenPage.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/ScheduleChecker.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/Utility.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/EnrichingStudents.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/ScheduleChecker.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/Utility.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1552" />
+    <option name="height" value="840" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -2887,7 +2478,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="98895432444642524a" />
+    <property name="device.picker.selection" value="10.18.1.70:5555" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2" />
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
@@ -3256,7 +2847,35 @@
       <option name="project" value="LOCAL" />
       <updated>1506057934727</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Everything is now more efficient">
+      <created>1506058079288</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1506058079288</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Everything is now more efficient">
+      <created>1506058153490</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1506058153490</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Everything is now more efficient">
+      <created>1506058361114</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1506058361114</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Everything is now more efficient">
+      <created>1506058535762</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1506058535762</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3269,7 +2888,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1552" height="840" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3281,11 +2900,11 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="-1928" y="-8" width="1552" height="840" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32844576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17590618" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22117962" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3673,41 +3292,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/EnrichingStudents.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#885#1182#0" expanded="true" />
-            <element signature="e#1181#1182#0" expanded="true" />
-            <element signature="e#1673#1674#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/MonthViewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
           <caret line="125" column="31" selection-start-line="125" selection-start-column="31" selection-end-line="125" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/AspenPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="116" column="127" selection-start-line="116" selection-start-column="127" selection-end-line="116" selection-end-column="127" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/CalendarChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -3733,36 +3321,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/Utility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="169" column="82" selection-start-line="169" selection-start-column="82" selection-end-line="169" selection-end-column="82" />
-          <folding>
-            <element signature="method#changeDayIcon#0;class#Utility#0" expanded="false" />
-            <element signature="method#changePeriodIcon#0;class#Utility#0" expanded="false" />
-            <element signature="e#3818#3891#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/ScheduleChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getCurrentPeriod#0;class#ScheduleChecker#0" expanded="false" />
-            <element signature="e#3695#3696#0" expanded="true" />
-            <element signature="method#halfDayHandler#0;class#ScheduleChecker#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="90" selection-start-line="28" selection-start-column="90" selection-end-line="28" selection-end-column="90" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/EnrichingStudents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#885#1182#0" expanded="true" />
+            <element signature="e#1181#1182#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/CalendarChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/ScheduleChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+          <folding>
+            <element signature="method#getCurrentPeriod#0;class#ScheduleChecker#0" expanded="false" />
+            <element signature="e#3653#3654#0" expanded="true" />
+            <element signature="e#3710#3711#0" expanded="true" />
+            <element signature="method#halfDayHandler#0;class#ScheduleChecker#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/Utility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+          <folding>
+            <element signature="method#changeDayIcon#0;class#Utility#0" expanded="false" />
+            <element signature="method#changePeriodIcon#0;class#Utility#0" expanded="false" />
+            <element signature="e#3659#3732#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/jonat/scheduleapp2/AspenPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="116" column="127" selection-start-line="116" selection-start-column="127" selection-end-line="116" selection-end-column="127" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -83,24 +83,6 @@
         <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\classes_2155fde28bd2d4f44ff67c9d71d9988976481bea.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-csv-1.5\commons-csv-1.5.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="e10f140af5b82167640f254fa9d88e35ad74329c">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\commons-csv-1.5_b0e30d4394f1adab7b7b55370ec626855fb96ce5.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-csv-1.5\commons-csv-1.5.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="e10f140af5b82167640f254fa9d88e35ad74329c">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-csv-1.5_b0e30d4394f1adab7b7b55370ec626855fb96ce5\classes.dex" />
-    </item>
-    <item
         is-multidex="true"
         jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\joda-time-2.9.9.jar"
         jumboMode="true"
@@ -155,33 +137,6 @@
         <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-io-2.5_5da065535c1062294a65aa8e2b27ddc05c2471b6\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\opencsv-4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="2b63c820c41cd1666df42f1ba296da9894961e59">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\opencsv-4.0_6a175fad218bb17bab3fdc3d3d9061583f54352b.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\opencsv-4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="2b63c820c41cd1666df42f1ba296da9894961e59">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\opencsv-4.0_6a175fad218bb17bab3fdc3d3d9061583f54352b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-lang3-3.6\commons-lang3-3.6-tests.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="ad971e62b400b400702433445d22264e3816dec2">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-lang3-3.6-tests_e349b7fe416dfd988e5877e9613b872b87a4443a\classes.dex" />
-    </item>
-    <item
         is-multidex="true"
         jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
@@ -189,33 +144,6 @@
         revision="25.0.3"
         sha1="6e36aab25664f1a286cd0eaf223cd8bf915559de">
         <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_78854d0302d86f72f890a5a9af33946460dfe19e\classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-lang3-3.6\commons-lang3-3.6-tests.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="ad971e62b400b400702433445d22264e3816dec2">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\commons-lang3-3.6-tests_e349b7fe416dfd988e5877e9613b872b87a4443a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-lang3-3.6\commons-lang3-3.6.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="9d28a6b23650e8a7e9063c04588ace6cf7012c17">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\pre-dexed\debug\commons-lang3-3.6_4cab02fb89037427ff6625a25564c16a562c99bd.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\commons-lang3-3.6\commons-lang3-3.6.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="9d28a6b23650e8a7e9063c04588ace6cf7012c17">
-        <dex dex="C:\Users\jonat\AndroidStudioProjects\ScheduleApp2\app\build\intermediates\transforms\dex\debug\folders\1000\2\commons-lang3-3.6_4cab02fb89037427ff6625a25564c16a562c99bd\classes.dex" />
     </item>
 
 </items>
