@@ -30,6 +30,7 @@ public class CalendarChecker {
 	private static final String SNOW_DAY = "SSSSS";
 	private static final String EXAM_DAY = "EEEEE";
 	private static final String HALF_DAY = "HHHH";
+	private static final String NOSCHOOL = "XXXXX";
 
 	private static void setCalendarFile(File calendarFile) {
 		calendar = calendarFile;
@@ -63,7 +64,7 @@ public class CalendarChecker {
 			if(returnValue.contains(HALF_DAY))
 				return -20 - Integer.valueOf(line.substring(line.indexOf(" = ") + 7));
 			switch(returnValue) {
-				case "XXXXX":
+				case NOSCHOOL:
 					return Utility.NO_SCHOOL;
 				case EXAM_DAY:
 					return Utility.EXAM;

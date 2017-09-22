@@ -16,7 +16,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
@@ -26,8 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,9 +47,8 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
 	private double latestVersion;
-	private File settings;
+	private File settingsFile;
 	private File calendarFile;
-	private Intent defaultScreen;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
 	public static double version = 1.6;
@@ -73,14 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
 		//startActivity(new Intent(MainActivity.this, EnrichingStudents.class));
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
-			 calendarFile = new File(this.getFilesDir(), "calendar.txt");
-				 settings = new File(this.getFilesDir(), "settings.txt");
+		calendarFile = new File(this.getFilesDir(), "calendar.txt");
+		settingsFile = new File(this.getFilesDir(), "settings.txt");
 
-//		File[] files = {scheduleFile, calendarFile};
-//		Utility.purge(files);
-
-		checkSettingsFile();
 		update(isOnline());
+		Settings settings = new Settings(settingsFile);
 
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
@@ -89,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 			initializeScheduleChecker(scheduleFile);
 			setAllAlarms();
 
-			startActivity(defaultScreen);
+			startActivity(Utility.stringtoIntent(this, settings.getDefaultView()));
 			setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
 		}
 	}
@@ -105,61 +98,11 @@ public class MainActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 			case R.id.navigation_settings:
-				Intent intent = new Intent(MainActivity.this, Settings.class);
+				Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
 				startActivity(intent);
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
-		}
-	}
-
-	public void createSettingsFile() {
-		try {
-			PrintWriter pw = new PrintWriter(settings);
-			pw.println("--Settings--");
-			pw.println("defaultView:current_view");
-			pw.println("dailyNotifications:on");
-			pw.println("periodicNotifications:on");
-			pw.close();
-			Log.i("settings","M:created settings file");
-			checkSettingsFile();
-		}
-		catch(Exception e) {
-			Log.e("debugging", "error creating settings");
-		}
-	}
-
-	public void checkSettingsFile() {
-		try {
-			Scanner scan = new Scanner(settings);
-			if(!scan.nextLine().equals("--Settings--"))
-				createSettingsFile();
-			String line, opt;
-			while(scan.hasNextLine()) {
-				line = scan.nextLine();
-				opt = line.substring(0, line.indexOf(":") + 1);
-				Log.i("settings", line);
-				switch(opt) {
-					case "defaultView:":
-						setDefaultView(line.substring(line.indexOf(":") + 1));
-						break;
-					case "dailyNotifications:":
-						dailyNotifications = !(line.substring(line.indexOf(":")).equals("off"));
-						break;
-					case "periodicNotifications:":
-						periodicNotifications = !(line.substring(line.indexOf(":")).equals("off"));
-						break;
-					default:
-						Log.i("settings_check", "settings file corrupted or missing");
-						createSettingsFile();
-				}
-			}
-		}
-		catch(IOException ioe) {
-			createSettingsFile();
-		}
-		catch(NoSuchElementException nsee) {
-			createSettingsFile();
 		}
 	}
 
@@ -185,26 +128,6 @@ public class MainActivity extends AppCompatActivity {
 				ioe.printStackTrace();
 			}
 		}
-	}
-
-	private void setDefaultView(String str) {
-		try {
-			switch(str) {
-				case "day_view":
-					defaultScreen = new Intent(MainActivity.this, DayViewActivity.class);
-					break;
-				case "current_view":
-					defaultScreen = new Intent(MainActivity.this, CurrentViewActivity.class);
-					break;
-				case "month_view":
-					defaultScreen = new Intent(MainActivity.this, MonthViewActivity.class);
-					break;
-				default:
-					defaultScreen = new Intent(MainActivity.this, MainActivity.class);
-					break;
-			}
-		}
-		catch(Exception e) {}
 	}
 
 	public void update(boolean isOnline) {
@@ -254,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 		return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 
-	public void setAlarm(int hour, int minute, int pendingIntentId, Notification notification) {
+	public void setAlarm(long notificationTime, int pendingIntentId, Notification notification) {
 		Intent intent = new Intent(this, Notify.class);
 		intent.putExtra("notification_id", 10);
 		intent.putExtra("notification_object", notification);
@@ -262,13 +185,8 @@ public class MainActivity extends AppCompatActivity {
 
 		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, pendingIntentId, intent, 0);
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(System.currentTimeMillis());
-		cal.set(Calendar.HOUR_OF_DAY, hour);
-		cal.set(Calendar.MINUTE, minute);
-
 		periodicAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-		periodicAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+		periodicAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, notificationTime, AlarmManager.INTERVAL_DAY, alarmIntent);
 	}
 
 	public int setPeriodicAlarms() {
@@ -280,17 +198,26 @@ public class MainActivity extends AppCompatActivity {
 		Notification notification;
 		android.support.v4.app.NotificationCompat.InboxStyle inboxStyle;
 
+
 		for(int i = 0; i < notificationTimes.length; i++) {
 			nextClass = MainActivity.scheduleChecker.getClass(0, i);
 			inboxStyle = new NotificationCompat.InboxStyle();
 			classInfo = nextClass.split("\n");
 			for(String s : classInfo)
 				inboxStyle.addLine(s);
+
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(System.currentTimeMillis());
+			cal.set(Calendar.HOUR_OF_DAY, notificationTimes[i] / 60);
+			cal.set(Calendar.MINUTE, notificationTimes[i] % 60);
+			long notificationTime = cal.getTimeInMillis();
+
 			builder = new NotificationCompat.Builder(this)
 					.setContentTitle("Your next class: ")
 					.setContentText(nextClass)
 					.setSmallIcon(R.drawable.ic_launcher_proto)
-					.setStyle(inboxStyle);
+					.setStyle(inboxStyle)
+					.setWhen(notificationTime);
 
 			stackBuilder = TaskStackBuilder.create(this);
 			stackBuilder.addParentStack(CurrentViewActivity.class);
@@ -299,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
 			builder.setContentIntent(resultPendingIntent);
 			notification = builder.build();
 
-			setAlarm(notificationTimes[i] / 60, notificationTimes[i] % 60, periodNotificationID[i], notification);
+			setAlarm(notificationTime, periodNotificationID[i], notification);
 		}
 		return 0;
 	}
@@ -310,11 +237,19 @@ public class MainActivity extends AppCompatActivity {
 			String[] schedule = Utility.oneLineClassNames(1);
 			for(String s : schedule)
 				inboxStyle.addLine(s);
+
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(System.currentTimeMillis());
+			cal.set(Calendar.HOUR_OF_DAY, 7);
+			cal.set(Calendar.MINUTE, 0);
+			long notificationTime = cal.getTimeInMillis();
+
 			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
 					.setContentTitle("Your schedule for today")
 					.setContentText("Day " + Utility.getSchoolDayRotation(1))
 					.setSmallIcon(R.drawable.ic_launcher_proto)
-					.setStyle(inboxStyle);
+					.setStyle(inboxStyle)
+					.setWhen(notificationTime);
 
 			TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 			stackBuilder.addParentStack(DayViewActivity.class);
@@ -332,13 +267,8 @@ public class MainActivity extends AppCompatActivity {
 
 			PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 20, intent, 0);
 
-			Calendar cal = Calendar.getInstance();
-			cal.setTimeInMillis(System.currentTimeMillis());
-			cal.set(Calendar.HOUR_OF_DAY, 7);
-			cal.set(Calendar.MINUTE, 0);
-
 			dailyAlarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-			dailyAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+			dailyAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, notificationTime, AlarmManager.INTERVAL_DAY, alarmIntent);
 
 			return 0;
 		}

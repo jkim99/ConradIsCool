@@ -85,7 +85,7 @@ public class AspenPage extends AppCompatActivity {
 			ArrayList<String> classes = parse(html);
 			try {
 				PrintWriter pw = new PrintWriter(new File(context.getFilesDir(), "schedule.txt"));
-				pw.println("--Schedule--");
+				pw.println(Utility.SCHEDULE_FILE_VERIFICATION_TAG);
 				for(String s : classes) {
 					pw.println(s);
 					Log.i("debugging", s);
@@ -121,7 +121,7 @@ public class AspenPage extends AppCompatActivity {
 				if(scheduleInfoLines.get(j + 1).equals(""))
 					scheduleInfoLines.set(j + 1, "Lunch 0");
 				if(!scheduleInfoLines.get(j + 3).equals("2"))
-					classes.add(scheduleInfoLines.get(j) + "\n" + scheduleInfoLines.get(j + 2) + "\n" + scheduleInfoLines.get(j + 5) + "\n" + scheduleInfoLines.get(j + 6) + "\n" + scheduleInfoLines.get(j + 1) + "\n");
+					classes.add(scheduleInfoLines.get(j) + "\n" + scheduleInfoLines.get(j + 2) + "\n" + scheduleInfoLines.get(j + 6) + "\n" + scheduleInfoLines.get(j + 5) + "\n" + scheduleInfoLines.get(j + 1) + "\n");
 			}
 
 			return classes;

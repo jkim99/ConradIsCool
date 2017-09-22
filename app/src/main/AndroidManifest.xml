@@ -29,7 +29,7 @@
 		<activity android:name=".MonthViewActivity"/>
 		<activity android:name=".AspenPage"/>
 		<activity android:name=".EnrichingStudents"/>
-		<activity android:name=".Settings"/>
+		<activity android:name=".SettingsActivity"/>
 		<service android:name="Firebase">
 			<intent-filter>
 				<action android:name="com.google.firebase.MESSAGING_EVENT"/>

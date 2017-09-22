@@ -111,7 +111,7 @@ public class MonthViewActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 			case R.id.navigation_settings:
-				Intent intent = new Intent(MonthViewActivity.this, Settings.class);
+				Intent intent = new Intent(MonthViewActivity.this, SettingsActivity.class);
 				startActivity(intent);
 				return true;
 			default:

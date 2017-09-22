@@ -7,7 +7,9 @@
  */
 package com.example.jonat.scheduleapp2;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,11 +38,13 @@ public class Utility {
 	static final int SNOW_DAY = -3;
 	static final int DIFF_DAY = -4;
 	static final int ERROR_CODE = -10;
+	static final String SCHEDULE_FILE_VERIFICATION_TAG = "-X-Schedule-X-";
+	static final String SETTINGS_FILE_VERIFICATION_TAG = "-X-SettingsActivity-X-";
 
 	static boolean verifyScheduleFile(File f) {
 		try {
 			Scanner scan = new Scanner(f);
-			return scan.nextLine().equals("--Schedule--");
+			return scan.nextLine().equals(SCHEDULE_FILE_VERIFICATION_TAG);
 		}
 		catch(IOException ioe) {
 			return false;
@@ -196,4 +200,34 @@ public class Utility {
 		return Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
 	}
 
+	static String viewToString(int x) {
+		switch(x) {
+			case R.layout.current_view:
+				return "current_view";
+			case R.layout.day_view:
+				return "day_view";
+			case R.layout.month_view:
+				return "month_view";
+			default:
+				return "current_view";
+		}
+	}
+
+	static Intent stringtoIntent(Activity activity, String str) {
+		try {
+			switch(str) {
+				case "day_view":
+					return new Intent(activity, DayViewActivity.class);
+				case "current_view":
+					return new Intent(activity, CurrentViewActivity.class);
+				case "month_view":
+					return new Intent(activity, MonthViewActivity.class);
+				default:
+					return new Intent(activity, MainActivity.class);
+			}
+		}
+		catch(Exception e) {
+			return new Intent(activity, MainActivity.class);
+		}
+	}
 }

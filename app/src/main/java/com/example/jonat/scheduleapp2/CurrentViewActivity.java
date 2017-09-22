@@ -23,8 +23,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.File;
-
 /*
  * CurrentViewActivity Class allows the user to view the current class and
  * next class quickly in a simple view.
@@ -100,7 +98,7 @@ public class CurrentViewActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 			case R.id.navigation_settings:
-				Intent intent = new Intent(CurrentViewActivity.this, Settings.class);
+				Intent intent = new Intent(CurrentViewActivity.this, SettingsActivity.class);
 				startActivity(intent);
 				return true;
 			default:

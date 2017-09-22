@@ -14,7 +14,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,8 +21,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.io.File;
 
 
 /* DayViewActivity allows the user to view their full schedule for that day.
@@ -110,7 +107,7 @@ public class DayViewActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 			case R.id.navigation_settings:
-				Intent intent = new Intent(DayViewActivity.this, Settings.class);
+				Intent intent = new Intent(DayViewActivity.this, SettingsActivity.class);
 				startActivity(intent);
 				return true;
 			default:
