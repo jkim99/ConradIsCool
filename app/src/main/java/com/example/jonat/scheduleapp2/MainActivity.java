@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 		//startActivity(new Intent(MainActivity.this, EnrichingStudents.class));
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
 		calendarFile = new File(this.getFilesDir(), "calendar.txt");
-		settingsFile = new File(this.getFilesDir(), "settingsHandler.txt");
+		settingsFile = new File(this.getFilesDir(), "settings.txt");
 
 //		if(b) {
 //			File[] files = {scheduleFile, calendarFile, settingsFile};

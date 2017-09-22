@@ -35,7 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		settingsFile = new File(this.getFilesDir(), "settingsHandler.txt");
+		settingsFile = new File(this.getFilesDir(), "settings.txt");
 		settingsHandler = new SettingsHandler(settingsFile);
 
 
