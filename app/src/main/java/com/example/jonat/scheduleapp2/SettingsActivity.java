@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -66,7 +67,6 @@ public class SettingsActivity extends AppCompatActivity {
 		currentViewOption.setTextColor(getResources().getColor(R.color.white));
 		dayViewOption.setTextColor(getResources().getColor(R.color.white));
 		monthViewOption.setTextColor(getResources().getColor(R.color.white));
-
 		switch(settingsHandler.getDefaultView()) {
 			case "current_view":
 				defaultViews.check(currentViewOption.getId());
@@ -124,6 +124,12 @@ public class SettingsActivity extends AppCompatActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.actionbar, menu);
 		return true;
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		settingsHandler.writeFile(settingsFile);
 	}
 
 	public String viewToString(int x) {

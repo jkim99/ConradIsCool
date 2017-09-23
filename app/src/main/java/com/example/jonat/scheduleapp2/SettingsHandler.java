@@ -10,13 +10,12 @@ import java.util.Scanner;
 
 public class SettingsHandler {
 	private final String SETTINGS_TAG = "settings";
-	private String defaultView;
+	private static String defaultView;
 	private boolean pNotifications;
 	private boolean dNotifications;
 
 	public SettingsHandler() {
 		this("current_view", true, true);
-		//Log.i(SETTINGS_TAG, "creating settings file");
 	}
 
 	public SettingsHandler(String defaultView, boolean pNotifications, boolean dNotifications) {
@@ -42,7 +41,7 @@ public class SettingsHandler {
 	}
 
 	public void setDefaultView(String view) {
-		Log.d(SETTINGS_TAG, view);
+		Log.d(SETTINGS_TAG + "_DEF", view);
 		defaultView = view;
 	}
 
@@ -55,8 +54,9 @@ public class SettingsHandler {
 	}
 
 	public void writeFile(File file) {
-		if(defaultView == null)
+		if(defaultView == null) {
 			defaultView = "current_view";
+		}
 		try {
 			PrintWriter pw = new PrintWriter(file);
 			pw.println(Utility.SETTINGS_FILE_VERIFICATION_TAG);
@@ -65,15 +65,18 @@ public class SettingsHandler {
 			pw.println("dailyNotifications:" + (dNotifications ? "on" : "off"));
 			pw.close();
 		}
-		catch(Exception e) {}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public boolean verifyFile(File file) {
 		try {
 			Scanner scan = new Scanner(file);
-			return scan.nextLine().equals(Utility.SETTINGS_FILE_VERIFICATION_TAG);
+			return (scan.nextLine()).equals(Utility.SETTINGS_FILE_VERIFICATION_TAG);
 		}
 		catch(NoSuchElementException nsee) {
+			nsee.printStackTrace();
 			return false;
 		}
 		catch(Exception e) {
@@ -86,24 +89,22 @@ public class SettingsHandler {
 		try {
 			Scanner scan = new Scanner(file);
 			if(!verifyFile(file)) {
+				Log.i(SETTINGS_TAG, "settings file corrupt or does not exist");
 				writeFile(file);
 			}
-			else {
-				for(int i = 0; i < 4; i++) {
-					String line = scan.nextLine();
-					switch(line.substring(0, line.indexOf(":") + 1)) {
-						case "defaultView:":
-							defaultView = line.substring(line.indexOf(":") + 1);
-							break;
-						case "dailyNotifications:":
-							dNotifications = !(line.substring(line.indexOf(":") + 1).equals("off"));
-							break;
-						case "periodicNotifications:":
-							pNotifications = !(line.substring(line.indexOf(":") + 1).equals("off"));
-							break;
-						default:
-							Log.i("checkSettings", "settings file corrupted or missing");
-					}
+			for(int i = 0; i < 4; i++) {
+				String line = scan.nextLine();
+				switch(line.substring(0, line.indexOf(":") + 1)) {
+					case "defaultView:":
+						Log.d(SETTINGS_TAG, line.substring(line.indexOf(":") + 1));
+						defaultView = line.substring(line.indexOf(":") + 1);
+						break;
+					case "dailyNotifications:":
+						dNotifications = !(line.substring(line.indexOf(":") + 1).equals("off"));
+						break;
+					case "periodicNotifications:":
+						pNotifications = !(line.substring(line.indexOf(":") + 1).equals("off"));
+						break;
 				}
 			}
 		}

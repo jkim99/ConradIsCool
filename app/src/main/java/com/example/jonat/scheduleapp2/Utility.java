@@ -39,7 +39,7 @@ public class Utility {
 	static final int DIFF_DAY = -4;
 	static final int ERROR_CODE = -10;
 	static final String SCHEDULE_FILE_VERIFICATION_TAG = "-X-Schedule-X-";
-	static final String SETTINGS_FILE_VERIFICATION_TAG = "-X-SettingsActivity-X-";
+	static final String SETTINGS_FILE_VERIFICATION_TAG = "-X-Settings-X-";
 
 	static boolean verifyScheduleFile(File f) {
 		try {
