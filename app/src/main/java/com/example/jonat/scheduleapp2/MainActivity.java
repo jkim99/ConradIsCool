@@ -49,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
 	private File calendarFile;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
-	public static double version = 1.6;
+	public static double version = 1.7;
 	public static boolean b = true;
-	public static ScheduleChecker scheduleChecker;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
+	public static String isDelay;
+	public static ScheduleChecker scheduleChecker;
 	public static int swipeDirectionOffset = 0;
 	public static final int[] periodNotificationID = {1, 2, 3, 4, 5};
 	public static final int[] notificationTimes = {Utility.PERIOD_1_BELL,
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 			initializeScheduleChecker(scheduleFile);
 			setAllAlarms();
 
-			startActivity(Utility.stringtoIntent(this, settingsHandler.getDefaultView()));
+			startActivity(Utility.stringToIntent(this, settingsHandler.getDefaultView()));
 			setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
 		}
 	}

@@ -14,18 +14,10 @@ public class SettingsHandler {
 	private boolean pNotifications;
 	private boolean dNotifications;
 
-	public SettingsHandler() {
-		this("current_view", true, true);
-	}
-
-	public SettingsHandler(String defaultView, boolean pNotifications, boolean dNotifications) {
-		this.defaultView = defaultView;
-		this.pNotifications = pNotifications;
-		this.dNotifications = dNotifications;
-	}
-
 	public SettingsHandler(File file) {
 		readFile(file);
+		MainActivity.periodicNotifications = pNotifications;
+		MainActivity.dailyNotifications = dNotifications;
 	}
 
 	public String getDefaultView() {

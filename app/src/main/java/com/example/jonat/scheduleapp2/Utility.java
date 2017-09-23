@@ -33,6 +33,25 @@ public class Utility {
 	static final int PERIOD_3_BELL = 603; // 10:03
 	static final int PERIOD_4_BELL = 667; // 11:07
 	static final int PERIOD_5_BELL = 784; //  1:04
+
+	static final int DELAY_PERIOD_1_BELL_60 = 0; //8:44
+	static final int DELAY_PERIOD_2_BELL_60 = 0; //9:30
+	static final int DELAY_PERIOD_3_BELL_60 = 0; //10:16
+	static final int DELAY_PERIOD_4_BELL_60 = 0; //11:02
+	static final int DELAY_PERIOD_5_BELL_60 = 0; //1:15
+
+	static final int DELAY_PERIOD_1_BELL_90 = 0; //9:14
+	static final int DELAY_PERIOD_2_BELL_90 = 0; //9:54
+	static final int DELAY_PERIOD_3_BELL_90 = 0; //10:34
+	static final int DELAY_PERIOD_4_BELL_90 = 0; //11:14
+	static final int DELAY_PERIOD_5_BELL_90 = 0; //1:27
+
+	static final int DELAY_PERIOD_1_BELL_120 = 0; //9:44
+	static final int DELAY_PERIOD_2_BELL_120 = 0; //10:19
+	static final int DELAY_PERIOD_3_BELL_120 = 0; //10:54
+	static final int DELAY_PERIOD_4_BELL_120 = 0; //11:29
+	static final int DELAY_PERIOD_5_BELL_120 = 0; //1:42
+
 	static final int NO_SCHOOL = -1;
 	static final int EXAM = -2;
 	static final int SNOW_DAY = -3;
@@ -213,7 +232,7 @@ public class Utility {
 		}
 	}
 
-	static Intent stringtoIntent(Activity activity, String str) {
+	static Intent stringToIntent(Activity activity, String str) {
 		try {
 			switch(str) {
 				case "day_view":

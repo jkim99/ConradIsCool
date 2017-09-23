@@ -27,10 +27,12 @@ import java.util.Scanner;
 public class CalendarChecker {
 
 	private static File calendar;
+	private static final String NOSCHOOL = "XXXXX";
 	private static final String SNOW_DAY = "SSSSS";
 	private static final String EXAM_DAY = "EEEEE";
 	private static final String HALF_DAY = "HHHH";
-	private static final String NOSCHOOL = "XXXXX";
+	private static final String DELAYDAY = "DDD";
+
 
 	private static void setCalendarFile(File calendarFile) {
 		calendar = calendarFile;
@@ -63,6 +65,10 @@ public class CalendarChecker {
 			returnValue = line.substring(line.indexOf(" = ") + 3);
 			if(returnValue.contains(HALF_DAY))
 				return -20 - Integer.valueOf(line.substring(line.indexOf(" = ") + 7));
+			else if(returnValue.contains(DELAYDAY)) {
+				MainActivity.isDelay = month + "/" + day;
+				return Integer.valueOf(line.substring(line.indexOf(" = ") + 7));
+			}
 			switch(returnValue) {
 				case NOSCHOOL:
 					return Utility.NO_SCHOOL;
