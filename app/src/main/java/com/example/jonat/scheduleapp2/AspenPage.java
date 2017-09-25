@@ -46,8 +46,6 @@ public class AspenPage extends AppCompatActivity {
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
 
-				Log.d("html", url);
-
 				//redirects webview to schedule info page
 				if(url.contains("home")) {
 					aspenLogin.loadUrl("https://ma-andover.myfollett.com/aspen/studentScheduleContextList.do?navkey=myInfo.sch.list");

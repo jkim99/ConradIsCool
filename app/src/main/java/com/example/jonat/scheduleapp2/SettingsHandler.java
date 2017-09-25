@@ -48,6 +48,8 @@ public class SettingsHandler {
 	public void writeFile(File file) {
 		if(defaultView == null) {
 			defaultView = "current_view";
+			pNotifications = true;
+			dNotifications = true;
 		}
 		try {
 			PrintWriter pw = new PrintWriter(file);
@@ -62,7 +64,7 @@ public class SettingsHandler {
 		}
 	}
 
-	public boolean verifyFile(File file) {
+	private boolean verifyFile(File file) {
 		try {
 			Scanner scan = new Scanner(file);
 			return (scan.nextLine()).equals(Utility.SETTINGS_FILE_VERIFICATION_TAG);
@@ -76,7 +78,7 @@ public class SettingsHandler {
 		}
 	}
 
-	public void readFile(File file) {
+	private void readFile(File file) {
 		try {
 			Scanner scan = new Scanner(file);
 			if(!verifyFile(file)) {

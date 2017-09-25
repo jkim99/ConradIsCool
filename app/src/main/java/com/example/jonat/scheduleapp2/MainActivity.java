@@ -45,12 +45,11 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
 	private double latestVersion;
-	private File settingsFile;
 	private File calendarFile;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
 	public static double version = 1.8;
-	public static boolean dev = true;
+	public static boolean dev = false;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
 	public static ScheduleChecker scheduleChecker;
@@ -66,15 +65,14 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//startActivity(new Intent(MainActivity.this, EnrichingStudents.class));
 		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
-		calendarFile = new File(this.getFilesDir(), "calendar.txt");
-		settingsFile = new File(this.getFilesDir(), "settings.txt");
+		File settingsFile = new File(this.getFilesDir(), "settings.txt");
+			 calendarFile = new File(this.getFilesDir(), "calendar.txt");
 
-//		if(dev) {
-//			File[] files = {scheduleFile, calendarFile, settingsFile};
-//			Utility.purge(files);
-//		}
+		if(dev) {
+			File[] files = {scheduleFile, calendarFile, settingsFile};
+			Utility.purge(files);
+		}
 
 		update(isOnline());
 		SettingsHandler settingsHandler = new SettingsHandler(settingsFile);
