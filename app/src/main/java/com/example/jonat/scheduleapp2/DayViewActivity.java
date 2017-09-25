@@ -9,6 +9,8 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -70,28 +73,29 @@ public class DayViewActivity extends AppCompatActivity {
 		navigation.setSelectedItemId(R.id.navigation_day_view);
 
 		final TextView[] times = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.time3), (TextView)findViewById(R.id.time4), (TextView)findViewById(R.id.time5)};
+		final ImageView[] imageViews = {(ImageView)findViewById(R.id.img1), (ImageView)findViewById(R.id.img2), (ImageView)findViewById(R.id.img3), (ImageView)findViewById(R.id.img4), (ImageView)findViewById(R.id.img5)};
 
 		lunch = (TextView)findViewById(R.id.lunch);
 		lunch.setElevation(1000);
 
 		final Button[] buttons = {(Button)findViewById(R.id.p1),(Button)findViewById(R.id.p2),(Button)findViewById(R.id.p3),(Button)findViewById(R.id.p4),(Button)findViewById(R.id.p5)};
 		final ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.content);
-		updateUI(constraintLayout, 'x', buttons, times);
+		updateUI(constraintLayout, 'x', buttons, times, imageViews);
 
 		on = new OnSwipeTouchListener(this) {
 
 			public void onSwipeLeft() {
 				MainActivity.swipeDirectionOffset++;
-				updateUI(constraintLayout, 'l', buttons, times);
+				updateUI(constraintLayout, 'l', buttons, times, imageViews);
 			}
 
 			public void onSwipeRight() {
 				MainActivity.swipeDirectionOffset--;
-				updateUI(constraintLayout, 'r', buttons, times);
+				updateUI(constraintLayout, 'r', buttons, times, imageViews);
 			}
 
 		};
-		updateUI(constraintLayout, 'x', buttons, times);
+		updateUI(constraintLayout, 'x', buttons, times, imageViews);
 	}
 
 	@Override
@@ -118,13 +122,20 @@ public class DayViewActivity extends AppCompatActivity {
 		int x = 0;
 		for(Button b : buttons) {
 			b.setText(MainActivity.scheduleChecker.getClass(MainActivity.swipeDirectionOffset, x));
-			b.setBackgroundResource(Utility.backgroundFix(this, x));
 			b.setOnTouchListener(on);
 			x++;
 		}
 	}
 
-	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons, TextView[] times) {
+	public void changeImageViews(ImageView[] imageViews) {
+		int x = 0;
+		for(ImageView i : imageViews) {
+			i.setImageResource(Utility.backgroundFix(x));
+			x++;
+		}
+	}
+
+	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons, TextView[] times, ImageView[] imageViews) {
 		try {
 			Utility.changeDayIcon(navigation.getMenu());
 			Utility.changePeriodIcon(navigation.getMenu());
@@ -145,6 +156,7 @@ public class DayViewActivity extends AppCompatActivity {
 				times[i].setElevation(1000);
 			}
 
+			changeImageViews(imageViews);
 			changeButtons(buttons);
 			lunch.setText(Utility.getLunch(MainActivity.swipeDirectionOffset, 3));
 		}

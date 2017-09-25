@@ -150,37 +150,35 @@ public class Utility {
 		return returnDay > -100 ? returnDay : returnDay + 100;
 	}
 
-	/** @param context simply to initialize the scheduleChecker
-	 *  @param block determines which background source to use
+	/** @param block determines which background source to use
 	 *  @return resource drawable file associated with <param>block</param> */
-	static int backgroundFix(Context context, int block) {
-//		ScheduleChecker scheduleChecker = initializeScheduleChecker(context);
-//		char x;
-//		try {
-//			x = scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) - 1, block);
-//		}
-//		catch(ArrayIndexOutOfBoundsException aioobe) {
-//			return R.drawable.x;
-//		}
-//		switch(x) {
-//			case 'A':
-//				return R.drawable.a;
-//			case 'B':
-//				return R.drawable.b;
-//			case 'C':
-//				return R.drawable.c;
-//			case 'D':
-//				return R.drawable.d;
-//			case 'E':
-//				return R.drawable.e;
-//			case 'F':
-//				return R.drawable.f;
-//			case 'G':
-//				return R.drawable.g;
-//			case 'H':
-//				return R.drawable.h;
-//		}
-		return R.drawable.x;
+	static int backgroundFix(int block) {
+		char x;
+		try {
+			x = MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) - 1, block);
+		}
+		catch(ArrayIndexOutOfBoundsException aioobe) {
+			return R.drawable.x;
+		}
+		switch(x) {
+			case 'A':
+				return R.drawable.a;
+			case 'B':
+				return R.drawable.b;
+			case 'C':
+				return R.drawable.c;
+			case 'D':
+				return R.drawable.d;
+			case 'E':
+				return R.drawable.e;
+			case 'F':
+				return R.drawable.f;
+			case 'G':
+				return R.drawable.g;
+			case 'H':
+				return R.drawable.h;
+		}
+		return R.drawable.x3;
 	}
 
 	static String[] oneLineClassNames(int off) {

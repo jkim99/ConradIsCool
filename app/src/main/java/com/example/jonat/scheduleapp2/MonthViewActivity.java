@@ -124,7 +124,6 @@ public class MonthViewActivity extends AppCompatActivity {
 		String[] schedule = Utility.oneLineClassNames(MainActivity.swipeDirectionOffset);
 		for(int x = 0; x < buttons.length; x++) {
 			buttons[x].setText(schedule[x]);
-			buttons[x].setBackgroundResource(Utility.backgroundFix(this, x));
 			//buttons[x].setOnTouchListener();
 		}
 	}

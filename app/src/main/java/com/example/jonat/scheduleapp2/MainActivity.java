@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 		else {
 			initializeScheduleChecker(scheduleFile);
+			CalendarChecker.updateCalendar(calendarFile);
 			setAllAlarms();
 
 			startActivity(Utility.stringToIntent(this, settingsHandler.getDefaultView()));
