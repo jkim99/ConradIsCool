@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void initializeScheduleChecker(File scheduleFile) {
-		ArrayList<String> classes = new ArrayList<String>();
+		ArrayList<String> classes = new ArrayList<>();
 		if(Utility.verifyScheduleFile(scheduleFile)) {
 			try {
 				Scanner scan = new Scanner(scheduleFile);
@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
 			am.cancel(alarmIntent);
 		}
 		catch(NullPointerException npe) {
-
+			npe.printStackTrace();
 		}
 	}
 
