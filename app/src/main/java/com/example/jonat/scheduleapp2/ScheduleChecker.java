@@ -7,8 +7,6 @@
  */
 package com.example.jonat.scheduleapp2;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /*
@@ -27,14 +25,11 @@ public class ScheduleChecker {
 		for(int i = 0; i < classes.size(); i++) {
 			String[] lines = classes.get(i).split("\n");
 			char block = lines[1].charAt(0);
-			Log.e("m", (block - 67) + ": " + lines[4]);
 			this.classes[block - 65] = lines[0].replace("STUDENT ENRICHMENT", "H BLOCK") + "\n" + lines[2] + "\n" + lines[3] + "\n";
 			if(block > 66 && block < 72) {
 				lunches[block - 67] = lines[4].replace("Lunch ", "Lunch: ");
 			}
 		}
-		for(String s : lunches)
-			Log.d("xxx3", s);
 		schedule[0][0] = 'A';
 		schedule[0][1] = 'C';
 		schedule[0][2] = 'H';
@@ -134,31 +129,38 @@ public class ScheduleChecker {
 	}
 
 	public String halfDayHandler(int day, int period) {
-		char[][] halfDay = new char[7][3];
+		char[][] halfDay = new char[7][4];
 		halfDay[0][0] = 'A';
-		halfDay[0][1] = 'B';
-		halfDay[0][2] = 'C';
+		halfDay[0][1] = 'H';
+		halfDay[0][2] = 'B';
+		halfDay[0][3] = 'C';
 		halfDay[1][0] = 'A';
-		halfDay[1][1] = 'E';
-		halfDay[1][2] = 'P'; //pep rally
+		halfDay[1][1] = 'H';
+		halfDay[1][2] = 'E';
+		halfDay[1][3] = 'P'; //pep rally
 		halfDay[2][0] = 'C';
-		halfDay[2][1] = 'B';
-		halfDay[2][2] = 'F';
+		halfDay[2][1] = 'H';
+		halfDay[2][2] = 'B';
+		halfDay[2][3] = 'F';
 		halfDay[3][0] = 'A';
-		halfDay[3][1] = 'B';
-		halfDay[3][2] = 'C';
+		halfDay[3][1] = 'H';
+		halfDay[3][2] = 'B';
+		halfDay[3][3] = 'C';
 		halfDay[4][0] = 'D';
-		halfDay[4][1] = 'E';
-		halfDay[4][2] = 'A';
+		halfDay[4][1] = 'H';
+		halfDay[4][2] = 'E';
+		halfDay[4][3] = 'A';
 		halfDay[5][0] = 'B';
-		halfDay[5][1] = 'D';
-		halfDay[5][2] = 'F';
+		halfDay[5][1] = 'H';
+		halfDay[5][2] = 'D';
+		halfDay[5][3] = 'F';
 		halfDay[6][0] = 'G';
-		halfDay[6][1] = 'B';
-		halfDay[6][2] = 'D';
+		halfDay[6][1] = 'H';
+		halfDay[6][2] = 'B';
+		halfDay[6][3] = 'D';
 		try {
 			int classIndex = (int)halfDay[day - 1][period] - 65;
-			return period > 2 ? "No Class!" : (classIndex != 15 ? classes[classIndex] : "Pep Rally");
+			return period > 3 ? "No Class!" : (classIndex != 15 ? classes[classIndex] : "Pep Rally");
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
 			return "No Class";

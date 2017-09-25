@@ -34,26 +34,31 @@ public class Utility {
 	static final int PERIOD_4_BELL = 667; // 11:07
 	static final int PERIOD_5_BELL = 784; //  1:04
 
-	static final int DELAY_PERIOD_1_BELL_60 = 0; //8:44
-	static final int DELAY_PERIOD_2_BELL_60 = 0; //9:30
-	static final int DELAY_PERIOD_3_BELL_60 = 0; //10:16
-	static final int DELAY_PERIOD_4_BELL_60 = 0; //11:02
-	static final int DELAY_PERIOD_5_BELL_60 = 0; //1:15
+	static final int HALF_DAY_PERIOD_1_BELL = 464; //  7:44
+	static final int HALF_DAY_PERIOD_2_BELL = 518; //  8:38
+	static final int HALF_DAY_PERIOD_3_BELL = 546; //  9:06
+	static final int HALF_DAY_PERIOD_4_BELL = 600; // 10:00
 
-	static final int DELAY_PERIOD_1_BELL_90 = 0; //9:14
-	static final int DELAY_PERIOD_2_BELL_90 = 0; //9:54
-	static final int DELAY_PERIOD_3_BELL_90 = 0; //10:34
-	static final int DELAY_PERIOD_4_BELL_90 = 0; //11:14
-	static final int DELAY_PERIOD_5_BELL_90 = 0; //1:27
+	static final int DELAY_PERIOD_1_BELL_60 = 524; //  8:44
+	static final int DELAY_PERIOD_2_BELL_60 = 570; //  9:30
+	static final int DELAY_PERIOD_3_BELL_60 = 616; // 10:16
+	static final int DELAY_PERIOD_4_BELL_60 = 662; // 11:02
+	static final int DELAY_PERIOD_5_BELL_60 = 795; //  1:15
 
-	static final int DELAY_PERIOD_1_BELL_120 = 0; //9:44
-	static final int DELAY_PERIOD_2_BELL_120 = 0; //10:19
-	static final int DELAY_PERIOD_3_BELL_120 = 0; //10:54
-	static final int DELAY_PERIOD_4_BELL_120 = 0; //11:29
-	static final int DELAY_PERIOD_5_BELL_120 = 0; //1:42
+	static final int DELAY_PERIOD_1_BELL_90 = 554; //  9:14
+	static final int DELAY_PERIOD_2_BELL_90 = 594; //  9:54
+	static final int DELAY_PERIOD_3_BELL_90 = 634; // 10:34
+	static final int DELAY_PERIOD_4_BELL_90 = 674; // 11:14
+	static final int DELAY_PERIOD_5_BELL_90 = 804; //  1:27
+
+	static final int DELAY_PERIOD_1_BELL_120 = 0; //  9:44
+	static final int DELAY_PERIOD_2_BELL_120 = 0; // 10:19
+	static final int DELAY_PERIOD_3_BELL_120 = 0; // 10:54
+	static final int DELAY_PERIOD_4_BELL_120 = 0; // 11:29
+	static final int DELAY_PERIOD_5_BELL_120 = 0; //  1:42
 
 	static final int NO_SCHOOL = -1;
-	static final int EXAM = -2;
+	static final int EXAM_DAY = -2;
 	static final int SNOW_DAY = -3;
 	static final int DIFF_DAY = -4;
 	static final int ERROR_CODE = -10;
@@ -141,7 +146,8 @@ public class Utility {
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, off);
 		String date = new SimpleDateFormat("MM dd").format(c.getTime());
-		return CalendarChecker.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
+		int returnDay = CalendarChecker.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
+		return returnDay > -100 ? returnDay : returnDay + 100;
 	}
 
 	/** @param context simply to initialize the scheduleChecker
@@ -249,4 +255,41 @@ public class Utility {
 			return new Intent(activity, MainActivity.class);
 		}
 	}
+
+	static int[] getTimeStamps(int off) {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, off);
+		String date = new SimpleDateFormat("MM dd").format(c.getTime());
+		int day = CalendarChecker.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
+
+		if(day <= -20 && day >= -30) {
+			int[] timeStamps = {HALF_DAY_PERIOD_1_BELL, HALF_DAY_PERIOD_2_BELL, HALF_DAY_PERIOD_3_BELL, HALF_DAY_PERIOD_4_BELL};
+			return timeStamps;
+		}
+		else if(day <= -100 && day > -200) {
+			int[] timeStamps = {DELAY_PERIOD_1_BELL_60, DELAY_PERIOD_2_BELL_60, DELAY_PERIOD_3_BELL_60, DELAY_PERIOD_4_BELL_60, DELAY_PERIOD_5_BELL_60};
+			return timeStamps;
+		}
+		else if(day <= -100 && day > -200) {
+			int[] timeStamps = {DELAY_PERIOD_1_BELL_90, DELAY_PERIOD_2_BELL_90, DELAY_PERIOD_3_BELL_90, DELAY_PERIOD_4_BELL_90, DELAY_PERIOD_5_BELL_90};
+			return timeStamps;
+		}
+		else if(day <= -100 && day > -200) {
+			int[] timeStamps = {DELAY_PERIOD_1_BELL_120, DELAY_PERIOD_2_BELL_120, DELAY_PERIOD_3_BELL_120, DELAY_PERIOD_4_BELL_120, DELAY_PERIOD_5_BELL_120};
+			return timeStamps;
+		}
+		else {
+			int[] timeStamps = {PERIOD_1_BELL, PERIOD_2_BELL, PERIOD_3_BELL, PERIOD_4_BELL, PERIOD_5_BELL};
+			return timeStamps;
+		}
+	}
+
+	static String timeStampToString(int time) {
+		int hour = time / 60;
+		String stringHour = (hour <= 12 ? hour : hour - 12) + "";
+		int minutes = time % 60;
+		String stringMinutes = (minutes >= 10 ? minutes : "0" + minutes) + "";
+		return stringHour + ":" + stringMinutes;
+	}
+
 }

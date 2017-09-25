@@ -69,31 +69,29 @@ public class DayViewActivity extends AppCompatActivity {
 		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
 		navigation.setSelectedItemId(R.id.navigation_day_view);
 
-		TextView[] times = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.time3), (TextView)findViewById(R.id.time4), (TextView)findViewById(R.id.time5)};
-		for(TextView t : times)
-			t.setElevation(1000);
+		final TextView[] times = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.time3), (TextView)findViewById(R.id.time4), (TextView)findViewById(R.id.time5)};
 
 		lunch = (TextView)findViewById(R.id.lunch);
 		lunch.setElevation(1000);
 
 		final Button[] buttons = {(Button)findViewById(R.id.p1),(Button)findViewById(R.id.p2),(Button)findViewById(R.id.p3),(Button)findViewById(R.id.p4),(Button)findViewById(R.id.p5)};
 		final ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.content);
-		updateUI(constraintLayout, 'x', buttons);
+		updateUI(constraintLayout, 'x', buttons, times);
 
 		on = new OnSwipeTouchListener(this) {
 
 			public void onSwipeLeft() {
 				MainActivity.swipeDirectionOffset++;
-				updateUI(constraintLayout, 'l', buttons);
+				updateUI(constraintLayout, 'l', buttons, times);
 			}
 
 			public void onSwipeRight() {
 				MainActivity.swipeDirectionOffset--;
-				updateUI(constraintLayout, 'r', buttons);
+				updateUI(constraintLayout, 'r', buttons, times);
 			}
 
 		};
-		updateUI(constraintLayout, 'x', buttons);
+		updateUI(constraintLayout, 'x', buttons, times);
 	}
 
 	@Override
@@ -126,7 +124,7 @@ public class DayViewActivity extends AppCompatActivity {
 		}
 	}
 
-	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons) {
+	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons, TextView[] times) {
 		try {
 			Utility.changeDayIcon(navigation.getMenu());
 			Utility.changePeriodIcon(navigation.getMenu());
@@ -140,6 +138,12 @@ public class DayViewActivity extends AppCompatActivity {
 
 			Animation animation = AnimationUtils.loadAnimation(this, direction);
 			constraintLayout.startAnimation(animation);
+
+			int[] timeStamps = Utility.getTimeStamps(MainActivity.swipeDirectionOffset);
+			for(int i = 0; i < timeStamps.length; i++) {
+				times[i].setText(Utility.timeStampToString(timeStamps[i]));
+				times[i].setElevation(1000);
+			}
 
 			changeButtons(buttons);
 			lunch.setText(Utility.getLunch(MainActivity.swipeDirectionOffset, 3));

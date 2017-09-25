@@ -49,11 +49,10 @@ public class MainActivity extends AppCompatActivity {
 	private File calendarFile;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
-	public static double version = 1.7;
-	public static boolean b = true;
+	public static double version = 1.8;
+	public static boolean dev = true;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
-	public static String isDelay;
 	public static ScheduleChecker scheduleChecker;
 	public static int swipeDirectionOffset = 0;
 	public static final int[] periodNotificationID = {1, 2, 3, 4, 5};
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 		calendarFile = new File(this.getFilesDir(), "calendar.txt");
 		settingsFile = new File(this.getFilesDir(), "settings.txt");
 
-//		if(b) {
+//		if(dev) {
 //			File[] files = {scheduleFile, calendarFile, settingsFile};
 //			Utility.purge(files);
 //		}
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 		SettingsHandler settingsHandler = new SettingsHandler(settingsFile);
 
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
-			 b = false;
+			 dev = false;
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
 		}
 		else {

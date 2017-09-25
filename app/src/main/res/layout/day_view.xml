@@ -86,7 +86,6 @@
 			android:layout_width="fill_parent"
 			android:layout_height="0dp"
 			android:layout_marginStart="10dp"
-			android:text="@string/time1"
 			android:textColor="@color/white"
 			app:layout_constraintBottom_toBottomOf="@id/p1"
 			app:layout_constraintLeft_toLeftOf="parent"/>
@@ -96,7 +95,6 @@
 			android:layout_width="fill_parent"
 			android:layout_height="0dp"
 			android:layout_marginStart="10dp"
-			android:text="@string/time2"
 			android:textColor="@color/white"
 			app:layout_constraintBottom_toBottomOf="@id/p2"
 			app:layout_constraintLeft_toLeftOf="parent"/>
@@ -106,7 +104,6 @@
 			android:layout_width="fill_parent"
 			android:layout_height="0dp"
 			android:layout_marginStart="10dp"
-			android:text="@string/time3"
 			android:textColor="@color/white"
 			app:layout_constraintBottom_toBottomOf="@id/p3"
 			app:layout_constraintLeft_toLeftOf="parent"/>
@@ -116,7 +113,6 @@
 			android:layout_width="fill_parent"
 			android:layout_height="0dp"
 			android:layout_marginStart="10dp"
-			android:text="@string/time4"
 			android:textColor="@color/white"
 			app:layout_constraintBottom_toBottomOf="@id/p4"
 			app:layout_constraintLeft_toLeftOf="parent"/>
@@ -126,7 +122,6 @@
 			android:layout_width="fill_parent"
 			android:layout_height="0dp"
 			android:layout_marginStart="10dp"
-			android:text="@string/time5"
 			android:textColor="@color/white"
 			app:layout_constraintBottom_toBottomOf="@id/p5"
 			app:layout_constraintLeft_toLeftOf="parent"/>

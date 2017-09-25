@@ -127,8 +127,14 @@ public class CurrentViewActivity extends AppCompatActivity {
 		TextView lunch1 = textViews[2];
 		TextView lunch2 = textViews[3];
 
-		time1.setText(getTimeText(0));
-		time2.setText(getTimeText(1));
+		try {
+			int[] timeStamps = Utility.getTimeStamps(MainActivity.swipeDirectionOffset);
+			time1.setText(Utility.timeStampToString(timeStamps[period]));
+			time2.setText(Utility.timeStampToString(timeStamps[period + 1]));
+		}
+		catch(ArrayIndexOutOfBoundsException aioobe) {
+
+		}
 
 		if(period == 3)
 			lunch1.setText(Utility.getLunch(MainActivity.swipeDirectionOffset, 3));
@@ -137,31 +143,6 @@ public class CurrentViewActivity extends AppCompatActivity {
 
 		for(TextView t : textViews)
 			t.setElevation(1000);
-	}
-
-	/** @return string of times depending on the period*/
-	public String getTimeText(int periodAfter) {
-		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		int period = MainActivity.scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), periodAfter);
-		if(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) >= 0) {
-			switch(period) {
-				case 0:
-					return getResources().getString(R.string.time1);
-				case 1:
-					return getResources().getString(R.string.time2);
-				case 2:
-					return getResources().getString(R.string.time3);
-				case 3:
-					return getResources().getString(R.string.time4);
-				case 4:
-					return getResources().getString(R.string.time5);
-				default:
-					return "";
-			}
-		}
-		else {
-			return "";
-		}
 	}
 
 	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons, TextView[] textViews) {

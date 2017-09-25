@@ -68,7 +68,6 @@ public class SettingsHandler {
 			return (scan.nextLine()).equals(Utility.SETTINGS_FILE_VERIFICATION_TAG);
 		}
 		catch(NoSuchElementException nsee) {
-			nsee.printStackTrace();
 			return false;
 		}
 		catch(Exception e) {

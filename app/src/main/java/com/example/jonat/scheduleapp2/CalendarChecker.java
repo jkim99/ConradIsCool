@@ -66,14 +66,13 @@ public class CalendarChecker {
 			if(returnValue.contains(HALF_DAY))
 				return -20 - Integer.valueOf(line.substring(line.indexOf(" = ") + 7));
 			else if(returnValue.contains(DELAYDAY)) {
-				MainActivity.isDelay = month + "/" + day;
-				return Integer.valueOf(line.substring(line.indexOf(" = ") + 7));
+				return (Integer.valueOf(line.substring(line.indexOf(" = ") + 6, line.length() - 1)) * -100) - Integer.valueOf(line.substring(line.indexOf(" = ") + 7));
 			}
 			switch(returnValue) {
 				case NOSCHOOL:
 					return Utility.NO_SCHOOL;
 				case EXAM_DAY:
-					return Utility.EXAM;
+					return Utility.EXAM_DAY;
 				case SNOW_DAY:
 					return Utility.SNOW_DAY;
 				case "A":
