@@ -37,6 +37,7 @@ public class AspenPage extends AppCompatActivity {
 		final WebView aspenLogin = new WebView(this);
 		aspenLogin.getSettings().setJavaScriptEnabled(true);
 		aspenLogin.getSettings().setUserAgentString("Mozilla/5.0 (Windows; U; Windows NT 6.2; en-US; rv:1.9) Gecko/2008062901 IceWeasel/3.0");
+		aspenLogin.getSettings().setSaveFormData(false);
 		aspenLogin.loadUrl("https://ma-andover.myfollett.com/aspen/logon.do");
 		aspenLogin.addJavascriptInterface(new JSInterface(this), "HTMLOUT");
 		setContentView(aspenLogin);
@@ -104,6 +105,9 @@ public class AspenPage extends AppCompatActivity {
 			ArrayList<String> classes = new ArrayList<>();
 
 			for(int i = 0; i < lines.length; i++) {
+				if(lines[i].contains("applicationSubtitle lightTitle")) {
+					MainActivity.name = lines[i + 2];
+				}
 				if(lines[i].contains("Lunch")) {
 					x = i;
 					break;

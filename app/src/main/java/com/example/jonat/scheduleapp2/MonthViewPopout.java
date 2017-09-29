@@ -38,7 +38,7 @@ public class MonthViewPopout extends AppCompatActivity {
 		int width = dm.widthPixels;
 		int height = dm.heightPixels;
 
-		getWindow().setLayout((int)(width * 0.8), (int)(height * 0.5));
+		getWindow().setLayout((int)(width * 0.8), (int)(height * 0.4 ));
 
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, 0);
@@ -51,7 +51,7 @@ public class MonthViewPopout extends AppCompatActivity {
 			public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 				MainActivity.swipeDirectionOffset = Days.daysBetween(new LocalDate(), new LocalDate(year, month + 1, dayOfMonth)).getDays();
 				startActivity(new Intent(MonthViewPopout.this, DayViewActivity.class));
-
+				overridePendingTransition(R.anim.slide_down, R.anim.slide_right);
 			}
 		});
 		Calendar c2 = Calendar.getInstance();
@@ -62,8 +62,7 @@ public class MonthViewPopout extends AppCompatActivity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		Animation animation = AnimationUtils.loadAnimation(this, R.anim.no_animation);
-		findViewById(R.id.content).startAnimation(animation);
 		startActivity(new Intent(this, DayViewActivity.class));
+		overridePendingTransition(R.anim.slide_up, R.anim.slide_right);
 	}
 }

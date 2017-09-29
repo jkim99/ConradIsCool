@@ -60,44 +60,6 @@ public class SettingsActivity extends AppCompatActivity {
 			}
 		});
 
-		final RadioGroup defaultViews = (RadioGroup)findViewById(R.id.default_view);
-		RadioButton currentViewOption = (RadioButton)findViewById(R.id.current_view_option);
-		RadioButton dayViewOption = (RadioButton)findViewById(R.id.day_view_option);
-		RadioButton monthViewOption = (RadioButton)findViewById(R.id.month_view_option);
-		currentViewOption.setTextColor(getResources().getColor(R.color.white));
-		dayViewOption.setTextColor(getResources().getColor(R.color.white));
-		monthViewOption.setTextColor(getResources().getColor(R.color.white));
-		switch(settingsHandler.getDefaultView()) {
-			case "current_view":
-				defaultViews.check(currentViewOption.getId());
-				break;
-			case "day_view":
-				defaultViews.check(dayViewOption.getId());
-				break;
-			case "month_view":
-				defaultViews.check(monthViewOption.getId());
-				break;
-		}
-
-		currentViewOption.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				settingsHandler.setDefaultView(viewToString(R.layout.current_view));
-			}
-		});
-		dayViewOption.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				settingsHandler.setDefaultView(viewToString(R.layout.day_view));
-			}
-		});
-		monthViewOption.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				settingsHandler.setDefaultView(viewToString(R.layout.month_view));
-			}
-		});
-
 		Button sendLogs = (Button)findViewById(R.id.send_logs);
 		sendLogs.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -130,19 +92,6 @@ public class SettingsActivity extends AppCompatActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		settingsHandler.writeFile(settingsFile);
-	}
-
-	public String viewToString(int x) {
-		switch(x) {
-			case R.layout.current_view:
-				return "current_view";
-			case R.layout.day_view:
-				return "day_view";
-			case R.layout.month_view:
-				return "month_view";
-			default:
-				return "current_view";
-		}
 	}
 
 	public void sendLogs() {

@@ -9,111 +9,115 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Calendar;
 
 /* DayViewActivity allows the user to view their full schedule for that day.
  * This view also displays the times of each class.
  */
-public class DayViewActivity extends AppCompatActivity {
+public class DayViewActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 	private OnSwipeTouchListener on;
-	private BottomNavigationView navigation;
 	private TextView lunch;
-
-	private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener
-			= new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-		@Override
-		public boolean onNavigationItemSelected(MenuItem item) {
-			switch(item.getItemId()) {
-				case R.id.navigation_current_view:
-					Intent intent2 = new Intent(DayViewActivity.this, CurrentViewActivity.class);
-					startActivity(intent2);
-					overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-					return true;
-				case R.id.navigation_day_view:
-					return true;
-				case R.id.navigation_month_view:
-					Intent intent3 = new Intent(DayViewActivity.this, MonthViewActivity.class);
-					startActivity(intent3);
-					overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-					return true;
-			}
-			return false;
-		}
-
-	};
+	private MenuItem icon;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.day_view);
+		overridePendingTransition(R.anim.no_animation, R.anim.fade_out);
 
-		Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
-		setSupportActionBar(myToolbar);
-
-		final BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.navigation);
-		this.navigation = navigation;
-		navigation.setOnNavigationItemSelectedListener(itemSelectedListener);
-		navigation.setSelectedItemId(R.id.navigation_day_view);
-
-		final TextView[] times = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.time3), (TextView)findViewById(R.id.time4), (TextView)findViewById(R.id.time5)};
-		final ImageView[] imageViews = {(ImageView)findViewById(R.id.img1), (ImageView)findViewById(R.id.img2), (ImageView)findViewById(R.id.img3), (ImageView)findViewById(R.id.img4), (ImageView)findViewById(R.id.img5)};
+		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 
 		lunch = (TextView)findViewById(R.id.lunch);
 		lunch.setElevation(1000);
 
-		final Button[] buttons = {(Button)findViewById(R.id.p1),(Button)findViewById(R.id.p2),(Button)findViewById(R.id.p3),(Button)findViewById(R.id.p4),(Button)findViewById(R.id.p5)};
-		final ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.content);
-		updateUI(constraintLayout, 'x', buttons, times, imageViews);
+		DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		toggle.syncState();
+
+		NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(this);
+
+		FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
+		floatingActionButton.setImageResource(Utility.floatingButtonFix(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
+		floatingActionButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivity(new Intent(DayViewActivity.this, MonthViewPopout.class));
+				overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+			}
+		});
 
 		on = new OnSwipeTouchListener(this) {
 
 			public void onSwipeLeft() {
 				MainActivity.swipeDirectionOffset++;
-				updateUI(constraintLayout, 'l', buttons, times, imageViews);
+				updateUI('l');
 			}
 
 			public void onSwipeRight() {
 				MainActivity.swipeDirectionOffset--;
-				updateUI(constraintLayout, 'r', buttons, times, imageViews);
+				updateUI('r');
 			}
 
 		};
-		updateUI(constraintLayout, 'x', buttons, times, imageViews);
+		updateUI('x');
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.actionbar, menu);
+		icon = menu.findItem(R.id.month_view_popup);
+		changeDayIcon();
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
-			case R.id.navigation_settings:
-				Intent intent = new Intent(DayViewActivity.this, SettingsActivity.class);
-				startActivity(intent);
+			case R.id.month_view_popup:
+				int temp = MainActivity.swipeDirectionOffset;
+				MainActivity.swipeDirectionOffset = 0;
+				if(temp > 0)
+					updateUI('r');
+				else if(temp < 0)
+					updateUI('l');
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		if(drawer.isDrawerOpen(GravityCompat.START)) {
+			drawer.closeDrawer(GravityCompat.START);
+		}
+		else {
+			super.onBackPressed();
 		}
 	}
 
@@ -135,17 +139,21 @@ public class DayViewActivity extends AppCompatActivity {
 		}
 	}
 
-	public void updateUI(ConstraintLayout constraintLayout, char dir, Button[] buttons, TextView[] times, ImageView[] imageViews) {
-		try {
-			Utility.changeDayIcon(navigation.getMenu());
-			Utility.changePeriodIcon(navigation.getMenu());
+	public void updateUI(char dir) {
+		ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.content);
+		Button[] buttons = {(Button)findViewById(R.id.p1),(Button)findViewById(R.id.p2),(Button)findViewById(R.id.p3),(Button)findViewById(R.id.p4),(Button)findViewById(R.id.p5)};
+		TextView[] times = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.time3), (TextView)findViewById(R.id.time4), (TextView)findViewById(R.id.time5)};
+		ImageView[] imageViews = {(ImageView)findViewById(R.id.img1), (ImageView)findViewById(R.id.img2), (ImageView)findViewById(R.id.img3), (ImageView)findViewById(R.id.img4), (ImageView)findViewById(R.id.img5)};
 
+		try {
 			int direction = R.anim.fade_in;
 
 			if(dir == 'l')
 				direction = R.anim.slide_left;
 			if(dir == 'r')
 				direction = R.anim.slide_right;
+			if(dir == 'x')
+				direction = R.anim.no_animation;
 
 			Animation animation = AnimationUtils.loadAnimation(this, direction);
 			constraintLayout.startAnimation(animation);
@@ -159,11 +167,80 @@ public class DayViewActivity extends AppCompatActivity {
 			changeImageViews(imageViews);
 			changeButtons(buttons);
 			lunch.setText(Utility.getLunch(MainActivity.swipeDirectionOffset, 3));
+			changeDayIcon();
 		}
 		catch(NullPointerException npe) {
 			npe.printStackTrace();
-			startActivity(new Intent(DayViewActivity.this, AspenPage.class));
+			startActivity(new Intent(this, MonthViewPopout.class));
 		}
 	}
 
+	public void changeDayIcon() {
+		try {
+			int day = Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset);
+			MenuItem icon = this.icon;
+			switch(day) {
+				case 1:
+					icon.setIcon(R.drawable.ic_filter_1_black_24dp);
+					break;
+				case 2:
+					icon.setIcon(R.drawable.ic_filter_2_black_24dp);
+					break;
+				case 3:
+					icon.setIcon(R.drawable.ic_filter_3_black_24dp);
+					break;
+				case 4:
+					icon.setIcon(R.drawable.ic_filter_4_black_24dp);
+					break;
+				case 5:
+					icon.setIcon(R.drawable.ic_filter_5_black_24dp);
+					break;
+				case 6:
+					icon.setIcon(R.drawable.ic_filter_6_black_24dp);
+					break;
+				case 7:
+					icon.setIcon(R.drawable.ic_filter_7_black_24dp);
+					break;
+				case 8:
+					icon.setIcon(R.drawable.ic_filter_8_black_24dp);
+					break;
+				default:
+					icon.setIcon(R.drawable.ic_filter_none_black_24dp);
+					break;
+			}
+		}
+		catch(NullPointerException npe) {
+			//do nothing
+		}
+	}
+
+	@SuppressWarnings("StatementWithEmptyBody")
+	@Override
+	public boolean onNavigationItemSelected(MenuItem item) {
+		// Handle navigation view item clicks here.
+		int id = item.getItemId();
+
+		if(id == R.id.nav_camera) {
+			// Handle the camera action
+		}
+		else if(id == R.id.nav_gallery) {
+
+		}
+		else if(id == R.id.nav_slideshow) {
+
+		}
+		else if(id == R.id.nav_manage) {
+
+		}
+		else if(id == R.id.nav_share) {
+
+		}
+		else if(id == R.id.nav_send) {
+
+		}
+
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		drawer.closeDrawer(GravityCompat.START);
+		return true;
+	}
 }

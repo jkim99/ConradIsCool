@@ -6,4 +6,10 @@
 	<string name="title_settings">SETTINGS</string>
 	<string name="current_class">Current Class:</string>
 	<string name="next_class">Next Class:</string>
+	<string name="title_activity_day">DayActivity</string>
+
+	<string name="navigation_drawer_open">Open navigation drawer</string>
+	<string name="navigation_drawer_close">Close navigation drawer</string>
+
+	<string name="action_settings">Settings</string>
 </resources>

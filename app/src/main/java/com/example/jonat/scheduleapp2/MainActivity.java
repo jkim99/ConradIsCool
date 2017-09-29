@@ -15,6 +15,7 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
@@ -48,12 +49,13 @@ public class MainActivity extends AppCompatActivity {
 	private File calendarFile;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
-	public static double version = 1.8;
+	public static int swipeDirectionOffset = 0;
+	public static double version = 2.0;
 	public static boolean dev = false;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
+	public static String name;
 	public static ScheduleChecker scheduleChecker;
-	public static int swipeDirectionOffset = 0;
 	public static final int[] periodNotificationID = {1, 2, 3, 4, 5};
 	public static final int[] notificationTimes = {Utility.PERIOD_1_BELL,
 												   Utility.PERIOD_2_BELL,
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 		File settingsFile = new File(this.getFilesDir(), "settings.txt");
 			 calendarFile = new File(this.getFilesDir(), "calendar.txt");
 
+
 		if(dev) {
 			File[] files = {scheduleFile, calendarFile, settingsFile};
 			Utility.purge(files);
@@ -78,35 +81,16 @@ public class MainActivity extends AppCompatActivity {
 		SettingsHandler settingsHandler = new SettingsHandler(settingsFile);
 
 		if(!Utility.verifyScheduleFile(scheduleFile)) {
-			 dev = false;
+			dev = false;
 			startActivity(new Intent(MainActivity.this, AspenPage.class));
 		}
 		else {
 			initializeScheduleChecker(scheduleFile);
 			CalendarChecker.updateCalendar(calendarFile);
 			setAllAlarms();
-
-			startActivity(Utility.stringToIntent(this, settingsHandler.getDefaultView()));
+			//startActivity(new Intent(this, EditInfoActivity.class));
+			startActivity(new Intent(this, DayViewActivity.class));
 			setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
-		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.actionbar, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch(item.getItemId()) {
-			case R.id.navigation_settings:
-				Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-				startActivity(intent);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
 		}
 	}
 
@@ -204,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 		for(int i = 0; i < notificationTimes.length; i++) {
-			nextClass = MainActivity.scheduleChecker.getClass(0, i);
+			nextClass = MainActivity.scheduleChecker.getClass(1, i);
 			inboxStyle = new NotificationCompat.InboxStyle();
 			classInfo = nextClass.split("\n");
 			for(String s : classInfo)
@@ -224,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
 					.setWhen(notificationTime);
 
 			stackBuilder = TaskStackBuilder.create(this);
-			stackBuilder.addParentStack(CurrentViewActivity.class);
+			stackBuilder.addParentStack(DayViewActivity.class);
 			stackBuilder.addNextIntent(new Intent(this, MainActivity.class));
 			resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 			builder.setContentIntent(resultPendingIntent);
@@ -238,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 	public int setDailyAlarms() {
 		try {
 			android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-			String[] schedule = Utility.oneLineClassNames(1);
+			String[] schedule = Utility.oneLineClassNames(0);
 			for(String s : schedule)
 				inboxStyle.addLine(s);
 
@@ -250,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
 
 			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
 					.setContentTitle("Your schedule for today")
-					.setContentText("Day " + Utility.getSchoolDayRotation(1))
+					.setContentText("Day " + Utility.getSchoolDayRotation(0))
 					.setSmallIcon(R.drawable.ic_launcher_proto)
 					.setStyle(inboxStyle)
 					.setWhen(notificationTime);
@@ -297,5 +281,4 @@ public class MainActivity extends AppCompatActivity {
 			npe.printStackTrace();
 		}
 	}
-
 }

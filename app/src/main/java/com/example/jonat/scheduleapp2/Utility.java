@@ -8,7 +8,6 @@
 package com.example.jonat.scheduleapp2;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -62,8 +61,8 @@ public class Utility {
 	static final int SNOW_DAY = -3;
 	static final int DIFF_DAY = -4;
 	static final int ERROR_CODE = -10;
-	static final String SCHEDULE_FILE_VERIFICATION_TAG = "-X-Schedule-X-";
-	static final String SETTINGS_FILE_VERIFICATION_TAG = "-X-Settings-X-";
+	static final String SCHEDULE_FILE_VERIFICATION_TAG = "--Schedule--" + MainActivity.version;
+	static final String SETTINGS_FILE_VERIFICATION_TAG = "--Settings--" + MainActivity.version;
 
 	static boolean verifyScheduleFile(File f) {
 		try {
@@ -79,66 +78,6 @@ public class Utility {
 		catch(Exception e) {
 			Log.e("file_verification", "verification failed");
 			return false;
-		}
-	}
-
-	static void changeDayIcon(Menu menu) {
-		int day = Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset);
-		MenuItem icon = menu.findItem(R.id.navigation_day_view);
-		switch(day) {
-			case 1:
-				icon.setIcon(R.drawable.ic_filter_1_black_24dp);
-				break;
-			case 2:
-				icon.setIcon(R.drawable.ic_filter_2_black_24dp);
-				break;
-			case 3:
-				icon.setIcon(R.drawable.ic_filter_3_black_24dp);
-				break;
-			case 4:
-				icon.setIcon(R.drawable.ic_filter_4_black_24dp);
-				break;
-			case 5:
-				icon.setIcon(R.drawable.ic_filter_5_black_24dp);
-				break;
-			case 6:
-				icon.setIcon(R.drawable.ic_filter_6_black_24dp);
-				break;
-			case 7:
-				icon.setIcon(R.drawable.ic_filter_7_black_24dp);
-				break;
-			case 8:
-				icon.setIcon(R.drawable.ic_filter_8_black_24dp);
-				break;
-			default:
-				icon.setIcon(R.drawable.ic_filter_none_black_24dp);
-				break;
-		}
-	}
-
-	static void changePeriodIcon(Menu menu) {
-		String time = new java.sql.Time(System.currentTimeMillis()).toString();
-		int period = MainActivity.scheduleChecker.getCurrentPeriod(Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5)), 0);
-		MenuItem icon = menu.findItem(R.id.navigation_current_view);
-		switch(period) {
-			case 0:
-				icon.setIcon(R.drawable.ic_looks_one_black_24dp);
-				break;
-			case 1:
-				icon.setIcon(R.drawable.ic_looks_two_black_24dp);
-				break;
-			case 2:
-				icon.setIcon(R.drawable.ic_looks_3_black_24dp);
-				break;
-			case 3:
-				icon.setIcon(R.drawable.ic_looks_4_black_24dp);
-				break;
-			case 4:
-				icon.setIcon(R.drawable.ic_looks_5_black_24dp);
-				break;
-			default:
-				icon.setIcon(R.drawable.ic_looks_none_black_24dp);
-				break;
 		}
 	}
 
@@ -178,7 +117,7 @@ public class Utility {
 			case 'H':
 				return R.drawable.h;
 		}
-		return R.drawable.x3;
+		return R.drawable.x;
 	}
 
 	static String[] oneLineClassNames(int off) {
@@ -223,37 +162,6 @@ public class Utility {
 		return Integer.valueOf(time.substring(0, 2)) * 60 + Integer.valueOf(time.substring(3, 5));
 	}
 
-	static String viewToString(int x) {
-		switch(x) {
-			case R.layout.current_view:
-				return "current_view";
-			case R.layout.day_view:
-				return "day_view";
-			case R.layout.month_view:
-				return "month_view";
-			default:
-				return "current_view";
-		}
-	}
-
-	static Intent stringToIntent(Activity activity, String str) {
-		try {
-			switch(str) {
-				case "day_view":
-					return new Intent(activity, DayViewActivity.class);
-				case "current_view":
-					return new Intent(activity, CurrentViewActivity.class);
-				case "month_view":
-					return new Intent(activity, MonthViewActivity.class);
-				default:
-					return new Intent(activity, MainActivity.class);
-			}
-		}
-		catch(Exception e) {
-			return new Intent(activity, MainActivity.class);
-		}
-	}
-
 	static int[] getTimeStamps(int off) {
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, off);
@@ -288,6 +196,74 @@ public class Utility {
 		int minutes = time % 60;
 		String stringMinutes = (minutes >= 10 ? minutes : "0" + minutes) + "";
 		return stringHour + ":" + stringMinutes;
+	}
+
+	static int floatingButtonFix(int date) {
+		switch(date) {
+			case 1:
+				return R.drawable.ic_1;
+			case 2:
+				return R.drawable.ic_2;
+			case 3:
+				return R.drawable.ic_3;
+			case 4:
+				return R.drawable.ic_4;
+			case 5:
+				return R.drawable.ic_5;
+			case 6:
+				return R.drawable.ic_6;
+			case 7:
+				return R.drawable.ic_7;
+			case 8:
+				return R.drawable.ic_8;
+			case 9:
+				return R.drawable.ic_9;
+			case 10:
+				return R.drawable.ic_10;
+			case 11:
+				return R.drawable.ic_11;
+			case 12:
+				return R.drawable.ic_12;
+			case 13:
+				return R.drawable.ic_13;
+			case 14:
+				return R.drawable.ic_14;
+			case 15:
+				return R.drawable.ic_15;
+			case 16:
+				return R.drawable.ic_16;
+			case 17:
+				return R.drawable.ic_17;
+			case 18:
+				return R.drawable.ic_18;
+			case 19:
+				return R.drawable.ic_19;
+			case 20:
+				return R.drawable.ic_20;
+			case 21:
+				return R.drawable.ic_21;
+			case 22:
+				return R.drawable.ic_22;
+			case 23:
+				return R.drawable.ic_23;
+			case 24:
+				return R.drawable.ic_24;
+			case 25:
+				return R.drawable.ic_25;
+			case 26:
+				return R.drawable.ic_26;
+			case 27:
+				return R.drawable.ic_27;
+			case 28:
+				return R.drawable.ic_28;
+			case 29:
+				return R.drawable.ic_29;
+			case 30:
+				return R.drawable.ic_30;
+			case 31:
+				return R.drawable.ic_31;
+		}
+		return R.drawable.ic_date_range_black_24dp;
 	}
 
 }
