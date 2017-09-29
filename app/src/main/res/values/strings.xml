@@ -1,12 +1,10 @@
 <resources>
 	<string name="app_name">7H</string>
-	<string name="title_day_view">DAY VIEW</string>
-	<string name="title_current_view">CURRENT VIEW</string>
-	<string name="title_month_view">MONTH VIEW</string>
 	<string name="title_settings">SETTINGS</string>
 	<string name="current_class">Current Class:</string>
 	<string name="next_class">Next Class:</string>
 	<string name="title_activity_day">DayActivity</string>
+	<string name="school_name">Andover High School</string>
 
 	<string name="navigation_drawer_open">Open navigation drawer</string>
 	<string name="navigation_drawer_close">Close navigation drawer</string>
