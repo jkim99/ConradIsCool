@@ -52,11 +52,6 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 		setContentView(R.layout.day_view);
 		overridePendingTransition(R.anim.no_animation, R.anim.fade_out);
 
-		AdView adView = (AdView)findViewById(R.id.ad);
-		MobileAds.initialize(this, "ca-app-pub-8214178121454691/3528585357");
-		AdRequest adRequest = new AdRequest.Builder().build();
-		adView.loadAd(adRequest);
-
 		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
@@ -70,6 +65,11 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 		NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 		View navigationHeaderView = navigationView.getHeaderView(0);
+
+		AdView adView = (AdView)findViewById(R.id.ad);
+		MobileAds.initialize(this, "ca-app-pub-8214178121454691/3528585357");
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
 
 		TextView studentName = (TextView)navigationHeaderView.findViewById(R.id.student_name);
 		studentName.setText(MainActivity.name != null ? MainActivity.name : "");

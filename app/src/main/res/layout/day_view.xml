@@ -10,19 +10,28 @@
 	android:background="@color/colorPrimary"
 	tools:openDrawer="start">
 
+<android.support.constraint.ConstraintLayout
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
 	<android.support.constraint.ConstraintLayout
 		android:id="@+id/content"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:layout_weight="1">
+		android:layout_weight="1"
+		app:layout_constraintBottom_toTopOf="@+id/ad">
 
 		<TextView
 			android:id="@+id/buffer"
 			android:layout_width="fill_parent"
 			android:layout_height="?attr/actionBarSize"
-			app:layout_constraintBottom_toTopOf="@+id/p1"
 			app:layout_constraintTop_toTopOf="parent"/>
+		<TextView
+			android:id="@+id/buffer2"
+			android:layout_width="fill_parent"
+			android:layout_height="?attr/actionBarSize"
+			app:layout_constraintTop_toBottomOf="@id/buffer"
+			app:layout_constraintBottom_toTopOf="@+id/p1"/>
 
 		<Button
 			android:id="@+id/p1"
@@ -33,7 +42,7 @@
 			app:layout_constraintBottom_toTopOf="@+id/p2"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/buffer"/>
+			app:layout_constraintTop_toBottomOf="@id/buffer2"/>
 
 		<Button
 			android:id="@+id/p2"
@@ -215,6 +224,17 @@
 
 	</android.support.constraint.ConstraintLayout>
 
+	<com.google.android.gms.ads.AdView
+		xmlns:ads="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/ad"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toBottomOf="parent"
+		ads:adSize="BANNER"
+		ads:adUnitId="@string/ADID">
+	</com.google.android.gms.ads.AdView>
+</android.support.constraint.ConstraintLayout>
+
 	<include
 		layout="@layout/app_bar_day"
 		android:layout_width="match_parent"
@@ -229,15 +249,7 @@
 		app:headerLayout="@layout/nav_header"
 		app:menu="@menu/day_activity_drawer"/>
 
-	<com.google.android.gms.ads.AdView
-		xmlns:ads="http://schemas.android.com/apk/res-auto"
-		android:id="@+id/ad"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:layout_alignParentBottom="true"
-		ads:adSize="BANNER"
-		ads:adUnitId="@string/ADID">
-	</com.google.android.gms.ads.AdView>
+
+
 
 </android.support.v4.widget.DrawerLayout>
