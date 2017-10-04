@@ -8,7 +8,7 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical"
 	android:background="#212121"
-	tools:context="com.example.jonat.scheduleapp2.MainActivity">
+	tools:context="sked.official.jonat.scheduleapp2.MainActivity">
 
 	<android.support.v7.widget.Toolbar
 		android:id="@+id/my_toolbar"

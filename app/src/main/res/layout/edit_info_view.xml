@@ -6,7 +6,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:background="@color/colorPrimary"
-			  tools:context="com.example.jonat.scheduleapp2.MainActivity">
+			  tools:context="sked.official.jonat.scheduleapp2.MainActivity">
 
 		<TextView
 			android:id="@+id/edit_info_title"
