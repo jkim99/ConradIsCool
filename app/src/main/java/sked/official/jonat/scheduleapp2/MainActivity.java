@@ -54,17 +54,22 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.logo_page);
 
-
 		scheduleFile = new File(this.getFilesDir(), "schedule.txt");
 		settingsFile = new File(this.getFilesDir(), "settings.txt");
-			 calendarFile = new File(this.getFilesDir(), "calendar.txt");
+		calendarFile = new File(this.getFilesDir(), "calendar.txt");
 
 		if(dev) {
 			File[] files = {scheduleFile, calendarFile, settingsFile};
 			Utility.purge(files);
 		}
 
-		new DownloadData().execute();
+		if(!Utility.verifyScheduleFile(scheduleFile)) {
+			dev = false;
+			startActivity(new Intent(MainActivity.this, AspenPage.class));
+		}
+		else {
+			new DownloadData().execute();
+		}
 	}
 
 	private void initializeScheduleChecker(File scheduleFile) {
@@ -244,18 +249,12 @@ public class MainActivity extends AppCompatActivity {
 		protected void onPreExecute() {
 			new SettingsHandler(settingsFile);
 
-			if(!Utility.verifyScheduleFile(scheduleFile)) {
-				dev = false;
-				startActivity(new Intent(MainActivity.this, AspenPage.class));
-			}
-			else {
-				initializeScheduleChecker(scheduleFile);
-				CalendarChecker.updateCalendar(calendarFile);
-				setAllAlarms();
-				//startActivity(new Intent(MainActivity.this, EditInfoActivity.class));
-				startActivity(new Intent(MainActivity.this, DayViewActivity.class));
-				setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
-			}
+			initializeScheduleChecker(scheduleFile);
+			CalendarChecker.updateCalendar(calendarFile);
+			setAllAlarms();
+			//startActivity(new Intent(MainActivity.this, EditInfoActivity.class));
+			startActivity(new Intent(MainActivity.this, DayViewActivity.class));
+			setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
 		}
 
 		@Override
