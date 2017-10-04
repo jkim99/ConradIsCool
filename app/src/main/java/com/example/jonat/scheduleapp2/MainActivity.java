@@ -45,53 +45,35 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
-	private double latestVersion;
 	private File calendarFile;
+	private File scheduleFile;
+	private File settingsFile;
 	public AlarmManager periodicAlarmManager;
 	public AlarmManager dailyAlarmManager;
 	public static int swipeDirectionOffset = 0;
-	public static double version = 2.0;
 	public static boolean dev = false;
 	public static boolean dailyNotifications;
 	public static boolean periodicNotifications;
 	public static String name;
 	public static ScheduleChecker scheduleChecker;
 	public static final int[] periodNotificationID = {1, 2, 3, 4, 5};
-	public static final int[] notificationTimes = {Utility.PERIOD_1_BELL,
-												   Utility.PERIOD_2_BELL,
-												   Utility.PERIOD_3_BELL,
-												   Utility.PERIOD_4_BELL,
-												   Utility.PERIOD_5_BELL};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.logo_page);
 
-		File scheduleFile = new File(this.getFilesDir(), "schedule.txt");
-		File settingsFile = new File(this.getFilesDir(), "settings.txt");
+
+		scheduleFile = new File(this.getFilesDir(), "schedule.txt");
+		settingsFile = new File(this.getFilesDir(), "settings.txt");
 			 calendarFile = new File(this.getFilesDir(), "calendar.txt");
-
 
 		if(dev) {
 			File[] files = {scheduleFile, calendarFile, settingsFile};
 			Utility.purge(files);
 		}
 
-		update(isOnline());
-		SettingsHandler settingsHandler = new SettingsHandler(settingsFile);
-
-		if(!Utility.verifyScheduleFile(scheduleFile)) {
-			dev = false;
-			startActivity(new Intent(MainActivity.this, AspenPage.class));
-		}
-		else {
-			initializeScheduleChecker(scheduleFile);
-			CalendarChecker.updateCalendar(calendarFile);
-			setAllAlarms();
-			//startActivity(new Intent(this, EditInfoActivity.class));
-			startActivity(new Intent(this, DayViewActivity.class));
-			setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
-		}
+		new DownloadData().execute();
 	}
 
 	private void initializeScheduleChecker(File scheduleFile) {
@@ -99,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
 		if(Utility.verifyScheduleFile(scheduleFile)) {
 			try {
 				Scanner scan = new Scanner(scheduleFile);
+				scan.nextLine();
+				scan.nextLine();
+				name = scan.nextLine();
 				scan.nextLine();
 				while(scan.hasNextLine()) {
 					classes.add(
@@ -120,22 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
 	public void update(boolean isOnline) {
 		if(isOnline) {
-			Log.i("updates", "isOnline");
 			CalendarChecker.updateCalendar(calendarFile);
-			try {
-				URL url = new URL("https://rawgit.com/jkim99/ConradIsCool/master/README.md");
-				URLConnection urlConnection = url.openConnection();
-				BufferedReader buff = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-				String line;
-				while((line = buff.readLine()) != null) {
-					if(line.contains("Version: "))
-						break;
-				}
-				latestVersion = Double.valueOf(line.replaceAll("[^\\d.]", ""));
-			}
-			catch(Exception e) {
-				Log.e("updates", e.toString());
-			}
 		}
 	}
 
@@ -152,12 +122,6 @@ public class MainActivity extends AppCompatActivity {
 		else {
 			cancelAlarm(dailyAlarmManager, 20);
 		}
-		if(latestVersion > version) {
-			FirebaseMessaging.getInstance().subscribeToTopic("update");
-		}
-		else {
-			FirebaseMessaging.getInstance().unsubscribeFromTopic("update");
-		}
 	}
 
 	public boolean isOnline() {
@@ -169,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, Notify.class);
 		intent.putExtra("notification_id", 10);
 		intent.putExtra("notification_object", notification);
-		intent.putExtra("notification_times", notificationTimes);
+		intent.putExtra("notification_times", Utility.getTimeStamps(0));
 
 		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, pendingIntentId, intent, 0);
 
@@ -177,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 		periodicAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, notificationTime, AlarmManager.INTERVAL_DAY, alarmIntent);
 	}
 
-	public int setPeriodicAlarms() {
+	public int setPeriodicAlarms() { //adjust for no school days
 		String nextClass;
 		android.support.v4.app.NotificationCompat.Builder builder;
 		String[] classInfo;
@@ -186,9 +150,10 @@ public class MainActivity extends AppCompatActivity {
 		Notification notification;
 		android.support.v4.app.NotificationCompat.InboxStyle inboxStyle;
 
+		int[] notificationTimes = Utility.getTimeStamps(0);
 
 		for(int i = 0; i < notificationTimes.length; i++) {
-			nextClass = MainActivity.scheduleChecker.getClass(1, i);
+			nextClass = MainActivity.scheduleChecker.getClass(0, i);
 			inboxStyle = new NotificationCompat.InboxStyle();
 			classInfo = nextClass.split("\n");
 			for(String s : classInfo)
@@ -222,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 	public int setDailyAlarms() {
 		try {
 			android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-			String[] schedule = Utility.oneLineClassNames(0);
+			String[] schedule = Utility.oneLineClassNames(1);
 			for(String s : schedule)
 				inboxStyle.addLine(s);
 
@@ -234,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
 			android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
 					.setContentTitle("Your schedule for today")
-					.setContentText("Day " + Utility.getSchoolDayRotation(0))
+					.setContentText("Day " + Utility.getSchoolDayRotation(1))
 					.setSmallIcon(R.drawable.ic_launcher_proto)
 					.setStyle(inboxStyle)
 					.setWhen(notificationTime);
@@ -249,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 			Intent intent = new Intent(this, Notify.class);
 			intent.putExtra("notification_id", 20);
 			intent.putExtra("notification_object", notification);
-			intent.putExtra("notification_times", notificationTimes);
+			intent.putExtra("notification_times", Utility.getTimeStamps(1));
 
 			Log.d("notification: ", notification.toString());
 
@@ -281,4 +246,37 @@ public class MainActivity extends AppCompatActivity {
 			npe.printStackTrace();
 		}
 	}
+
+	private class DownloadData extends AsyncTask {
+
+		@Override
+		protected void onPreExecute() {
+			new SettingsHandler(settingsFile);
+
+			if(!Utility.verifyScheduleFile(scheduleFile)) {
+				dev = false;
+				startActivity(new Intent(MainActivity.this, AspenPage.class));
+			}
+			else {
+				initializeScheduleChecker(scheduleFile);
+				CalendarChecker.updateCalendar(calendarFile);
+				setAllAlarms();
+				//startActivity(new Intent(MainActivity.this, EditInfoActivity.class));
+				startActivity(new Intent(MainActivity.this, DayViewActivity.class));
+				setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
+			}
+		}
+
+		@Override
+		protected Object doInBackground(Object[] params) {
+			update(isOnline());
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Object o) {
+			startActivity(new Intent(MainActivity.this, DayViewActivity.class));
+		}
+	}
+
 }

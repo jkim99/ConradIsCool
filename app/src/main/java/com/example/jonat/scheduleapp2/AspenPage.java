@@ -85,6 +85,7 @@ public class AspenPage extends AppCompatActivity {
 			try {
 				PrintWriter pw = new PrintWriter(new File(context.getFilesDir(), "schedule.txt"));
 				pw.println(Utility.SCHEDULE_FILE_VERIFICATION_TAG);
+				pw.println(MainActivity.name);
 				for(String s : classes) {
 					pw.println(s);
 					Log.i("debugging", s);
@@ -106,7 +107,7 @@ public class AspenPage extends AppCompatActivity {
 
 			for(int i = 0; i < lines.length; i++) {
 				if(lines[i].contains("applicationSubtitle lightTitle")) {
-					MainActivity.name = lines[i + 2];
+					MainActivity.name = lines[i + 1].substring(lines[i + 1].indexOf(">") + 1);
 				}
 				if(lines[i].contains("Lunch")) {
 					x = i;

@@ -9,6 +9,7 @@
 package com.example.jonat.scheduleapp2;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -29,6 +30,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
+import java.io.File;
 import java.util.Calendar;
 
 /* DayViewActivity allows the user to view their full schedule for that day.
@@ -39,12 +46,18 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 	private OnSwipeTouchListener on;
 	private TextView lunch;
 	private MenuItem icon;
+	private FloatingActionButton floatingActionButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.day_view);
 		overridePendingTransition(R.anim.no_animation, R.anim.fade_out);
+
+		AdView adView = (AdView)findViewById(R.id.ad);
+		MobileAds.initialize(this, "ca-app-pub-8214178121454691/3528585357");
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
 
 		Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
@@ -58,8 +71,12 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 
 		NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
+		View navigationHeaderView = navigationView.getHeaderView(0);
 
-		FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
+		TextView studentName = (TextView)navigationHeaderView.findViewById(R.id.student_name);
+		studentName.setText(MainActivity.name != null ? MainActivity.name : "");
+
+		floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
 		floatingActionButton.setImageResource(Utility.floatingButtonFix(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 		floatingActionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -112,7 +129,7 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 
 	@Override
 	public void onBackPressed() {
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
 		if(drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
 		}
@@ -144,6 +161,11 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 		Button[] buttons = {(Button)findViewById(R.id.p1),(Button)findViewById(R.id.p2),(Button)findViewById(R.id.p3),(Button)findViewById(R.id.p4),(Button)findViewById(R.id.p5)};
 		TextView[] times = {(TextView)findViewById(R.id.time1), (TextView)findViewById(R.id.time2), (TextView)findViewById(R.id.time3), (TextView)findViewById(R.id.time4), (TextView)findViewById(R.id.time5)};
 		ImageView[] imageViews = {(ImageView)findViewById(R.id.img1), (ImageView)findViewById(R.id.img2), (ImageView)findViewById(R.id.img3), (ImageView)findViewById(R.id.img4), (ImageView)findViewById(R.id.img5)};
+		ImageView[] markers = {(ImageView)findViewById(R.id.marker1),
+				(ImageView)findViewById(R.id.marker2),
+				(ImageView)findViewById(R.id.marker3),
+				(ImageView)findViewById(R.id.marker4),
+				(ImageView)findViewById(R.id.marker5)};
 
 		try {
 			int direction = R.anim.fade_in;
@@ -164,6 +186,15 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 				times[i].setElevation(1000);
 			}
 
+			for(int i = 0; i < markers.length; i++) {
+				markers[i].setVisibility(View.INVISIBLE);
+				if(i == MainActivity.scheduleChecker.getCurrentPeriod(Utility.getCurrentMinutes(), 0)) {
+					markers[i].setVisibility(View.VISIBLE);
+				}
+			}
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DATE, MainActivity.swipeDirectionOffset);
+			floatingActionButton.setImageResource(Utility.floatingButtonFix(calendar.get(Calendar.DAY_OF_MONTH)));
 			changeImageViews(imageViews);
 			changeButtons(buttons);
 			lunch.setText(Utility.getLunch(MainActivity.swipeDirectionOffset, 3));
@@ -220,27 +251,50 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
 
-		if(id == R.id.nav_camera) {
-			// Handle the camera action
+//		if(id == R.id.nav_H_block) {
+//			//todo
+//		}
+		if(id == R.id.nav_settings) {
+			startActivity(new Intent(this, SettingsActivity.class));
 		}
-		else if(id == R.id.nav_gallery) {
-
+		else if(id == R.id.nav_update) {
+			updateScheduleFile(new File(this.getFilesDir(), "schedule.txt"));
 		}
-		else if(id == R.id.nav_slideshow) {
-
+		else if(id == R.id.nav_review) {
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/forms/KU1GzxoxkvQDAU8J2")));
 		}
-		else if(id == R.id.nav_manage) {
-
-		}
-		else if(id == R.id.nav_share) {
-
-		}
-		else if(id == R.id.nav_send) {
-
+		else if(id == R.id.nav_log) {
+			sendLogs();
 		}
 
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
 	}
+
+	public void updateScheduleFile(File scheduleFile) {
+		File[] files = {scheduleFile};
+		Utility.purge(files);
+		startActivity(new Intent(this, MainActivity.class));
+	}
+
+	public void sendLogs() {
+		try {
+			File logs = File.createTempFile("logs.txt", ".tmp", this.getExternalCacheDir());
+			Runtime.getRuntime().exec("logcat -f " + logs.getAbsolutePath());
+
+			String[] addressTo = {"jkim2018@k12.andoverma.us"};
+
+			Intent mail = new Intent(Intent.ACTION_SEND);
+			mail.setType("vnd.android.cursor.dir/email");
+			mail.putExtra(Intent.EXTRA_EMAIL, addressTo);
+			mail.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(logs));
+			mail.putExtra(Intent.EXTRA_SUBJECT, "sked");
+			startActivityForResult(Intent.createChooser(mail, "Send Logs..."), 0);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

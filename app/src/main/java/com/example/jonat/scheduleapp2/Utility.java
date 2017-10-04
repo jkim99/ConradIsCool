@@ -56,13 +56,14 @@ public class Utility {
 	static final int DELAY_PERIOD_4_BELL_120 = 0; // 11:29
 	static final int DELAY_PERIOD_5_BELL_120 = 0; //  1:42
 
+	//Half days are represented with numbers from -20 to -30.
 	static final int NO_SCHOOL = -1;
 	static final int EXAM_DAY = -2;
 	static final int SNOW_DAY = -3;
 	static final int DIFF_DAY = -4;
 	static final int ERROR_CODE = -10;
-	static final String SCHEDULE_FILE_VERIFICATION_TAG = "--Schedule--" + MainActivity.version;
-	static final String SETTINGS_FILE_VERIFICATION_TAG = "--Settings--" + MainActivity.version;
+	static final String SCHEDULE_FILE_VERIFICATION_TAG = "--Schedule--";
+	static final String SETTINGS_FILE_VERIFICATION_TAG = "--Settings--";
 
 	static boolean verifyScheduleFile(File f) {
 		try {
@@ -92,12 +93,18 @@ public class Utility {
 	/** @param block determines which background source to use
 	 *  @return resource drawable file associated with <param>block</param> */
 	static int backgroundFix(int block) {
+		int day = Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) - 1;
 		char x;
 		try {
-			x = MainActivity.scheduleChecker.getBlock(Utility.getSchoolDayRotation(MainActivity.swipeDirectionOffset) - 1, block);
+			x = MainActivity.scheduleChecker.getBlock(day, block);
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe) {
-			return R.drawable.x;
+			if(day > -20 || day < -30) {
+				return R.drawable.x;
+			}
+			else {
+				x  = MainActivity.scheduleChecker.getBlock(-1 * day - 20, block);
+			}
 		}
 		switch(x) {
 			case 'A':

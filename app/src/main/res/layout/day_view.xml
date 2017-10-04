@@ -23,6 +23,7 @@
 			android:layout_height="?attr/actionBarSize"
 			app:layout_constraintBottom_toTopOf="@+id/p1"
 			app:layout_constraintTop_toTopOf="parent"/>
+
 		<Button
 			android:id="@+id/p1"
 			android:layout_width="0dp"
@@ -172,6 +173,46 @@
 			app:layout_constraintTop_toTopOf="@id/p5"
 			app:layout_constraintBottom_toBottomOf="@id/p5"/>
 
+		<ImageView
+			android:id="@+id/marker1"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:scaleType="center"
+			android:src="@drawable/marker"
+			app:layout_constraintTop_toTopOf="@id/p1"/>
+
+		<ImageView
+			android:id="@+id/marker2"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:scaleType="center"
+			android:src="@drawable/marker"
+			app:layout_constraintTop_toTopOf="@id/p2"/>
+
+		<ImageView
+			android:id="@+id/marker3"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:scaleType="center"
+			android:src="@drawable/marker"
+			app:layout_constraintTop_toTopOf="@id/p3"/>
+
+		<ImageView
+			android:id="@+id/marker4"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:scaleType="center"
+			android:src="@drawable/marker"
+			app:layout_constraintTop_toTopOf="@id/p4"/>
+
+		<ImageView
+			android:id="@+id/marker5"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:scaleType="center"
+			android:src="@drawable/marker"
+			app:layout_constraintTop_toTopOf="@id/p5"/>
+
 	</android.support.constraint.ConstraintLayout>
 
 	<include
@@ -187,5 +228,16 @@
 		android:fitsSystemWindows="true"
 		app:headerLayout="@layout/nav_header"
 		app:menu="@menu/day_activity_drawer"/>
+
+	<com.google.android.gms.ads.AdView
+		xmlns:ads="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/ad"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_alignParentBottom="true"
+		ads:adSize="BANNER"
+		ads:adUnitId="@string/ADID">
+	</com.google.android.gms.ads.AdView>
 
 </android.support.v4.widget.DrawerLayout>

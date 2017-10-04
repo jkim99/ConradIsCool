@@ -10,7 +10,7 @@
 
 		<TextView
 			android:id="@+id/edit_info_title"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:text="CHANGE CLASSES"
 			android:textColor="@color/white"
@@ -18,56 +18,63 @@
 			android:textSize="40sp"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"/>
-		<TextView
+
+	<Spinner
+		android:id="@+id/spinner"
+		android:layout_width="21dp"
+		android:layout_height="wrap_content"/>
+
+	<TextView
 			android:id="@+id/period1_class"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:textSize="24sp"
 			android:text="Period 1: "
 			android:textColor="@color/white"
-			app:layout_constraintTop_toBottomOf="@id/edit_info_title"
+			app:layout_constraintTop_toBottomOf="@+id/edit_info_title"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toLeftOf="@+id/period1_input"/>
 
-		<EditText
-			android:id="@id/period1_input"
+	<EditText
+		android:id="@id/period1_input"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:background="@android:color/transparent"
+		android:textColorHint="@color/white"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/edit_info_title"/>
+
+	<EditText
+			android:id="@+id/period2_input"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:textColorHint="@color/white"
 			android:background="@android:color/transparent"
-			app:layout_constraintTop_toBottomOf="@id/edit_info_title"
-			app:layout_constraintRight_toRightOf="parent"/>
-		<EditText
-			android:id="@+id/period2_input"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:textColorHint="@color/white"
-			android:background="@android:color/transparent"
 			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/period1_input"/>
+			app:layout_constraintTop_toBottomOf="@+id/period1_input"/>
 		<EditText
 			android:id="@+id/period3_input"
-			android:layout_width="match_parent"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:textColorHint="@color/white"
 			android:background="@android:color/transparent"
 			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/period2_input"/>
+			app:layout_constraintTop_toBottomOf="@+id/period2_input"/>
 		<EditText
 			android:id="@+id/period4_input"
-			android:layout_width="match_parent"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:textColorHint="@color/white"
 			android:background="@android:color/transparent"
 			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/period3_input"/>
+			app:layout_constraintTop_toBottomOf="@+id/period3_input"/>
 		<EditText
 			android:id="@+id/period5_input"
-			android:layout_width="match_parent"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:textColorHint="@color/white"
 			android:background="@android:color/transparent"
 			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/period4_input"/>
+			app:layout_constraintTop_toBottomOf="@+id/period4_input"/>
 
 </android.support.constraint.ConstraintLayout>
