@@ -83,7 +83,7 @@ public class Utility {
 		c.add(Calendar.DATE, off);
 		String date = new SimpleDateFormat("MM dd").format(c.getTime());
 		int returnDay = CalendarChecker.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
-		return returnDay > -100 ? returnDay : returnDay + 100;
+		return returnDay > -100 ? returnDay : returnDay * -1 - 100;
 	}
 
 	/** @param block determines which background source to use
@@ -170,7 +170,6 @@ public class Utility {
 		c.add(Calendar.DATE, off);
 		String date = new SimpleDateFormat("MM dd").format(c.getTime());
 		int day = CalendarChecker.getDayRotation(Integer.valueOf(date.substring(0, 2)), Integer.valueOf(date.substring(3, 5)));
-
 		if(day <= -20 && day >= -30) {
 			int[] timeStamps = {HALF_DAY_PERIOD_1_BELL, HALF_DAY_PERIOD_2_BELL, HALF_DAY_PERIOD_3_BELL, HALF_DAY_PERIOD_4_BELL};
 			return timeStamps;
@@ -179,11 +178,11 @@ public class Utility {
 			int[] timeStamps = {DELAY_PERIOD_1_BELL_60, DELAY_PERIOD_2_BELL_60, DELAY_PERIOD_3_BELL_60, DELAY_PERIOD_4_BELL_60, DELAY_PERIOD_5_BELL_60};
 			return timeStamps;
 		}
-		else if(day <= -100 && day > -200) {
+		else if(day <= -200 && day > -300) {
 			int[] timeStamps = {DELAY_PERIOD_1_BELL_90, DELAY_PERIOD_2_BELL_90, DELAY_PERIOD_3_BELL_90, DELAY_PERIOD_4_BELL_90, DELAY_PERIOD_5_BELL_90};
 			return timeStamps;
 		}
-		else if(day <= -100 && day > -200) {
+		else if(day <= -300 && day > -400) {
 			int[] timeStamps = {DELAY_PERIOD_1_BELL_120, DELAY_PERIOD_2_BELL_120, DELAY_PERIOD_3_BELL_120, DELAY_PERIOD_4_BELL_120, DELAY_PERIOD_5_BELL_120};
 			return timeStamps;
 		}

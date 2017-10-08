@@ -19,6 +19,7 @@ public class ScheduleChecker {
 	private String[] lunches;
 
 	public ScheduleChecker(ArrayList<String> classes) {
+
 		schedule = new char[8][5];
 		this.classes = new String[8];
 		lunches = new String[5];

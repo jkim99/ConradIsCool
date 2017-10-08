@@ -12,9 +12,10 @@
 
 		<CalendarView
 			android:id="@+id/calendarView"
-			android:layout_width="fill_parent"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="@color/white"
+			android:layout_gravity="center_horizontal"
 			android:weekDayTextAppearance="@android:style/TextAppearance.Material.Widget.ActionMode.Title.Inverse"
 			android:dateTextAppearance="@android:style/TextAppearance.Material.Widget.ActionMode.Subtitle.Inverse"/>
 

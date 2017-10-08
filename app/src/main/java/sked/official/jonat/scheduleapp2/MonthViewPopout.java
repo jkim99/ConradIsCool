@@ -10,7 +10,9 @@ package sked.official.jonat.scheduleapp2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.util.DisplayMetrics;
+import android.view.ViewGroup;
 import android.widget.CalendarView;
 
 import org.joda.time.Days;
@@ -36,7 +38,7 @@ public class MonthViewPopout extends AppCompatActivity {
 		int width = dm.widthPixels;
 		int height = dm.heightPixels;
 
-		getWindow().setLayout((int)(width * 0.8), (int)(height * 0.4 ));
+		getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, 0);

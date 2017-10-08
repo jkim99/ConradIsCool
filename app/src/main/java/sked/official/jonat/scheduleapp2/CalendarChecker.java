@@ -51,7 +51,7 @@ public class CalendarChecker {
 	}
 
 	static int getDayRotation(int month, int day) {
-		String searchDate = month + "/" + day;
+		String searchDate = (month > 2 ? "" : "0") + month + "/" + day;
 		String returnValue;
 
 		try {
@@ -59,6 +59,7 @@ public class CalendarChecker {
 			String line = "";
 			while(scan.hasNextLine()) {
 				line = scan.nextLine();
+				Log.e("AndroidRuntime", line);
 				if(line.contains(searchDate))
 					break;
 			}
