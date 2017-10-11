@@ -144,41 +144,51 @@
 
 		<ImageView
 			android:id="@+id/img1"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:scaleType="centerCrop"
+			android:layout_margin="10dp"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toTopOf="@id/p1"
 			app:layout_constraintBottom_toBottomOf="@id/p1"/>
 
 		<ImageView
 			android:id="@+id/img2"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:scaleType="centerCrop"
+			android:layout_margin="10dp"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toTopOf="@id/p2"
 			app:layout_constraintBottom_toBottomOf="@id/p2"/>
 
 		<ImageView
 			android:id="@+id/img3"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:scaleType="centerCrop"
+			android:layout_margin="10dp"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toTopOf="@id/p3"
 			app:layout_constraintBottom_toBottomOf="@id/p3"/>
 
 		<ImageView
 			android:id="@+id/img4"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:scaleType="centerCrop"
+			android:layout_margin="10dp"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toTopOf="@id/p4"
 			app:layout_constraintBottom_toBottomOf="@id/p4"/>
 
 		<ImageView
 			android:id="@+id/img5"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:scaleType="centerCrop"
+			android:layout_margin="10dp"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toTopOf="@id/p5"
 			app:layout_constraintBottom_toBottomOf="@id/p5"/>
 

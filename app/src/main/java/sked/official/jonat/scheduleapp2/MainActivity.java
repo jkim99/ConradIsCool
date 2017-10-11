@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
 			setAllAlarms();
 			//startActivity(new Intent(MainActivity.this, EditInfoActivity.class));
 			startActivity(new Intent(MainActivity.this, DayViewActivity.class));
-			setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
+			setSupportActionBar((Toolbar)findViewById(R.id.my_toolbar));
 		}
 
 		@Override
