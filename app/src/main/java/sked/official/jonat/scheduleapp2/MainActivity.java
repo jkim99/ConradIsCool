@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 		scheduleFile = new File(this.getFilesDir(), "schedule.txt");
 		settingsFile = new File(this.getFilesDir(), "settings.txt");
 		calendarFile = new File(this.getFilesDir(), "calendar.txt");
+		new SettingsHandler(settingsFile);
 
 		if(dev) {
 			File[] files = {scheduleFile, calendarFile, settingsFile};
@@ -247,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
 
 		@Override
 		protected void onPreExecute() {
-			new SettingsHandler(settingsFile);
 
 			initializeScheduleChecker(scheduleFile);
 			CalendarChecker.updateCalendar(calendarFile);

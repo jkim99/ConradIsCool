@@ -59,7 +59,6 @@ public class CalendarChecker {
 			String line = "";
 			while(scan.hasNextLine()) {
 				line = scan.nextLine();
-				Log.e("AndroidRuntime", line);
 				if(line.contains(searchDate))
 					break;
 			}

@@ -11,6 +11,7 @@
 	tools:openDrawer="start">
 
 <android.support.constraint.ConstraintLayout
+	android:id="@+id/day_view"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
@@ -258,8 +259,6 @@
 		android:fitsSystemWindows="true"
 		app:headerLayout="@layout/nav_header"
 		app:menu="@menu/day_activity_drawer"/>
-
-
 
 
 </android.support.v4.widget.DrawerLayout>

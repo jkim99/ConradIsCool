@@ -28,10 +28,6 @@
 		<activity android:name="sked.official.jonat.scheduleapp2.AspenPage"/>
 		<activity android:name="sked.official.jonat.scheduleapp2.EditInfoActivity"/>
 		<activity android:name="sked.official.jonat.scheduleapp2.SettingsActivity"/>
-		<activity
-			android:name="sked.official.jonat.scheduleapp2.MonthViewPopout"
-			android:theme="@style/AppTheme.PopupTheme">
-		</activity>
 
 		<service android:name="sked.official.jonat.scheduleapp2.Firebase">
 			<intent-filter>

@@ -15,11 +15,13 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.PopupMenu;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.widget.CalendarView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,11 +32,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
 
 import java.io.File;
 import java.util.Calendar;
@@ -82,8 +88,36 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 		floatingActionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startActivity(new Intent(DayViewActivity.this, MonthViewPopout.class));
-				overridePendingTransition(R.anim.slide_up, R.anim.slide_right);
+				LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+				ViewGroup container = (ViewGroup)layoutInflater.inflate(R.layout.month_view, null);
+
+				CalendarView calendarView = (CalendarView)container.findViewById(R.id.calendarView);
+
+				int containerX = (int)(getApplicationContext().getResources().getDisplayMetrics().widthPixels * 0.8);
+				int containerY = (int)(getApplicationContext().getResources().getDisplayMetrics().heightPixels * 0.4);
+				Log.e("container", containerX + " " + containerY);
+
+				int xPosition = (getApplicationContext().getResources().getDisplayMetrics().widthPixels - containerX) / 2;
+				int yPosition = (getApplicationContext().getResources().getDisplayMetrics().heightPixels - containerY) / 2;
+
+				PopupWindow popupWindow = new PopupWindow(container, containerX, containerY, true);
+				popupWindow.showAtLocation(findViewById(R.id.day_view), Gravity.NO_GRAVITY, xPosition, yPosition);
+
+				Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.DATE, 0);
+
+				Calendar c1 = Calendar.getInstance();
+				c1.add(Calendar.DATE, 0);
+				calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+					@Override
+					public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+						MainActivity.swipeDirectionOffset = Days.daysBetween(new LocalDate(), new LocalDate(year, month + 1, dayOfMonth)).getDays();
+						updateUI(MainActivity.swipeDirectionOffset > 0 ? 'l' : 'r');
+					}
+				});
+				Calendar c2 = Calendar.getInstance();
+				c2.add(Calendar.DATE, MainActivity.swipeDirectionOffset);
+				calendarView.setDate(c2.getTimeInMillis());
 			}
 		});
 
@@ -203,7 +237,7 @@ public class DayViewActivity extends AppCompatActivity implements NavigationView
 		}
 		catch(NullPointerException npe) {
 			npe.printStackTrace();
-			startActivity(new Intent(this, MonthViewPopout.class));
+			startActivity(new Intent(DayViewActivity.this, DayViewActivity.class));
 		}
 	}
 
